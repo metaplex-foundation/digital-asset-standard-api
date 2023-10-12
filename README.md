@@ -8,7 +8,7 @@
   Open-source specification for interacting with digital assets on Solana.
 </p>
 <p align="center">
-  <img width="600" alt="Metaplex Digital Asset Standard" src="https://github.com/metaplex-foundation/digital-asset-standard-api/assets/729235/3c8defa1-8f6f-4f3b-abfd-2db2dc5b6958" />
+  <img width="600" alt="Metaplex Digital Asset Standard" src="https://github.com/metaplex-foundation/digital-asset-standard-api/assets/729235/1d4761b9-1477-4c30-9e86-2ba001e652c4" />
 </p>
 <p align="center">
   <a href="https://github.com/metaplex-foundation/digital-asset-standard-api/actions/workflows/main.yml"><img src="https://img.shields.io/github/actions/workflow/status/metaplex-foundation/digital-asset-standard-api/main.yml?logo=GitHub" /></a>
