@@ -48,7 +48,7 @@ The plugin can be used with any RPC that supports the Metaplex DAS API specifica
 
 ## Methods
 
-> 💡 You can test each method of the API using the [OpenRPC playground](https://playground.open-rpc.org/?url=https://raw.githubusercontent.com/metaplex-foundation/digital-asset-standard/main/specification/metaplex-das-api.json).
+> 💡 You can test each method of the API using the [OpenRPC playground](https://playground.open-rpc.org/?url=https://raw.githubusercontent.com/metaplex-foundation/digital-asset-standard-api/main/specification/metaplex-das-api.json).
 
 | Name                   | Description                                                     | Example                     |
 | ---------------------- | --------------------------------------------------------------- | :-------------------------: |
