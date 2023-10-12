@@ -19,12 +19,12 @@ The API defines a set of methods that RPCs implement in order to provide asset d
 
 ## Getting Started
 
-The `@metaplex-foundation/das-api` package can be use to interact with Metaplex DAS API.
+The `@metaplex-foundation/digital-asset-standard-api` package can be use to interact with Metaplex DAS API.
 
 1. First, if you are not already using Umi, [follow these instructions to install the Umi framework](https://github.com/metaplex-foundation/umi/blob/main/docs/installation.md).
 2. Next, install this library using the package manager of your choice.
    ```sh
-   npm install @metaplex-foundation/das-api
+   npm install @metaplex-foundation/digital-asset-standard-api
    ```
 3. Finally, register the library with your Umi instance.
    ```ts
@@ -39,7 +39,7 @@ Examples are provided [here](#examples)  and you can learn more about this libra
 
 ## Methods
 
-> 💡 You can test each method of the API using the [OpenRPC playground](https://playground.open-rpc.org/?url=https://raw.githubusercontent.com/metaplex-foundation/digital-asset-standard/main/specification/metaplex-das-api.json).
+> 💡 You can test each method of the API using the [OpenRPC playground](https://playground.open-rpc.org/?url=https://raw.githubusercontent.com/metaplex-foundation/digital-asset-standard-api/main/specification/metaplex-das-api.json).
 
 | Name                   | Description                                                     | Example                     |
 | ---------------------- | --------------------------------------------------------------- | :-------------------------: |
