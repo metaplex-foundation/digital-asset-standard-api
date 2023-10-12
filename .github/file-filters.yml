@@ -1,0 +1,8 @@
+# Client.
+
+client: &client
+  - ".github/workflows/test.yml"
+  - ".github/workflows/build.yml"
+  - ".github/workflows/main.yml"
+  - ".github/file-filters.yml"
+  - "clients/js/**"

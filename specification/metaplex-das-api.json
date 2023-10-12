@@ -1,0 +1,866 @@
+{
+  "openrpc": "1.2.1",
+  "info": {
+    "version": "1.0.0",
+    "title": "Metaplex Digital Asset Standard API"
+  },
+  "methods": [
+    {
+      "name": "getAsset",
+      "description": "Return the metadata information of a compressed/standard asset",
+      "params": [
+        {
+          "name": "id",
+          "description": "The id of the asset",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "result": {
+        "$ref": "#/components/contentDescriptors/asset"
+      }
+    },
+    {
+      "name": "getAssetProof",
+      "description": "Return the merkle tree proof information for a compressed asset",
+      "params": [
+        {
+          "name": "id",
+          "description": "The id of the asset",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "result": {
+        "$ref": "#/components/contentDescriptors/assetProof"
+      }
+    },
+    {
+      "name": "getAssetsByAuthority",
+      "description": "Return the list of assets given an authority address",
+      "params": [
+        {
+          "name": "authorityAddress",
+          "description": "The address of the authority of the assets",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "sortBy",
+          "description": "Sorting criteria",
+          "schema": {
+            "type": "object",
+            "$ref": "#/components/contentDescriptors/sortBy"
+          }
+        },
+        {
+          "name": "limit",
+          "description": "The maximum number of assets to retrieve",
+          "schema": {
+            "type": "number"
+          }
+        },
+        {
+          "name": "page",
+          "description": "The index of the \"page\" to retrieve",
+          "schema": {
+            "type": "number"
+          }
+        },
+        {
+          "name": "before",
+          "description": "Retrieve assets before the specified ID",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "after",
+          "description": "Retrieve assets after the specified ID",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "result": {
+        "$ref": "#/components/contentDescriptors/assetList"
+      }
+    },
+    {
+      "name": "getAssetsByCreator",
+      "description": "Return the list of assets given a creator address",
+      "params": [
+        {
+          "name": "creatorAddress",
+          "description": "The address of the creator of the assets",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "onlyVerified",
+          "description": "Indicates whether to retrieve only verified assets or not",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "sortBy",
+          "description": "Sorting criteria",
+          "schema": {
+            "type": "object",
+            "$ref": "#/components/contentDescriptors/sortBy"
+          }
+        },
+        {
+          "name": "limit",
+          "description": "The maximum number of assets to retrieve",
+          "schema": {
+            "type": "number"
+          }
+        },
+        {
+          "name": "page",
+          "description": "The index of the \"page\" to retrieve",
+          "schema": {
+            "type": "number"
+          }
+        },
+        {
+          "name": "before",
+          "description": "Retrieve assets before the specified ID",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "after",
+          "description": "Retrieve assets after the specified ID",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "result": {
+        "$ref": "#/components/contentDescriptors/assetList"
+      }
+    },
+    {
+      "name": "getAssetsByGroup",
+      "description": "Return the list of assets given a group (key, value) pair",
+      "params": [
+        {
+          "name": "groupKey",
+          "description": "The key of the group (e.g., \"collection\")",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "groupValue",
+          "description": "The value of the group",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "sortBy",
+          "description": "Sorting criteria",
+          "schema": {
+            "type": "object",
+            "$ref": "#/components/contentDescriptors/sortBy"
+          }
+        },
+        {
+          "name": "limit",
+          "description": "The maximum number of assets to retrieve",
+          "schema": {
+            "type": "number"
+          }
+        },
+        {
+          "name": "page",
+          "description": "The index of the \"page\" to retrieve",
+          "schema": {
+            "type": "number"
+          }
+        },
+        {
+          "name": "before",
+          "description": "Retrieve assets before the specified ID",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "after",
+          "description": "Retrieve assets after the specified ID",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "result": {
+        "$ref": "#/components/contentDescriptors/assetList"
+      }
+    },
+    {
+      "name": "getAssetsByOwner",
+      "description": "Return the list of assets given an owner address",
+      "params": [
+        {
+          "name": "ownerAddress",
+          "description": "The address of the owner of the assets",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "sortBy",
+          "description": "Sorting criteria",
+          "schema": {
+            "type": "object",
+            "$ref": "#/components/contentDescriptors/sortBy"
+          }
+        },
+        {
+          "name": "limit",
+          "description": "The maximum number of assets to retrieve",
+          "schema": {
+            "type": "number"
+          }
+        },
+        {
+          "name": "page",
+          "description": "The index of the \"page\" to retrieve",
+          "schema": {
+            "type": "number"
+          }
+        },
+        {
+          "name": "before",
+          "description": "Retrieve assets before the specified ID",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "after",
+          "description": "Retrieve assets after the specified ID",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "result": {
+        "$ref": "#/components/contentDescriptors/assetList"
+      }
+    },
+    {
+      "name": "searchAssets",
+      "description": "Return the list of assets given a search criteria",
+      "params": [
+        {
+          "name": "negate",
+          "description": "Indicates whether the search criteria should be inverted or not",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "conditionType",
+          "description": "Indicates whether to retrieve all or any asset that matches the search criteria",
+          "schema": {
+            "type": "string",
+            "enum": [
+              "all",
+              "any"
+            ]
+          }
+        },
+        {
+          "name": "interface",
+          "description": "The interface of the asset",
+          "schema": {
+            "type": "string",
+            "enum": [
+              "V1_NFT",
+              "V1_PRINT",
+              "LEGACY_NFT",
+              "V2_NFT",
+              "FungibleAsset",
+              "Custom",
+              "Identity",
+              "Executable"
+            ]
+          }
+        },
+        {
+          "name": "ownerAddress",
+          "description": "The address of the owner",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "ownerType",
+          "description": "Type of ownership",
+          "schema": {
+            "type": "string",
+            "enum": [
+              "single",
+              "token"
+            ]
+          }
+        },
+        {
+          "name": "creatorAddress",
+          "description": "The address of the creator",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "creatorVerified",
+          "description": "Indicates whether the creator must be verified or not",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "authorityAddress",
+          "description": "The address of the authority",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "grouping",
+          "description": "The group (key, value) pair",
+          "schema": {
+            "type": "array",
+            "prefixItems": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          }
+        },
+        {
+          "name": "delegateAddress",
+          "description": "The address of the delegate",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "frozen",
+          "description": "Indicates whether the asset is frozen or not",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "supply",
+          "description": "The supply of the asset",
+          "schema": {
+            "type": "number"
+          }
+        },
+        {
+          "name": "supplyMint",
+          "description": "The address of the supply mint",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "compressed",
+          "description": "Indicates whether the asset is compressed or not",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "compressible",
+          "description": "Indicates whether the asset is compressible or not",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "royaltyTargetType",
+          "description": "Type of royalty",
+          "schema": {
+            "type": "string",
+            "enum": [
+              "creators",
+              "fanout",
+              "single"
+            ]
+          }
+        },
+        {
+          "name": "royaltyTarget",
+          "description": "The target address for royalties",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "royaltyAmount",
+          "description": "The royalties amount",
+          "schema": {
+            "type": "number"
+          }
+        },
+        {
+          "name": "burnt",
+          "description": "Indicates whether the asset is burnt or not",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "sortBy",
+          "description": "Sorting criteria",
+          "schema": {
+            "type": "object",
+            "$ref": "#/components/contentDescriptors/sortBy"
+          }
+        },
+        {
+          "name": "limit",
+          "description": "The maximum number of assets to retrieve",
+          "schema": {
+            "type": "number"
+          }
+        },
+        {
+          "name": "page",
+          "description": "The index of the \"page\" to retrieve",
+          "schema": {
+            "type": "number"
+          }
+        },
+        {
+          "name": "before",
+          "description": "Retrieve assets before the specified ID",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "after",
+          "description": "Retrieve assets after the specified ID",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "jsonUri",
+          "description": "The value for the JSON URI",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "result": {
+        "$ref": "#/components/contentDescriptors/assetList"
+      }
+    }
+  ],
+  "components": {
+    "contentDescriptors": {
+      "asset": {
+        "name": "Asset",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "interface": {
+              "type": "string",
+              "enum": [
+                "V1_NFT",
+                "V1_PRINT",
+                "LEGACY_NFT",
+                "V2_NFT",
+                "FungibleAsset",
+                "Custom",
+                "Identity",
+                "Executable",
+                "ProgrammableNFT"
+              ]
+            },
+            "id": {
+              "type": "string"
+            },
+            "content": {
+              "type": "object",
+              "required": [
+                "$schema"
+              ],
+              "properties": {
+                "$schema": {
+                  "type": "string"
+                },
+                "json_uri": {
+                  "type": "string"
+                },
+                "files": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "uri",
+                      "mime"
+                    ],
+                    "properties": {
+                      "uri": {
+                        "type": "string"
+                      },
+                      "mime": {
+                        "type": "string"
+                      },
+                      "quality": {
+                        "type": "object",
+                        "properties": {
+                          "$$schema": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "contexts": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "enum": [
+                            "wallet-default",
+                            "web-desktop",
+                            "web-mobile",
+                            "app-mobile",
+                            "app-desktop",
+                            "app",
+                            "vr"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "metadata": {
+                  "type": "object",
+                  "required": [
+                    "name",
+                    "symbol"
+                  ],
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "token_standard": {
+                      "type": "string",
+                      "enum": [
+                        "NonFungible",
+                        "FungibleAsset",
+                        "Fungible",
+                        "NonFungibleEdition",
+                        "ProgrammableNonFungible",
+                        "ProgrammableNonFungibleEdition"
+                      ]
+                    },
+                    "attributes": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string"
+                          },
+                          "trait_type": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "links": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "authorities": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "type": "string"
+                  },
+                  "scopes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "full",
+                        "royalty",
+                        "metadata",
+                        "extension"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "compression": {
+              "type": "object",
+              "properties": {
+                "eligible": {
+                  "type": "boolean"
+                },
+                "compressed": {
+                  "type": "boolean"
+                },
+                "data_hash": {
+                  "type": "string"
+                },
+                "creator_hash": {
+                  "type": "string"
+                },
+                "asset_hash": {
+                  "type": "string"
+                },
+                "tree": {
+                  "type": "string"
+                },
+                "seq": {
+                  "type": "number"
+                },
+                "leaf_id": {
+                  "type": "string"
+                }
+              }
+            },
+            "grouping": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "group_key": {
+                    "type": "string"
+                  },
+                  "group_value": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "royalty": {
+              "type": "object",
+              "properties": {
+                "royalty_model": {
+                  "type": "string",
+                  "enum": [
+                    "creators",
+                    "fanout",
+                    "single"
+                  ]
+                },
+                "target": {
+                  "type": "string"
+                },
+                "percent": {
+                  "type": "number"
+                },
+                "basis_points": {
+                  "type": "number"
+                },
+                "primary_sale_happened": {
+                  "type": "boolean"
+                },
+                "locked": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "creators": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "type": "string"
+                  },
+                  "share": {
+                    "type": "number"
+                  },
+                  "verified": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            },
+            "ownership": {
+              "type": "object",
+              "properties": {
+                "frozen": {
+                  "type": "boolean"
+                },
+                "delegated": {
+                  "type": "boolean"
+                },
+                "delegate": {
+                  "type": "string"
+                },
+                "ownership_model": {
+                  "type": "string",
+                  "enum": [
+                    "single",
+                    "token"
+                  ]
+                },
+                "owner": {
+                  "type": "string"
+                }
+              }
+            },
+            "uses": {
+              "type": "object",
+              "properties": {
+                "use_method": {
+                  "type": "string",
+                  "enum": [
+                    "burn",
+                    "multiple",
+                    "single"
+                  ]
+                },
+                "remaining": {
+                  "type": "number"
+                },
+                "total": {
+                  "type": "number"
+                }
+              }
+            },
+            "supply": {
+              "type": "object",
+              "properties": {
+                "print_max_supply": {
+                  "type": "number"
+                },
+                "print_current_supply": {
+                  "type": "number"
+                },
+                "edition_nonce": {
+                  "type": "number"
+                }
+              }
+            },
+            "mutable": {
+              "type": "boolean"
+            },
+            "burnt": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "assetList": {
+        "name": "AssetList",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "total": {
+              "type": "number"
+            },
+            "limit": {
+              "type": "number"
+            },
+            "items": {
+              "type": "array",
+              "$ref": "#/components/contentDescriptors/asset"
+            }
+          }
+        }
+      },
+      "assetProof": {
+        "name": "AssetProof",
+        "schema": {
+          "type": "object",
+          "required": [
+            "node_index",
+            "tree_id",
+            "proof"
+          ],
+          "properties": {
+            "root": {
+              "type": "string"
+            },
+            "proof": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "node_index": {
+              "type": "number"
+            },
+            "leaf": {
+              "type": "string"
+            },
+            "tree_id": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "sortBy": {
+        "name": "sortBy",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "sortBy": {
+              "type": "string",
+              "enum": [
+                "created",
+                "updated",
+                "recent_action",
+                "none"
+              ]
+            },
+            "sortDirection": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
