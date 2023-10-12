@@ -12,7 +12,7 @@
 </p>
 <p align="center">
   <a href="https://github.com/metaplex-foundation/digital-asset-standard-api/actions/workflows/main.yml"><img src="https://img.shields.io/github/actions/workflow/status/metaplex-foundation/digital-asset-standard-api/main.yml?logo=GitHub" /></a>
-  <a href="https://www.npmjs.com/package/@metaplex-foundation/das-api"><img src="https://img.shields.io/npm/v/%40metaplex-foundation%2Fdas-api?logo=npm&color=377CC0" /></a>
+  <a href="https://www.npmjs.com/package/@metaplex-foundation/digital-asset-standard-api"><img src="https://img.shields.io/npm/v/%40metaplex-foundation%2Fdigital-asset-standard-api?logo=npm&color=377CC0" /></a>
 </p>
 
 ## Overview
