@@ -1,6 +1,6 @@
 {
     "name": "@metaplex-foundation/digital-asset-standard-api",
-    "version": "0.0.1",
+    "version": "1.0.0-alpha.1",
     "description": "Open-source specification for interacting with digital assets on Solana",
     "main": "dist/src/index.js",
     "types": "dist/src/index.d.ts",
