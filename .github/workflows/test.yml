@@ -42,6 +42,7 @@ jobs:
         env:
           DAS_API_ENDPOINT1: ${{ secrets.DAS_API_ENDPOINT1 }}
           DAS_API_ENDPOINT2: ${{ secrets.DAS_API_ENDPOINT2 }}
+          DAS_API_SHYFT_ENDPOINT: ${{ secrets.DAS_API_SHYFT_ENDPOINT }}
 
   lint:
     name: Lint
