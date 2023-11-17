@@ -42,6 +42,7 @@ The plugin can be used with any RPC that supports the Metaplex DAS API specifica
 - [Helius](https://docs.helius.xyz/compression-and-das-api/digital-asset-standard-das-api)
 - [Hello Moon](https://docs.hellomoon.io/reference/rpc-endpoint-for-digital-asset-standard)
 - [Triton](https://docs.triton.one/rpc-pool/metaplex-digital-assets-api)
+- [Shyft](https://docs.shyft.to/solana-rpcs-das-api/compression-das-api)
 
 > **Note**
 > You might need to contact your RPC provider to "enable" the DAS API on your endpoint.
