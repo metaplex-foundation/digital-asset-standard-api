@@ -54,7 +54,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
 
     // Then we expect the following data.
     t.like(asset, <DasApiAsset>{
-      interface: 'Custom',
+      interface: 'ProgrammableNFT',
       id: assetId,
       content: {
         metadata: {
