@@ -37,6 +37,10 @@ Examples are provided [here](#examples)  and you can learn more about this libra
 > **Note**
 > The plugin can be used with any RPC that supports the Metaplex DAS API specification. You might need to contact your RPC provider to "enable" the Metaplex DAS API on your endpoint.
 
+## Working with `mpl-core`
+
+Core assets and collections are also indexed by DAS. It is recommended to use this package in conjunction with the [mpl-core-das](http://github.com/metaplex-foundation/mpl-core-das) if you are working with Core assets.
+
 ## Methods
 
 > 💡 You can test each method of the API using the [OpenRPC playground](https://playground.open-rpc.org/?url=https://raw.githubusercontent.com/metaplex-foundation/digital-asset-standard-api/main/specification/metaplex-das-api.json).

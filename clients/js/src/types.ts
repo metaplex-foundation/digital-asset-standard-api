@@ -216,6 +216,50 @@ export type DasApiAsset = {
    * Indicates whether the asset is burnt or not.
    */
   burnt: boolean;
+} & DasApiCoreAssetFields;
+
+/**
+ * Optional fields on an asset if the interface is for Core (i.e. interface is 'MplCoreAsset' or 'MplCoreCollection')
+ * It is recommended to use the mpl-core-das package along with this one to convert the types
+ * to be consistent with mpl-core (e.g. AssetV1)
+ */
+export type DasApiCoreAssetFields = {
+  /**
+   * Plugins active on the asset or collection
+   */
+  plugins?: Record<string, any>;
+  /**
+   * External plugins active on the asset or collection
+   */
+  external_plugins?: Record<string, any>[];
+  /**
+   * Plugins on the asset/collection that were unknown at the time of indexing.
+   * Contact your DAS provider to update their core indexing version if this field is being populated.
+   * If you have an up-to-date version of mpl-core-das installed, that library will also try to deserialize the plugin
+   */
+  unknown_plugins?: Record<string, any>[];
+  /**
+   * External plugin adapters on the asset/collection that were unknown at the time of indexing.
+   * Contact your DAS provider to update their core indexing version if this field is being populated.
+   * If you have an up-to-date version of mpl-core-das installed, that library will also try to deserialize the plugin
+   */
+  unknown_external_plugins?: Record<string, any>[];
+  /**
+   * Additional fields that are indexed for Core assets or collections
+   */
+  mpl_core_info?: {
+    /**
+     * Number of assets minted to this collection
+     * Only applicable for collections
+     */
+    num_minted?: number;
+    /**
+     * Current number of assets in this collection
+     * Only applicable for collections
+     */
+    current_size?: number;
+    plugins_json_version: number;
+  };
 };
 
 /**
@@ -296,7 +340,9 @@ export type DasApiAssetInterface =
   | 'Custom'
   | 'Identity'
   | 'Executable'
-  | 'ProgrammableNFT';
+  | 'ProgrammableNFT'
+  | 'MplCoreAsset'
+  | 'MplCoreCollection';
 
 export type DasApiAssetContent = {
   json_uri: string;
