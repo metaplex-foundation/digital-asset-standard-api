@@ -233,11 +233,17 @@ export type DasApiCoreAssetFields = {
    */
   external_plugins?: Record<string, any>[];
   /**
-   * Plugins on asset that were unknown at the time of indexing.
+   * Plugins on the asset/collection that were unknown at the time of indexing.
    * Contact your DAS provider to update their core indexing version if this field is being populated.
-   * If you have a newer version of mpl-core-das installed, that library will also try to deserialize the plugin
+   * If you have an up-to-date version of mpl-core-das installed, that library will also try to deserialize the plugin
    */
   unknown_plugins?: Record<string, any>[];
+  /**
+   * External plugin adapters on the asset/collection that were unknown at the time of indexing.
+   * Contact your DAS provider to update their core indexing version if this field is being populated.
+   * If you have an up-to-date version of mpl-core-das installed, that library will also try to deserialize the plugin
+   */
+  unknown_external_plugins?: Record<string, any>[];
   /**
    * Additional fields that are indexed for Core assets or collections
    */
