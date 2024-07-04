@@ -43,7 +43,6 @@ jobs:
           DAS_API_ENDPOINT1: ${{ secrets.DAS_API_ENDPOINT1 }}
           DAS_API_ENDPOINT2: ${{ secrets.DAS_API_ENDPOINT2 }}
           DAS_API_ENDPOINT3: ${{ secrets.DAS_API_ENDPOINT3 }}
-          DAS_API_ENDPOINT4: ${{ secrets.DAS_API_ENDPOINT4 }}
 
   lint:
     name: Lint
