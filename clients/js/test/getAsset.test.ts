@@ -1,6 +1,6 @@
 import { publicKey } from '@metaplex-foundation/umi';
 import test from 'ava';
-import { DasApiAssetCompression, DasApiAssetContent } from '../src';
+import { DasApiAsset, DasApiAssetCompression, DasApiAssetContent } from '../src';
 import { DAS_API_ENDPOINTS, createUmi } from './_setup';
 
 DAS_API_ENDPOINTS.forEach((endpoint) => {
@@ -50,11 +50,13 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     const asset = await umi.rpc.getAsset(assetId);
 
     // Then we expect the following data.
-    t.deepEqual(asset.interface, 'ProgrammableNFT');
-    t.deepEqual(asset.id, assetId);
-    t.like(asset.content, <DasApiAssetContent>{
-      metadata: {
-        name: 'Mad Lads #2732',
+    t.like(asset, <DasApiAsset>{
+      interface: 'ProgrammableNFT',
+      id: assetId,
+      content: {
+        metadata: {
+          name: 'Mad Lads #2732',
+        },
       },
     });
     t.like(asset.compression, <DasApiAssetCompression>{

@@ -45,6 +45,8 @@ The plugin can be used with any RPC that supports the Metaplex DAS API specifica
 
 - [Helius](https://docs.helius.xyz/compression-and-das-api/digital-asset-standard-das-api)
 - [Hello Moon](https://docs.hellomoon.io/reference/rpc-endpoint-for-digital-asset-standard)
+- [QuickNode](https://marketplace.quicknode.com/add-on/metaplex-digital-asset-standard-api)
+- [Shyft](https://docs.shyft.to/solana-rpcs-das-api/compression-das-api)
 - [Triton](https://docs.triton.one/rpc-pool/metaplex-digital-assets-api)
 
 > **Note**
@@ -542,3 +544,27 @@ curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json'
 ```
 
 </details>
+
+## Testing Endpoints
+
+The tests included in this repository can be run locally to test different endpoints. From the `clients/js` folder, follow the steps below to setup the environment to run the tests:
+
+1. Make a copy of file `.env.example` and name it `.env`.
+2. Edit the `.env` file and include a line specifying your endpoint:
+
+   ```bash
+   DAS_API_MYENDPOINT="<URL>"
+   ```
+
+   where `MYENDPOINT` is the name of your endpoint (this can be any name) and `<URL>` is the URL of your endpoint.
+3. [Ensure you have pnpm installed](https://pnpm.io/installation) and run the following command to install the dependencies:
+
+   ```bash
+   pnpm install
+   ```
+
+4. Build and run the tests:
+
+   ```bash
+   pnpm build && pnpm test
+   ```

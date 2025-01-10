@@ -2,10 +2,11 @@ name: Test JS client
 
 on:
   workflow_call:
+  workflow_dispatch:
 
 env:
   CACHE: true
-  NODE_VERSION: "16.x"
+  NODE_VERSION: "18.x"
 
 jobs:
   test:
@@ -13,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ["16.x", "18.x"]
+        node: ["18.x"]
     steps:
       - name: Git checkout
         uses: actions/checkout@v3
@@ -41,6 +42,7 @@ jobs:
         env:
           DAS_API_ENDPOINT1: ${{ secrets.DAS_API_ENDPOINT1 }}
           DAS_API_ENDPOINT2: ${{ secrets.DAS_API_ENDPOINT2 }}
+          DAS_API_ENDPOINT3: ${{ secrets.DAS_API_ENDPOINT3 }}
 
   lint:
     name: Lint

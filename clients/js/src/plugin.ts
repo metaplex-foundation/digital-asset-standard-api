@@ -7,7 +7,7 @@ export const dasApi = (): UmiPlugin => ({
   },
 });
 
-declare module '@metaplex-foundation/umi' {
+declare module '@metaplex-foundation/umi/dist/types/Umi' {
   interface Umi {
     rpc: RpcInterface & DasApiInterface;
   }
