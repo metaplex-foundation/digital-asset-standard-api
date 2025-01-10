@@ -9,6 +9,8 @@ import {
   DasApiAsset,
   DasApiAssetList,
   SearchAssetsRpcInput,
+  GetAssetSignaturesRpcResponse,
+  GetAssetProofsRpcResponse,
 } from './types';
 
 export interface DasApiInterface {
@@ -20,11 +22,25 @@ export interface DasApiInterface {
   getAsset(assetId: PublicKey): Promise<DasApiAsset>;
 
   /**
+   * Return the metadata information of a compressed/standard asset.
+   *
+   * @param assetId the id of the asset to fetch
+   */
+  getAssets(assetIds: PublicKey[]): Promise<DasApiAsset[]>;
+
+  /**
    * Return the merkle tree proof information for a compressed asset.
    *
    * @param assetId the id of the asset to fetch the proof for
    */
   getAssetProof(assetId: PublicKey): Promise<GetAssetProofRpcResponse>;
+
+  /**
+   * Return the merkle tree proof information for a compressed asset.
+   *
+   * @param assetId the id of the asset to fetch the proof for
+   */
+  getAssetProofs(assetIds: PublicKey[]): Promise<GetAssetProofsRpcResponse>;
 
   /**
    * Return the list of assets given an authority address.
@@ -64,6 +80,13 @@ export interface DasApiInterface {
    * @param input the input parameters for the RPC call
    */
   searchAssets(input: SearchAssetsRpcInput): Promise<DasApiAssetList>;
+
+  /**
+   * Return the transaction signatures for a compressed asset
+   * 
+   * @param assetId the id of the asset to fetch the signatures for
+   */
+  getAssetSignatures(assetId: PublicKey): Promise<GetAssetSignaturesRpcResponse>;
 }
 
 export const createDasApiDecorator = (
@@ -75,6 +98,11 @@ export const createDasApiDecorator = (
     if (!asset) throw new DasApiError(`Asset not found: ${assetId}`);
     return asset;
   },
+  getAssets: async (assetIds: PublicKey[]) => {
+    const assets = await rpc.call<DasApiAsset[] | null>('getAssets', [assetIds]);
+    if (!assets) throw new DasApiError(`No assets found: ${assetIds}`);
+    return assets;
+  },
   getAssetProof: async (assetId: PublicKey) => {
     const proof = await rpc.call<GetAssetProofRpcResponse | null>(
       'getAssetProof',
@@ -82,6 +110,14 @@ export const createDasApiDecorator = (
     );
     if (!proof) throw new DasApiError(`No proof found for asset: ${assetId}`);
     return proof;
+  },
+  getAssetProofs: async (assetIds: PublicKey[]) => {
+    const proofs = await rpc.call<GetAssetProofsRpcResponse | null>(
+      'getAssetProofs',
+      [assetIds]
+    );
+    if (!proofs) throw new DasApiError(`No proofs found for assets: ${assetIds}`);
+    return proofs;
   },
   getAssetsByAuthority: async (input: GetAssetsByAuthorityRpcInput) => {
     if (typeof input.page === 'number' && (input.before || input.after)) {
@@ -214,5 +250,13 @@ export const createDasApiDecorator = (
       throw new DasApiError('No assets found for the given search criteria');
     }
     return assetList;
+  },
+  getAssetSignatures: async (assetId: PublicKey) => {
+    const signatures = await rpc.call<GetAssetSignaturesRpcResponse | null>(
+      'getAssetSignaturesV2',
+      [assetId]
+    );
+    if (!signatures) throw new DasApiError(`No signatures found for asset: ${assetId}`);
+    return signatures;
   },
 });

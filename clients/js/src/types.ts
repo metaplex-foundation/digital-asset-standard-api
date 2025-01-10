@@ -1,4 +1,4 @@
-import { Nullable, PublicKey } from '@metaplex-foundation/umi';
+import { Nullable, PublicKey, TransactionSignature } from '@metaplex-foundation/umi';
 
 // ---------------------------------------- //
 // RPC input.                               //
@@ -283,7 +283,7 @@ type Pagination = {
  * Sorting criteria.
  */
 type DasApiParamAssetSortBy = {
-  sortBy: 'created' | 'updated' | 'recent_action' | 'none';
+  sortBy: 'created' | 'updated' | 'recent_action' | 'id' | 'none';
   sortDirection: 'asc' | 'desc';
 };
 
@@ -394,4 +394,30 @@ export type GetAssetProofRpcResponse = {
   node_index: number;
   leaf: PublicKey;
   tree_id: PublicKey;
+};
+
+export type GetAssetProofsRpcResponse = Record<PublicKey, GetAssetProofRpcResponse>;
+
+export type GetAssetSignaturesRpcResponse = {
+  /**
+   * total number of signatures in the list.
+   */
+  total: number;
+
+  /**
+   * Limit of signatures used to create the list. When the `total` value is
+   * lower than the `limit`, it means that there are no more signatures to be
+   * retrieved.
+   */
+  limit: number;
+
+  /**
+   * The page number of the signatures.
+   */
+  page: number;
+
+  /**
+   * List of individual signatures.
+   */
+  signatures: TransactionSignature[];
 };

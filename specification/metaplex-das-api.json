@@ -28,7 +28,7 @@
     },
     {
       "name": "getAssets",
-      "description": "Return the metadata information of a compressed/standard assets",
+      "description": "Return the metadata information of compressed/standard assets",
       "params": [
         {
           "name": "ids",
@@ -46,7 +46,8 @@
         "name": "AssetList",
         "description": "The list of assets",
         "schema": {
-          "$ref": "#/components/schemas/AssetList"
+          "type": "array",
+          "$ref": "#/components/schemas/Asset"
         }
       }
     },
@@ -91,8 +92,13 @@
         "name": "AssetProofs",
         "description": "List of AssetProof for the IDs requested",
         "schema": {
-          "type": "array",
-          "items": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+          },
+          "additionalProperties": {
+            "type": "object",
             "$ref": "#/components/schemas/AssetProof"
           }
         }
@@ -100,7 +106,7 @@
     },
     {
       "name": "getAssetSignatures",
-      "description": "Return the tansaction signatures for a compressed asset",
+      "description": "Return the transaction signatures for a compressed asset",
       "params": [
         {
           "name": "id",
@@ -1007,6 +1013,7 @@
               "created",
               "updated",
               "recent_action",
+              "id",
               "none"
             ]
           },
