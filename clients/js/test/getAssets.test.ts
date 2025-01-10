@@ -7,8 +7,12 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
   test(`it can fetch multiple assets by ID (${endpoint.name})`, async (t) => {
     // Given a minted NFT.
     const umi = createUmi(endpoint.url);
-    const compressedAssetId = publicKey('8TrvJBRa6Pzb9BDadqroHhWTHxaxK8Ws8r91oZ2jxaVV');
-    const regularAssetId = publicKey('5ja3EvVuEu5rXgtYE3LXKG84s7Pmy5siFfYbcopMc2Dx');
+    const compressedAssetId = publicKey(
+      '8TrvJBRa6Pzb9BDadqroHhWTHxaxK8Ws8r91oZ2jxaVV'
+    );
+    const regularAssetId = publicKey(
+      '5ja3EvVuEu5rXgtYE3LXKG84s7Pmy5siFfYbcopMc2Dx'
+    );
 
     // When we fetch the asset using its ID.
     const assets = await umi.rpc.getAssets([compressedAssetId, regularAssetId]);

@@ -1,4 +1,8 @@
-import { Nullable, PublicKey, TransactionSignature } from '@metaplex-foundation/umi';
+import {
+  Nullable,
+  PublicKey,
+  TransactionSignature,
+} from '@metaplex-foundation/umi';
 
 // ---------------------------------------- //
 // RPC input.                               //
@@ -442,7 +446,10 @@ export type GetAssetProofRpcResponse = {
   tree_id: PublicKey;
 };
 
-export type GetAssetProofsRpcResponse = Record<PublicKey, GetAssetProofRpcResponse>;
+export type GetAssetProofsRpcResponse = Record<
+  PublicKey,
+  GetAssetProofRpcResponse
+>;
 
 export type GetAssetSignaturesRpcResponse = {
   /**

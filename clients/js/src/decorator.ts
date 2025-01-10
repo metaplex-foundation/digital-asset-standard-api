@@ -83,10 +83,12 @@ export interface DasApiInterface {
 
   /**
    * Return the transaction signatures for a compressed asset
-   * 
+   *
    * @param assetId the id of the asset to fetch the signatures for
    */
-  getAssetSignatures(assetId: PublicKey): Promise<GetAssetSignaturesRpcResponse>;
+  getAssetSignatures(
+    assetId: PublicKey
+  ): Promise<GetAssetSignaturesRpcResponse>;
 }
 
 export const createDasApiDecorator = (
@@ -99,7 +101,9 @@ export const createDasApiDecorator = (
     return asset;
   },
   getAssets: async (assetIds: PublicKey[]) => {
-    const assets = await rpc.call<DasApiAsset[] | null>('getAssets', [assetIds]);
+    const assets = await rpc.call<DasApiAsset[] | null>('getAssets', [
+      assetIds,
+    ]);
     if (!assets) throw new DasApiError(`No assets found: ${assetIds}`);
     return assets;
   },
@@ -116,7 +120,8 @@ export const createDasApiDecorator = (
       'getAssetProofs',
       [assetIds]
     );
-    if (!proofs) throw new DasApiError(`No proofs found for assets: ${assetIds}`);
+    if (!proofs)
+      throw new DasApiError(`No proofs found for assets: ${assetIds}`);
     return proofs;
   },
   getAssetsByAuthority: async (input: GetAssetsByAuthorityRpcInput) => {
@@ -256,7 +261,8 @@ export const createDasApiDecorator = (
       'getAssetSignaturesV2',
       [assetId]
     );
-    if (!signatures) throw new DasApiError(`No signatures found for asset: ${assetId}`);
+    if (!signatures)
+      throw new DasApiError(`No signatures found for asset: ${assetId}`);
     return signatures;
   },
 });

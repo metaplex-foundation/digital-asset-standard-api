@@ -15,7 +15,6 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     console.log(signatures);
 
     // Then we expect the following data.
-    t.like(signatures, <GetAssetSignaturesRpcResponse>{
-    });
+    t.like(signatures, <GetAssetSignaturesRpcResponse>{});
   });
 });

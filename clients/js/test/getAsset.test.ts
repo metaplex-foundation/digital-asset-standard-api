@@ -1,6 +1,10 @@
 import { publicKey } from '@metaplex-foundation/umi';
 import test from 'ava';
-import { DasApiAsset, DasApiAssetCompression, DasApiAssetContent } from '../src';
+import {
+  DasApiAsset,
+  DasApiAssetCompression,
+  DasApiAssetContent,
+} from '../src';
 import { DAS_API_ENDPOINTS, createUmi } from './_setup';
 
 DAS_API_ENDPOINTS.forEach((endpoint) => {
