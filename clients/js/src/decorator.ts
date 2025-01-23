@@ -260,7 +260,8 @@ export const createDasApiDecorator = (
   getAssetSignatures: async (input: GetAssetSignaturesRpcInput) => {
     const signatures = await rpc.call<GetAssetSignaturesRpcResponse | null>(
       'getAssetSignaturesV2',
-      [ input.assetId,
+      [
+        input.assetId,
         input.limit ?? null,
         input.page ?? null,
         input.before ?? null,

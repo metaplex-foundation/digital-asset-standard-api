@@ -1,7 +1,4 @@
-import {
-  Nullable,
-  PublicKey,
-} from '@metaplex-foundation/umi';
+import { Nullable, PublicKey } from '@metaplex-foundation/umi';
 
 // ---------------------------------------- //
 // RPC input.                               //
@@ -459,7 +456,7 @@ export type GetAssetSignaturesRpcInput = {
   /**
    * The maximum number of assets to retrieve.
    */
-  limit?: Nullable<number>; 
+  limit?: Nullable<number>;
 
   /**
    * The page number of the signatures.
@@ -487,7 +484,7 @@ export type GetAssetSignaturesRpcInput = {
   leaf_index?: Nullable<number>;
 
   /**
-   * 
+   *
    */
   cursor?: Nullable<string>;
 
@@ -516,8 +513,8 @@ export type GetAssetSignaturesRpcResponse = {
    */
   limit: number;
 
-  before: string,
-  after: string,
+  before: string;
+  after: string;
 
   /**
    * The page number of the signatures.
