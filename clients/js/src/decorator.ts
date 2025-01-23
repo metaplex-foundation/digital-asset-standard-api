@@ -23,9 +23,9 @@ export interface DasApiInterface {
   getAsset(assetId: PublicKey): Promise<DasApiAsset>;
 
   /**
-   * Return the metadata information of a compressed/standard asset.
+   * Return the metadata information of multiple compressed/standard assets.
    *
-   * @param assetId the id of the asset to fetch
+   * @param assetIds Array of the ids of the assets to fetch
    */
   getAssets(assetIds: PublicKey[]): Promise<DasApiAsset[]>;
 
@@ -37,9 +37,9 @@ export interface DasApiInterface {
   getAssetProof(assetId: PublicKey): Promise<GetAssetProofRpcResponse>;
 
   /**
-   * Return the merkle tree proof information for a compressed asset.
+   * Return the merkle tree proof information for multiple compressed assets.
    *
-   * @param assetId the id of the asset to fetch the proof for
+   * @param assetIds array of the ids of the assets to fetch the proofs for
    */
   getAssetProofs(assetIds: PublicKey[]): Promise<GetAssetProofsRpcResponse>;
 
