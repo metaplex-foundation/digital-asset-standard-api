@@ -11,7 +11,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
   test(`it can fetch a compressed asset by ID (${endpoint.name})`, async (t) => {
     // Given a minted NFT.
     const umi = createUmi(endpoint.url);
-    const assetId = publicKey('8TrvJBRa6Pzb9BDadqroHhWTHxaxK8Ws8r91oZ2jxaVV');
+    const assetId = publicKey('GGRbPQhwmo3dXBkJSAjMFc1QYTKGBt8qc11tTp3LkEKA');
 
     // When we fetch the asset using its ID.
     const asset = await umi.rpc.getAsset(assetId);
@@ -29,17 +29,17 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     t.deepEqual(asset.compression, <DasApiAssetCompression>{
       eligible: false,
       compressed: true,
-      data_hash: '3daLaunnCdbLtYR4Gas4xFnKLVezdMNqgjZEXtzhWqFA',
-      creator_hash: 'DJ7kGgdfHEMPJLUTW1YdnGX2JBc3DdD6ybJmkfE4wgSq',
-      asset_hash: 'BtbdpcxueKdAwpwRtyXMpUMV2Zbjd6YYtWvyiAK2FNQ6',
-      tree: '9PHhh7dJqdWnmjwiZEe6bMCFKnRSL436msEhN587adu5',
-      seq: 540278,
-      leaf_id: 539880,
+      data_hash: '29BdgNWxNB1sinkfmWKFQi3zWXRpsotp2FKoZhoqVa9F',
+      creator_hash: 'FGAvkyrzeEgvGGMfmi6ztGpvybHMYAL9w82nx6wzLVqn',
+      asset_hash: 'FGWfA5v5SZnpe9r32NEvDyX9hLeVEoBf3GqEkHX6YK9w',
+      tree: 'J1imb8C8SPzofrtgCxkN4nsKwHevzxgvHGeYBKFEDEmE',
+      seq: 1,
+      leaf_id: 0,
     });
     t.deepEqual(asset.grouping.length, 1);
     t.like(asset.grouping[0], {
       group_key: 'collection',
-      group_value: 'PEEiTQbMc87HQ9TbXfHWWyW3bKiMExbGmAiMDR6NUiD',
+      group_value: 'Dm1TRVw82roqpfqpzsFxSsWg6a4z3dku6ebVHSHuVo1c',
     });
     t.deepEqual(asset.mutable, true);
     t.deepEqual(asset.burnt, false);
@@ -48,7 +48,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
   test(`it can fetch a regular asset by ID (${endpoint.name})`, async (t) => {
     // Given a minted NFT.
     const umi = createUmi(endpoint.url);
-    const assetId = publicKey('5ja3EvVuEu5rXgtYE3LXKG84s7Pmy5siFfYbcopMc2Dx');
+    const assetId = publicKey('8bFQbnBrzeiYQabEJ1ghy5T7uFpqFzPjUGsVi3SzSMHB');
 
     // When we fetch the asset using its ID.
     const asset = await umi.rpc.getAsset(assetId);
@@ -59,7 +59,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
       id: assetId,
       content: {
         metadata: {
-          name: 'Mad Lads #2732',
+          name: 'Chiaki Azure 55',
         },
       },
     });
@@ -69,7 +69,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     t.deepEqual(asset.grouping.length, 1);
     t.like(asset.grouping[0], {
       group_key: 'collection',
-      group_value: 'J1S9H3QjnRtBbbuD4HjPV6RpRhwuk4zKbxsnCHuTgh9w',
+      group_value: '5RT4e9uHUgG9h13cSc3L4YvkDc9qXSznoLaX4Tx8cpWS',
     });
     t.deepEqual(asset.mutable, true);
     t.deepEqual(asset.burnt, false);

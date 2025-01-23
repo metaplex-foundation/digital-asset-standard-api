@@ -8,10 +8,10 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     // Given a minted NFT.
     const umi = createUmi(endpoint.url);
     const compressedAssetId = publicKey(
-      '8TrvJBRa6Pzb9BDadqroHhWTHxaxK8Ws8r91oZ2jxaVV'
+      'GGRbPQhwmo3dXBkJSAjMFc1QYTKGBt8qc11tTp3LkEKA'
     );
     const regularAssetId = publicKey(
-      '5ja3EvVuEu5rXgtYE3LXKG84s7Pmy5siFfYbcopMc2Dx'
+      '8bFQbnBrzeiYQabEJ1ghy5T7uFpqFzPjUGsVi3SzSMHB'
     );
 
     // When we fetch the asset using its ID.
@@ -30,17 +30,17 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     t.deepEqual(assets[0].compression, <DasApiAssetCompression>{
       eligible: false,
       compressed: true,
-      data_hash: '3daLaunnCdbLtYR4Gas4xFnKLVezdMNqgjZEXtzhWqFA',
-      creator_hash: 'DJ7kGgdfHEMPJLUTW1YdnGX2JBc3DdD6ybJmkfE4wgSq',
-      asset_hash: 'BtbdpcxueKdAwpwRtyXMpUMV2Zbjd6YYtWvyiAK2FNQ6',
-      tree: '9PHhh7dJqdWnmjwiZEe6bMCFKnRSL436msEhN587adu5',
-      seq: 540278,
-      leaf_id: 539880,
+      data_hash: '29BdgNWxNB1sinkfmWKFQi3zWXRpsotp2FKoZhoqVa9F',
+      creator_hash: 'FGAvkyrzeEgvGGMfmi6ztGpvybHMYAL9w82nx6wzLVqn',
+      asset_hash: 'FGWfA5v5SZnpe9r32NEvDyX9hLeVEoBf3GqEkHX6YK9w',
+      tree: 'J1imb8C8SPzofrtgCxkN4nsKwHevzxgvHGeYBKFEDEmE',
+      seq: 1,
+      leaf_id: 0,
     });
     t.deepEqual(assets[0].grouping.length, 1);
     t.like(assets[0].grouping[0], {
       group_key: 'collection',
-      group_value: 'PEEiTQbMc87HQ9TbXfHWWyW3bKiMExbGmAiMDR6NUiD',
+      group_value: 'Dm1TRVw82roqpfqpzsFxSsWg6a4z3dku6ebVHSHuVo1c',
     });
     t.deepEqual(assets[0].mutable, true);
     t.deepEqual(assets[0].burnt, false);
@@ -49,7 +49,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     t.deepEqual(assets[1].id, regularAssetId);
     t.like(assets[1].content, <DasApiAssetContent>{
       metadata: {
-        name: 'Mad Lads #2732',
+        name: 'Chiaki Azure 55',
       },
     });
     t.like(assets[1].compression, <DasApiAssetCompression>{
@@ -58,7 +58,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     t.deepEqual(assets[1].grouping.length, 1);
     t.like(assets[1].grouping[0], {
       group_key: 'collection',
-      group_value: 'J1S9H3QjnRtBbbuD4HjPV6RpRhwuk4zKbxsnCHuTgh9w',
+      group_value: '5RT4e9uHUgG9h13cSc3L4YvkDc9qXSznoLaX4Tx8cpWS',
     });
     t.deepEqual(assets[1].mutable, true);
     t.deepEqual(assets[1].burnt, false);
