@@ -1,8 +1,6 @@
 import { publicKey } from '@metaplex-foundation/umi';
 import test from 'ava';
-import {
-  DasApiTransactionSignature,
-} from '../src';
+import { DasApiTransactionSignature } from '../src';
 import { DAS_API_ENDPOINTS, createUmi } from './_setup';
 
 DAS_API_ENDPOINTS.forEach((endpoint) => {
