@@ -11,6 +11,7 @@ import {
   SearchAssetsRpcInput,
   GetAssetSignaturesRpcResponse,
   GetAssetProofsRpcResponse,
+  GetAssetSignaturesRpcInput,
 } from './types';
 
 export interface DasApiInterface {
@@ -84,10 +85,10 @@ export interface DasApiInterface {
   /**
    * Return the transaction signatures for a compressed asset
    *
-   * @param assetId the id of the asset to fetch the signatures for
+   * @param input the input parameters for the RPC call
    */
   getAssetSignatures(
-    assetId: PublicKey
+    input: GetAssetSignaturesRpcInput
   ): Promise<GetAssetSignaturesRpcResponse>;
 }
 
@@ -256,13 +257,22 @@ export const createDasApiDecorator = (
     }
     return assetList;
   },
-  getAssetSignatures: async (assetId: PublicKey) => {
+  getAssetSignatures: async (input: GetAssetSignaturesRpcInput) => {
     const signatures = await rpc.call<GetAssetSignaturesRpcResponse | null>(
       'getAssetSignaturesV2',
-      [assetId]
+      [ input.assetId,
+        input.limit ?? null,
+        input.page ?? null,
+        input.before ?? null,
+        input.after ?? null,
+        input.tree ?? null,
+        input.leaf_index ?? null,
+        input.cursor ?? null,
+        input.sort_direction ?? null,
+      ]
     );
     if (!signatures)
-      throw new DasApiError(`No signatures found for asset: ${assetId}`);
+      throw new DasApiError(`No signatures found for asset: ${input.assetId}`);
     return signatures;
   },
 });

@@ -1,7 +1,6 @@
 import {
   Nullable,
   PublicKey,
-  TransactionSignature,
 } from '@metaplex-foundation/umi';
 
 // ---------------------------------------- //
@@ -451,6 +450,59 @@ export type GetAssetProofsRpcResponse = Record<
   GetAssetProofRpcResponse
 >;
 
+export type GetAssetSignaturesRpcInput = {
+  /**
+   * The Asset ID to retrieve signatures for.
+   */
+  assetId?: Nullable<PublicKey>;
+
+  /**
+   * The maximum number of assets to retrieve.
+   */
+  limit?: Nullable<number>; 
+
+  /**
+   * The page number of the signatures.
+   */
+  page?: Nullable<number>;
+
+  /**
+   * Retrieve signatures before the specified `ID` value.
+   */
+  before?: Nullable<string>;
+
+  /**
+   * Retrieve signatures after the specified `ID` value.
+   */
+  after?: Nullable<string>;
+
+  /**
+   * The tree ID to retrieve signatures for.
+   */
+  tree?: Nullable<PublicKey>;
+
+  /**
+   * The leaf index to retrieve signatures for.
+   */
+  leaf_index?: Nullable<number>;
+
+  /**
+   * 
+   */
+  cursor?: Nullable<string>;
+
+  /**
+   * The sort direction.
+   */
+  sort_direction?: Nullable<'asc' | 'desc'>;
+};
+
+export type DasApiTransactionSignature = {
+  signature: string;
+  instruction: string;
+  slot: number;
+};
+
 export type GetAssetSignaturesRpcResponse = {
   /**
    * total number of signatures in the list.
@@ -464,13 +516,16 @@ export type GetAssetSignaturesRpcResponse = {
    */
   limit: number;
 
+  before: string,
+  after: string,
+
   /**
    * The page number of the signatures.
    */
-  page: number;
+  page?: number;
 
   /**
    * List of individual signatures.
    */
-  signatures: TransactionSignature[];
+  items: DasApiTransactionSignature[];
 };
