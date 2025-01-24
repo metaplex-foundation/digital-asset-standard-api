@@ -59,15 +59,15 @@ The plugin can be used with any RPC that supports the Metaplex DAS API specifica
 | Name                   | Description                                                     |           Example           |
 | ---------------------- | --------------------------------------------------------------- | :-------------------------: |
 | `getAsset`             | Return the metadata information of a compressed/standard asset  |       [➡](#-getasset)       |
-| `getAssets`            | Return the metadata information of a compressed/standard assets |      [-](#-getassets)       |
+| `getAssets`            | Return the metadata information of a compressed/standard assets |      [➡](#-getassets)       |
 | `getAssetProof`        | Return the merkle tree proof information for a compressed asset |    [➡](#-getassetproof)     |
-| `getAssetProofs`       | Return the merkle tree proof information for compressed assets  |    [-](#-getassetproofs)    |
+| `getAssetProofs`       | Return the merkle tree proof information for compressed assets  |    [➡](#-getassetproofs)    |
 | `getAssetsByOwner`     | Return the list of assets given an owner address                |   [➡](#-getassetsbyowner)   |
 | `getAssetsByAuthority` | Return the list of assets given an authority address            | [➡](#-getassetsbyauthority) |
 | `getAssetsByCreator`   | Return the list of assets given a creator address               |  [➡](#-getassetsbycreator)  |
 | `getAssetsByGroup`     | Return the list of assets given a group (key, value) pair       |   [➡](#-getassetsbygroup)   |
+| `getAssetSignatures`   | Return the transaction signatures for a compressed asset        |  [➡](#-getassetsignatures)  |
 | `searchAssets`         | Return the list of assets given a search criteria               |     [➡](#-searchassets)     |
-| `getAssetSignatures`   | Return the transaction signatures for a compressed asset        |  [-](#-getassetsignatures)  |
 
 ## Examples
 
@@ -465,6 +465,59 @@ curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json'
         "ownerAddress": "N4f6zftYsuu4yT7icsjLwh4i6pB1zvvKbseHj2NmSQw",
         "limit": 10,
         "page": 1
+    },
+    "id": 0
+}'
+```
+
+</details>
+
+#### 📌 `getAssetSignatures`
+
+<details>
+  <summary>parameters</summary>
+
+| Name            | Required | Description                                                                                                                                                                                                                |
+| --------------- | :------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `assetId`       |    ✅ (or tree + leafIndex)   | The id of the asset.                                                                                                                                                                                                       |
+| `tree`          |    ✅ (or assetId)    | The tree corresponding to the leaf.                                                                                                                                                                                        |
+| `leafIndex`     |    ✅ (or assetId)    | The leaf index of the asset.                                                                                                                                                                                               |
+| `limit`         |          | The maximum number of signatures to retrieve.                                                                                                                                                                              |
+| `page`          |          | The index of the "page" to retrieve.                                                                                                                                                                                       |
+| `before`        |          | Retrieve signatures before the specified signature.                                                                                                                                                                        |
+| `after`         |          | Retrieve signatures after the specified signature.                                                                                                                                                                         |
+| `cursor`        |          | The cursor of the signatures.                                                                                                                                                                                              |
+| `sortDirection` |          | Sort direction. can be one of these values: `["asc", "desc"]`                                                                                                                                                                                                           |
+
+</details>
+
+<details>
+  <summary>typescript</summary>
+
+```typescript
+import { publicKey } from "@metaplex-foundation/umi";
+import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
+import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
+
+const umi = createUmi("<ENDPOINT>").use(dasApi());
+
+const assets = await umi.rpc.getAssetSignatures({
+  assetId: publicKey("GGRbPQhwmo3dXBkJSAjMFc1QYTKGBt8qc11tTp3LkEKA"),
+});
+console.log(assets.items.length == 1);
+```
+
+</details>
+
+<details>
+  <summary>curl</summary>
+
+```sh
+curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
+    "jsonrpc": "2.0",
+    "method": "getAssetSignaturesV2",
+    "params": {
+        "assetId": "GGRbPQhwmo3dXBkJSAjMFc1QYTKGBt8qc11tTp3LkEKA"
     },
     "id": 0
 }'
