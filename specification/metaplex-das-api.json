@@ -132,7 +132,7 @@
         },
         {
           "name": "before",
-          "description": "Retrieve signature before the specified signature",
+          "description": "Retrieve signatures before the specified signature",
           "schema": {
             "type": "string"
           }
@@ -158,6 +158,25 @@
           "required": false,
           "schema": {
             "type": "string"
+          }
+        },
+        {
+          "name": "cursor",
+          "description": "",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "sortDirection",
+          "description": "Sort direction",
+          "schema": {
+            "type": "string",
+            "enum": [
+              "asc",
+              "desc"
+            ]
           }
         }
       ],
@@ -1001,6 +1020,9 @@
           },
           "instruction": {
             "type": "string"
+          },
+          "slot": {
+            "type": "number"
           }
         }
       },
