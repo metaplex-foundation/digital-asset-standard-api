@@ -154,7 +154,7 @@ console.log(asset);
 ```sh
 curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
     "jsonrpc": "2.0",
-    "method": "getAsset",
+    "method": "getAssets",
     "params": [
       "8vw7tdLGE3FBjaetsJrZAarwsbc8UESsegiLyvWXxs5A",
       "5ja3EvVuEu5rXgtYE3LXKG84s7Pmy5siFfYbcopMc2Dx"
@@ -246,7 +246,7 @@ console.log(proof);
 ```sh
 curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
     "jsonrpc": "2.0",
-    "method": "getAssetProof",
+    "method": "getAssetProofs",
     "params": [
       "8TrvJBRa6Pzb9BDadqroHhWTHxaxK8Ws8r91oZ2jxaVV",
       "5HsEEPqaMKvneyoxMEEfFh47CUrWTZruhrECg4Fsn4Go"
