@@ -261,19 +261,23 @@ export const createDasApiDecorator = (
     const signatures = await rpc.call<GetAssetSignaturesRpcResponse | null>(
       'getAssetSignaturesV2',
       [
-        input.assetId,
+        'assetId' in input ? input.assetId : null,
         input.limit ?? null,
         input.page ?? null,
         input.before ?? null,
         input.after ?? null,
-        input.tree ?? null,
-        input.leaf_index ?? null,
+        'tree' in input ? input.tree : null,
+        'tree' in input ? input.leaf_index : null,
         input.cursor ?? null,
         input.sort_direction ?? null,
       ]
     );
-    if (!signatures)
-      throw new DasApiError(`No signatures found for asset: ${input.assetId}`);
+    if (!signatures) {
+      const identifier = 'assetId' in input 
+        ? `asset: ${input.assetId}` 
+        : `tree: ${input.tree}, leaf_index: ${input.leaf_index}`;
+      throw new DasApiError(`No signatures found for ${identifier}`);
+    }
     return signatures;
   },
 });

@@ -449,11 +449,6 @@ export type GetAssetProofsRpcResponse = Record<
 
 export type GetAssetSignaturesRpcInput = {
   /**
-   * The Asset ID to retrieve signatures for.
-   */
-  assetId?: Nullable<PublicKey>;
-
-  /**
    * The maximum number of assets to retrieve.
    */
   limit?: Nullable<number>;
@@ -474,16 +469,6 @@ export type GetAssetSignaturesRpcInput = {
   after?: Nullable<string>;
 
   /**
-   * The tree ID to retrieve signatures for.
-   */
-  tree?: Nullable<PublicKey>;
-
-  /**
-   * The leaf index to retrieve signatures for.
-   */
-  leaf_index?: Nullable<number>;
-
-  /**
    *
    */
   cursor?: Nullable<string>;
@@ -492,7 +477,27 @@ export type GetAssetSignaturesRpcInput = {
    * The sort direction.
    */
   sort_direction?: Nullable<'asc' | 'desc'>;
-};
+} & (
+  | {
+      /**
+       * The Asset ID to retrieve signatures for.
+       */
+      assetId: PublicKey;
+      tree?: never;
+      leaf_index?: never;
+    }
+  | {
+      /**
+       * The tree ID to retrieve signatures for.
+       */
+      tree: PublicKey;
+      /**
+       * The leaf index to retrieve signatures for.
+       */
+      leaf_index: number;
+      assetId?: never;
+    }
+);
 
 export type DasApiTransactionSignature = {
   signature: string;
