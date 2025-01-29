@@ -18,6 +18,9 @@ devDependencies:
   '@solana/web3.js':
     specifier: ^1.73.0
     version: 1.98.0
+  '@types/node':
+    specifier: ^22.12.0
+    version: 22.12.0
   '@typescript-eslint/eslint-plugin':
     specifier: ^5.0.0
     version: 5.62.0(@typescript-eslint/parser@5.62.0)(eslint@8.57.1)(typescript@4.9.5)
