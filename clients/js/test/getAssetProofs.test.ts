@@ -31,10 +31,10 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     });
 
     t.like(assets[assetIds[1]], <GetAssetProofsRpcResponse>{
-      root: 'EH7KDynGRdQWh4YF91i5euceg6ucZEbXnuyiqmPu8ZWb',
+      root: 'ATo9owW1JofdTjhZNgMdYx8uS82mkExCSwCTvoyfTxmD',
       proof: [
         'FGWfA5v5SZnpe9r32NEvDyX9hLeVEoBf3GqEkHX6YK9w',
-        'Cf5tmmFZ4D31tviuJezHdFLf5WF7yFvzfxNyftKsqTwr',
+        '8QoG5BnZH9RVz2qLsKPEQ5jnAaCBu3kdRd9Hf4PgSwx9',
         'DAbAU9srHpEUogXWuhy5VZ7g8UX9STymELtndcx1xgP1',
         '3HCYqQRcQSChEuAw1ybNYHibrTNNjzbYzm56cmEmivB6',
         'GSz87YKd3YoZWcEKhnjSsYJwv8o5aWGdBdGGYUphRfTh',
