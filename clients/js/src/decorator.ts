@@ -273,9 +273,10 @@ export const createDasApiDecorator = (
       ]
     );
     if (!signatures) {
-      const identifier = 'assetId' in input 
-        ? `asset: ${input.assetId}` 
-        : `tree: ${input.tree}, leaf_index: ${input.leaf_index}`;
+      const identifier =
+        'assetId' in input
+          ? `asset: ${input.assetId}`
+          : `tree: ${input.tree}, leaf_index: ${input.leaf_index}`;
       throw new DasApiError(`No signatures found for ${identifier}`);
     }
     return signatures;
