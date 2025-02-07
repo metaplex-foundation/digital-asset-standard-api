@@ -4,11 +4,38 @@ import { Nullable, PublicKey } from '@metaplex-foundation/umi';
 // RPC input.                               //
 // ---------------------------------------- //
 
+/**
+ * Display options for asset queries
+ */
+export type DisplayOptions = {
+  /**
+   * Whether to show unverified collections
+   */
+  showUnverifiedCollections?: boolean;
+  /**
+   * Whether to show collection metadata
+   */
+  showCollectionMetadata?: boolean;
+  /**
+   * Whether to show fungible assets
+   */
+  showFungible?: boolean;
+  /**
+   * Whether to show inscription data
+   */
+  showInscription?: boolean;
+};
+
 export type GetAssetsByAuthorityRpcInput = {
   /**
    * The address of the authority of the assets.
    */
   authority: PublicKey;
+
+  /**
+   * Display options for the query
+   */
+  displayOptions?: DisplayOptions;
 } & Pagination;
 
 export type GetAssetsByCreatorRpcInput = {
@@ -21,6 +48,11 @@ export type GetAssetsByCreatorRpcInput = {
    * Indicates whether to retrieve only verified assets or not.
    */
   onlyVerified: boolean;
+
+  /**
+   * Display options for the query
+   */
+  displayOptions?: DisplayOptions;
 } & Pagination;
 
 export type GetAssetsByGroupRpcInput = {
@@ -33,6 +65,11 @@ export type GetAssetsByGroupRpcInput = {
    * The value of the group
    */
   groupValue: string;
+
+  /**
+   * Display options for the query
+   */
+  displayOptions?: DisplayOptions;
 } & Pagination;
 
 export type GetAssetsByOwnerRpcInput = {
@@ -40,6 +77,11 @@ export type GetAssetsByOwnerRpcInput = {
    * The address of the owner of the assets.
    */
   owner: PublicKey;
+
+  /**
+   * Display options for the query
+   */
+  displayOptions?: DisplayOptions;
 } & Pagination;
 
 export type SearchAssetsRpcInput = {
@@ -57,6 +99,11 @@ export type SearchAssetsRpcInput = {
    * The interface value of the asset.
    */
   interface?: Nullable<DasApiAssetInterface>;
+
+  /**
+   * Display options for the query
+   */
+  displayOptions?: DisplayOptions;
 
   /**
    * The value for the JSON URI.
@@ -143,6 +190,36 @@ export type SearchAssetsRpcInput = {
    */
   burnt?: Nullable<boolean>;
 } & Pagination;
+
+/**
+ * Input parameters for getAsset RPC call
+ */
+export type GetAssetRpcInput = {
+  /**
+   * The asset ID to fetch
+   */
+  assetId: PublicKey;
+
+  /**
+   * Display options for the query
+   */
+  options?: DisplayOptions;
+};
+
+/**
+ * Input parameters for getAssets RPC call
+ */
+export type GetAssetsRpcInput = {
+  /**
+   * Array of asset IDs to fetch
+   */
+  assetIds: PublicKey[];
+
+  /**
+   * Display options for the query
+   */
+  displayOptions?: DisplayOptions;
+};
 
 // ---------------------------------------- //
 // Result types.                            //
@@ -321,6 +398,11 @@ type Pagination = {
    * Retrieve assets after the specified `ID` value.
    */
   after?: Nullable<string>;
+
+    /**
+   *
+   */
+    cursor?: Nullable<string>;
 };
 
 /**
@@ -407,6 +489,7 @@ export type DasApiPropGroupKey = 'collection';
 export type DasApiAssetGrouping = {
   group_key: DasApiPropGroupKey;
   group_value: string;
+  verified?: boolean;
 };
 
 export type DasApiAuthorityScope =

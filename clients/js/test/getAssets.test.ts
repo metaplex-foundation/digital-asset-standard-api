@@ -63,4 +63,31 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     t.deepEqual(assets[1].mutable, true);
     t.deepEqual(assets[1].burnt, false);
   });
+
+  test(`it can fetch multiple assets by ID with showUnverifiedCollections true (${endpoint.name})`, async (t) => {
+    // Given a minted NFT.
+    const umi = createUmi(endpoint.url);
+    const compressedAssetId = publicKey(
+      'GGRbPQhwmo3dXBkJSAjMFc1QYTKGBt8qc11tTp3LkEKA'
+    );
+    const regularAssetId = publicKey(
+      '8bFQbnBrzeiYQabEJ1ghy5T7uFpqFzPjUGsVi3SzSMHB'
+    );
+
+    // When we fetch the assets using their IDs with display options.
+    const assets = await umi.rpc.getAssets({
+      assetIds: [compressedAssetId, regularAssetId],
+      displayOptions: {
+        showUnverifiedCollections: true,
+      },
+    });
+
+    // Then we expect to get the assets back.
+    t.is(assets.length, 2);
+    t.deepEqual(assets[0].id, compressedAssetId);
+    t.deepEqual(assets[1].id, regularAssetId);
+
+    //And asset1 should have grouping data
+    t.deepEqual(assets[1].grouping.length, 1);
+  });
 });
