@@ -531,3 +531,4 @@ export type GetAssetSignaturesRpcResponse = {
    */
   items: DasApiTransactionSignature[];
 };
+
