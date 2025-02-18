@@ -13,18 +13,19 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
 
     // When we search for an asset given its owner.
     const assets = await umi.rpc.searchAssets({
-      owner: publicKey('N4f6zftYsuu4yT7icsjLwh4i6pB1zvvKbseHj2NmSQw'),
+      owner: publicKey('DASPQfEAVcHp55eFmfstRduMT3dSfoTirFFsMHwUaWaz'),
+      compressed: true,
       jsonUri:
         'https://arweave.net/c9aGs5fOk7gD4wWnSvmzeqgtfxAGRgtI1jYzvl8-IVs/chiaki-violet-azure-common.json',
     });
 
     // Then we expect to find an asset.
-    t.true(assets.items.length == 1);
+    t.true(assets.items.length > 1);
 
     // Then we expect the following data.
     t.like(assets.items[0], <DasApiAsset>{
       interface: 'V1_NFT',
-      id: '8TrvJBRa6Pzb9BDadqroHhWTHxaxK8Ws8r91oZ2jxaVV',
+      id: 'GGRbPQhwmo3dXBkJSAjMFc1QYTKGBt8qc11tTp3LkEKA',
       content: {
         metadata: {
           name: 'Chiaki Azure 55',
@@ -33,31 +34,31 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
       },
       authorities: [
         {
-          address: 'mRdta4rc2RtsxEUDYuvKLamMZAdW6qHcwuq866Skxxv',
+          address: '6FpirDzk8dXDfSHWH7FAjKSvjtMPbTBYe34bRckeRN2u',
           scopes: ['full'],
         },
       ],
       compression: {
         eligible: false,
         compressed: true,
-        data_hash: '3daLaunnCdbLtYR4Gas4xFnKLVezdMNqgjZEXtzhWqFA',
-        creator_hash: 'DJ7kGgdfHEMPJLUTW1YdnGX2JBc3DdD6ybJmkfE4wgSq',
-        asset_hash: 'BtbdpcxueKdAwpwRtyXMpUMV2Zbjd6YYtWvyiAK2FNQ6',
-        tree: '9PHhh7dJqdWnmjwiZEe6bMCFKnRSL436msEhN587adu5',
-        seq: 540278,
-        leaf_id: 539880,
+        data_hash: '29BdgNWxNB1sinkfmWKFQi3zWXRpsotp2FKoZhoqVa9F',
+        creator_hash: 'FGAvkyrzeEgvGGMfmi6ztGpvybHMYAL9w82nx6wzLVqn',
+        asset_hash: 'FGWfA5v5SZnpe9r32NEvDyX9hLeVEoBf3GqEkHX6YK9w',
+        tree: 'J1imb8C8SPzofrtgCxkN4nsKwHevzxgvHGeYBKFEDEmE',
+        seq: 1,
+        leaf_id: 0,
       },
       grouping: [
         {
           group_key: 'collection',
-          group_value: 'PEEiTQbMc87HQ9TbXfHWWyW3bKiMExbGmAiMDR6NUiD',
+          group_value: 'Dm1TRVw82roqpfqpzsFxSsWg6a4z3dku6ebVHSHuVo1c',
         },
       ],
       royalty: {
         royalty_model: 'creators',
         target: null,
-        percent: 0.030000000000000002,
-        basis_points: 300,
+        percent: 0.05,
+        basis_points: 500,
         primary_sale_happened: false,
         locked: false,
       },
@@ -72,7 +73,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
 
     // When we search for assetw given their collection.
     const assets = await umi.rpc.searchAssets({
-      grouping: ['collection', 'PEEiTQbMc87HQ9TbXfHWWyW3bKiMExbGmAiMDR6NUiD'],
+      grouping: ['collection', 'Dm1TRVw82roqpfqpzsFxSsWg6a4z3dku6ebVHSHuVo1c'],
     });
 
     // Then we expect to find assets.
@@ -84,7 +85,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
         grouping: [
           {
             group_key: 'collection',
-            group_value: 'PEEiTQbMc87HQ9TbXfHWWyW3bKiMExbGmAiMDR6NUiD',
+            group_value: 'Dm1TRVw82roqpfqpzsFxSsWg6a4z3dku6ebVHSHuVo1c',
           },
         ],
       });

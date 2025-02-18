@@ -7,7 +7,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
   test(`it can fetch compressed assets by owner (${endpoint.name})`, async (t) => {
     // Given an owner address.
     const umi = createUmi(endpoint.url);
-    const owner = publicKey('N4f6zftYsuu4yT7icsjLwh4i6pB1zvvKbseHj2NmSQw');
+    const owner = publicKey('DASPQfEAVcHp55eFmfstRduMT3dSfoTirFFsMHwUaWaz');
 
     // When we fetch the asset using the owner.
     const assets = await umi.rpc.getAssetsByOwner({ owner });

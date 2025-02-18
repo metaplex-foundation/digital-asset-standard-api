@@ -6,12 +6,12 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
   test(`it can fetch compressed assets by creator (${endpoint.name})`, async (t) => {
     // Given an creator address.
     const umi = createUmi(endpoint.url);
-    const creator = publicKey('D3XrkNZz6wx6cofot7Zohsf2KSsu2ArngNk8VqU9cTY3');
+    const creator = publicKey('DASPQfEAVcHp55eFmfstRduMT3dSfoTirFFsMHwUaWaz');
 
     // When we fetch the asset using the creator.
     const assets = await umi.rpc.getAssetsByCreator({
       creator,
-      onlyVerified: false,
+      onlyVerified: true,
       limit: 10,
     });
 

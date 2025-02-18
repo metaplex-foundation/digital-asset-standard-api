@@ -9,6 +9,9 @@ import {
   DasApiAsset,
   DasApiAssetList,
   SearchAssetsRpcInput,
+  GetAssetSignaturesRpcResponse,
+  GetAssetProofsRpcResponse,
+  GetAssetSignaturesRpcInput,
 } from './types';
 
 export interface DasApiInterface {
@@ -20,11 +23,25 @@ export interface DasApiInterface {
   getAsset(assetId: PublicKey): Promise<DasApiAsset>;
 
   /**
+   * Return the metadata information of multiple compressed/standard assets.
+   *
+   * @param assetIds Array of the ids of the assets to fetch
+   */
+  getAssets(assetIds: PublicKey[]): Promise<DasApiAsset[]>;
+
+  /**
    * Return the merkle tree proof information for a compressed asset.
    *
    * @param assetId the id of the asset to fetch the proof for
    */
   getAssetProof(assetId: PublicKey): Promise<GetAssetProofRpcResponse>;
+
+  /**
+   * Return the merkle tree proof information for multiple compressed assets.
+   *
+   * @param assetIds array of the ids of the assets to fetch the proofs for
+   */
+  getAssetProofs(assetIds: PublicKey[]): Promise<GetAssetProofsRpcResponse>;
 
   /**
    * Return the list of assets given an authority address.
@@ -64,6 +81,15 @@ export interface DasApiInterface {
    * @param input the input parameters for the RPC call
    */
   searchAssets(input: SearchAssetsRpcInput): Promise<DasApiAssetList>;
+
+  /**
+   * Return the transaction signatures for a compressed asset
+   *
+   * @param input the input parameters for the RPC call
+   */
+  getAssetSignatures(
+    input: GetAssetSignaturesRpcInput
+  ): Promise<GetAssetSignaturesRpcResponse>;
 }
 
 export const createDasApiDecorator = (
@@ -75,6 +101,13 @@ export const createDasApiDecorator = (
     if (!asset) throw new DasApiError(`Asset not found: ${assetId}`);
     return asset;
   },
+  getAssets: async (assetIds: PublicKey[]) => {
+    const assets = await rpc.call<DasApiAsset[] | null>('getAssets', [
+      assetIds,
+    ]);
+    if (!assets) throw new DasApiError(`No assets found: ${assetIds}`);
+    return assets;
+  },
   getAssetProof: async (assetId: PublicKey) => {
     const proof = await rpc.call<GetAssetProofRpcResponse | null>(
       'getAssetProof',
@@ -82,6 +115,15 @@ export const createDasApiDecorator = (
     );
     if (!proof) throw new DasApiError(`No proof found for asset: ${assetId}`);
     return proof;
+  },
+  getAssetProofs: async (assetIds: PublicKey[]) => {
+    const proofs = await rpc.call<GetAssetProofsRpcResponse | null>(
+      'getAssetProofs',
+      [assetIds]
+    );
+    if (!proofs)
+      throw new DasApiError(`No proofs found for assets: ${assetIds}`);
+    return proofs;
   },
   getAssetsByAuthority: async (input: GetAssetsByAuthorityRpcInput) => {
     if (typeof input.page === 'number' && (input.before || input.after)) {
@@ -214,5 +256,29 @@ export const createDasApiDecorator = (
       throw new DasApiError('No assets found for the given search criteria');
     }
     return assetList;
+  },
+  getAssetSignatures: async (input: GetAssetSignaturesRpcInput) => {
+    const signatures = await rpc.call<GetAssetSignaturesRpcResponse | null>(
+      'getAssetSignaturesV2',
+      [
+        'assetId' in input ? input.assetId : null,
+        input.limit ?? null,
+        input.page ?? null,
+        input.before ?? null,
+        input.after ?? null,
+        'tree' in input ? input.tree : null,
+        'tree' in input ? input.leaf_index : null,
+        input.cursor ?? null,
+        input.sort_direction ?? null,
+      ]
+    );
+    if (!signatures) {
+      const identifier =
+        'assetId' in input
+          ? `asset: ${input.assetId}`
+          : `tree: ${input.tree}, leaf_index: ${input.leaf_index}`;
+      throw new DasApiError(`No signatures found for ${identifier}`);
+    }
+    return signatures;
   },
 });
