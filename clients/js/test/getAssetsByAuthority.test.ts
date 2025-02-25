@@ -87,4 +87,45 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
       });
     });
   });
+
+  test(`it can fetch assets by authority with showCollectionMetadata true (${endpoint.name})`, async (t) => {
+    // Given an authority address.
+    const umi = createUmi(endpoint.url);
+    const authority = publicKey('DASPQfEAVcHp55eFmfstRduMT3dSfoTirFFsMHwUaWaz');
+
+    // When we fetch the asset using the authority with display options.
+    const assets = await umi.rpc.getAssetsByAuthority({
+      authority,
+      displayOptions: {
+        showCollectionMetadata: true,
+      },
+    });
+
+    // Then we expect to find assets.
+    t.true(assets.items.length > 0);
+
+    // And the authority should be present.
+    assets.items.forEach((asset) => {
+      t.true(asset.authorities.some((other) => other.address === authority));
+    });
+
+    // And collection metadata should be present in the grouping
+    const assetWithCollectionMetadata = assets.items[0];
+    t.true(assetWithCollectionMetadata.grouping.length > 0);
+    const collectionGroup = assetWithCollectionMetadata.grouping.find(
+      (group) => group.group_key === 'collection'
+    );
+    t.truthy(collectionGroup, 'Expected to find a collection group');
+    t.like(collectionGroup, {
+      group_key: 'collection',
+      group_value: 'Dm1TRVw82roqpfqpzsFxSsWg6a4z3dku6ebVHSHuVo1c',
+      collection_metadata: {
+        name: 'My cNFT Collection',
+        symbol: '',
+        image: 'https://gateway.irys.xyz/8da3Er9Q39QRkdNhBNP7w5hDo5ZnydLNxLqe9i6s1Nak',
+        description: '',
+        external_url: ''
+      }
+    });
+  });
 });

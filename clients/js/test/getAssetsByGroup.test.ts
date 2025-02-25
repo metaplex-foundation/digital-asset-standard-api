@@ -98,4 +98,59 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
       'Expected to find at least one asset with an unverified collection'
     );
   });
+
+  test(`it can fetch assets by group with collection metadata when showCollectionMetadata is true (${endpoint.name})`, async (t) => {
+    // Given a group (key, value) pair.
+    const umi = createUmi(endpoint.url);
+    const groupKey = 'collection';
+    const groupValue = publicKey(
+      '5RT4e9uHUgG9h13cSc3L4YvkDc9qXSznoLaX4Tx8cpWS'
+    );
+
+    // When we fetch the asset using the group information with display options.
+    const assets = await umi.rpc.getAssetsByGroup({
+      groupKey,
+      groupValue,
+      displayOptions: {
+        showCollectionMetadata: true,
+      },
+    });
+
+    // Then we expect to find assets
+    t.true(assets.items.length > 0);
+
+    // And the collection grouping should include collection metadata
+    assets.items.forEach((asset) => {
+      const collectionGroup = asset.grouping?.find(
+        (group) =>
+          group.group_key === groupKey &&
+          group.group_value === groupValue.toString()
+      );
+      t.truthy(collectionGroup, 'Expected to find collection group');
+      if (!collectionGroup) return;
+
+      t.truthy(
+        collectionGroup.collection_metadata,
+        'Expected collection group to have collection_metadata'
+      );
+      if (!collectionGroup.collection_metadata) return;
+
+      t.true(
+        typeof collectionGroup.collection_metadata.name === 'string',
+        'Expected collection_metadata to have a name'
+      );
+      t.true(
+        typeof collectionGroup.collection_metadata.description === 'string',
+        'Expected collection_metadata to have a description'
+      );
+      t.true(
+        typeof collectionGroup.collection_metadata.image === 'string',
+        'Expected collection_metadata to have an image'
+      );
+      t.true(
+        typeof collectionGroup.collection_metadata.symbol === 'string',
+        'Expected collection_metadata to have a symbol'
+      );
+    });
+  });
 });

@@ -97,7 +97,11 @@ export interface DasApiInterface {
 export const createDasApiDecorator = (
   rpc: RpcInterface
 ): RpcInterface & DasApiInterface => {
-  const validatePagination = (page: number | null | undefined, before?: string | null, after?: string | null) => {
+  const validatePagination = (
+    page: number | null | undefined,
+    before?: string | null,
+    after?: string | null
+  ) => {
     if (typeof page === 'number' && (before || after)) {
       throw new DasApiError(
         'Pagination Error. Please use either page or before/after, but not both.'
@@ -108,17 +112,24 @@ export const createDasApiDecorator = (
   return {
     ...rpc,
     getAsset: async (input: GetAssetRpcInput | PublicKey) => {
-      const assetId = typeof input === 'object' && 'assetId' in input ? input.assetId : input;
-      const options = typeof input === 'object' && 'options' in input ? input.options : {};
+      const assetId =
+        typeof input === 'object' && 'assetId' in input ? input.assetId : input;
+      const options =
+        typeof input === 'object' && 'options' in input ? input.options : {};
 
-      const asset = await rpc.call<DasApiAsset | null>('getAsset', [assetId, options]);
+      const asset = await rpc.call<DasApiAsset | null>('getAsset', [
+        assetId,
+        options,
+      ]);
       if (!asset) throw new DasApiError(`Asset not found: ${assetId}`);
       return asset;
     },
     getAssets: async (input: GetAssetsRpcInput | PublicKey[]) => {
       const assetIds = Array.isArray(input) ? input : input.assetIds;
-      const displayOptions = Array.isArray(input) ? {} : (input.displayOptions ?? {});
-      
+      const displayOptions = Array.isArray(input)
+        ? {}
+        : input.displayOptions ?? {};
+
       const assets = await rpc.call<DasApiAsset[] | null>('getAssets', [
         assetIds,
         displayOptions,
@@ -279,9 +290,10 @@ export const createDasApiDecorator = (
         ]
       );
       if (!signatures) {
-        const identifier = 'assetId' in input 
-          ? `asset: ${input.assetId}` 
-          : `tree: ${input.tree}, leaf_index: ${input.leaf_index}`;
+        const identifier =
+          'assetId' in input
+            ? `asset: ${input.assetId}`
+            : `tree: ${input.tree}, leaf_index: ${input.leaf_index}`;
         throw new DasApiError(`No signatures found for ${identifier}`);
       }
       return signatures;

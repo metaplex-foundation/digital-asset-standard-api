@@ -90,4 +90,42 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     //And asset1 should have grouping data
     t.deepEqual(assets[1].grouping.length, 1);
   });
+
+  test(`it can fetch multiple assets by ID with showCollectionMetadata true (${endpoint.name})`, async (t) => {
+    // Given a minted NFT.
+    const umi = createUmi(endpoint.url);
+    const compressedAssetId = publicKey(
+      'GGRbPQhwmo3dXBkJSAjMFc1QYTKGBt8qc11tTp3LkEKA'
+    );
+    const regularAssetId = publicKey(
+      '8bFQbnBrzeiYQabEJ1ghy5T7uFpqFzPjUGsVi3SzSMHB'
+    );
+
+    // When we fetch the assets using their IDs with display options.
+    const assets = await umi.rpc.getAssets({
+      assetIds: [compressedAssetId, regularAssetId],
+      displayOptions: {
+        showCollectionMetadata: true,
+      },
+    });
+
+    // Then we expect to get the assets back with collection metadata.
+    t.is(assets.length, 2);
+    t.deepEqual(assets[0].id, compressedAssetId);
+
+    // Verify collection metadata is present in the grouping
+    t.deepEqual(assets[0].grouping.length, 1);
+    t.like(assets[0].grouping[0], {
+      group_key: 'collection',
+      group_value: 'Dm1TRVw82roqpfqpzsFxSsWg6a4z3dku6ebVHSHuVo1c',
+      verified: true,
+      collection_metadata: {
+        name: 'My cNFT Collection',
+        symbol: '',
+        image: 'https://gateway.irys.xyz/8da3Er9Q39QRkdNhBNP7w5hDo5ZnydLNxLqe9i6s1Nak',
+        description: '',
+        external_url: ''
+      }
+    });
+  });
 });

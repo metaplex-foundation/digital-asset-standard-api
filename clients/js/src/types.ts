@@ -490,6 +490,12 @@ export type DasApiAssetGrouping = {
   group_key: DasApiPropGroupKey;
   group_value: string;
   verified?: boolean;
+  collection_metadata?: {
+    name: string;
+    symbol: string;
+    description: string;
+    image: string;
+  };
 };
 
 export type DasApiAuthorityScope =
