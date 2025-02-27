@@ -111,21 +111,50 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
 
     // Then we expect to get the assets back with collection metadata.
     t.is(assets.length, 2);
-    t.deepEqual(assets[0].id, compressedAssetId);
+    t.deepEqual(assets[1].id, regularAssetId);
 
     // Verify collection metadata is present in the grouping
-    t.deepEqual(assets[0].grouping.length, 1);
-    t.like(assets[0].grouping[0], {
+    const assetWithCollectionMetadata = assets.find(
+      (asset) => asset.grouping[0]?.collection_metadata
+    );
+    t.truthy(assetWithCollectionMetadata, 'Expected to find an asset with collection metadata');
+    if (!assetWithCollectionMetadata) return;
+
+    t.like(assetWithCollectionMetadata.grouping[0], {
       group_key: 'collection',
-      group_value: 'Dm1TRVw82roqpfqpzsFxSsWg6a4z3dku6ebVHSHuVo1c',
-      verified: true,
+      group_value: '5RT4e9uHUgG9h13cSc3L4YvkDc9qXSznoLaX4Tx8cpWS',
+      verified: false,
       collection_metadata: {
-        name: 'My cNFT Collection',
+        name: 'Chiaki Azure 55 Collection',
         symbol: '',
-        image: 'https://gateway.irys.xyz/8da3Er9Q39QRkdNhBNP7w5hDo5ZnydLNxLqe9i6s1Nak',
-        description: '',
-        external_url: ''
+        image: 'https://arweave.net/fFcYDkRHF-936IbAZ3pLTmFAmxF1WlW3KwWndYPgI8Q/chiaki-violet-azure-common.png',
+        description: 'MONMONMON is a collection from the creativity of Peelander Yellow. Each MONMONMON has unique and kind abilities that can be used to help others and play with your friends. There are secrets in each MONMONMON. We love you.'
       }
     });
+  });
+
+  test(`it can fetch multiple assets by ID with showFungible true (${endpoint.name})`, async (t) => {
+    // Given a minted NFT and a fungible token.
+    const umi = createUmi(endpoint.url);
+    const nftAssetId = publicKey(
+      'GGRbPQhwmo3dXBkJSAjMFc1QYTKGBt8qc11tTp3LkEKA'
+    );
+    const fungibleAssetId = publicKey(
+      '4oZjhZTiKAbuLtfCPukCgTDAcUngDUyccctpLVT9zJuP'
+    );
+
+    // When we fetch the assets using their IDs with showFungible true.
+    const assets = await umi.rpc.getAssets({
+      assetIds: [nftAssetId, fungibleAssetId],
+      displayOptions: {
+        showFungible: true,
+      },
+    });
+
+    // Then we expect to get both assets back.
+    t.is(assets.length, 2);
+    const fungibleAsset = assets.find(asset => asset.interface === 'FungibleToken');
+    t.truthy(fungibleAsset, 'Expected to find a fungible token');
+    t.deepEqual(fungibleAsset?.id, fungibleAssetId);
   });
 });

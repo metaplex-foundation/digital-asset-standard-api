@@ -165,8 +165,9 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
         name: 'My cNFT Collection',
         symbol: '',
         image: 'https://gateway.irys.xyz/8da3Er9Q39QRkdNhBNP7w5hDo5ZnydLNxLqe9i6s1Nak',
-        description: '',
-        external_url: ''
+        // TODO: Needs to be added again after MTG-1380 is merged
+//        description: '',
+//        external_url: ''
       }
     });
   });

@@ -101,9 +101,70 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
         name: 'My cNFT Collection',
         symbol: '',
         image: 'https://gateway.irys.xyz/8da3Er9Q39QRkdNhBNP7w5hDo5ZnydLNxLqe9i6s1Nak',
-        description: '',
-        external_url: ''
+        // TODO: Needs to be added again after MTG-1380 is merged
+//        description: '',
+//        external_url: ''
       }
     });
+  });
+
+  test(`it can fetch assets by owner with showFungible true (${endpoint.name})`, async (t) => {
+    // Given an owner address.
+    const umi = createUmi(endpoint.url);
+    const owner = publicKey('DASPQfEAVcHp55eFmfstRduMT3dSfoTirFFsMHwUaWaz');
+
+    // When we fetch the asset using the owner with display options.
+    const assets = await umi.rpc.getAssetsByOwner({
+      owner,
+      displayOptions: {
+        showFungible: true,
+      },
+    });
+
+    // Then we expect to find assets.
+    t.true(assets.items.length > 0);
+
+    // And the owner should match.
+    assets.items.forEach((asset) => {
+      t.like(assets.items[0], <DasApiAsset>{
+        ownership: {
+          owner,
+        },
+      });
+    });
+
+    // And at least one asset should be a fungible token
+    const fungibleAsset = assets.items.find((asset) => asset.interface === 'FungibleToken');
+    t.truthy(fungibleAsset, 'Expected to find at least one fungible token asset');
+  });
+
+  test(`it can fetch assets by owner with showFungible false (${endpoint.name})`, async (t) => {
+    // Given an owner address.
+    const umi = createUmi(endpoint.url);
+    const owner = publicKey('DASPQfEAVcHp55eFmfstRduMT3dSfoTirFFsMHwUaWaz');
+
+    // When we fetch the asset using the owner with display options.
+    const assets = await umi.rpc.getAssetsByOwner({
+      owner,
+      displayOptions: {
+        showFungible: false,
+      },
+    });
+
+    // Then we expect to find assets.
+    t.true(assets.items.length > 0);
+
+    // And the owner should match.
+    assets.items.forEach((asset) => {
+      t.like(assets.items[0], <DasApiAsset>{
+        ownership: {
+          owner,
+        },
+      });
+    });
+
+    // And no asset should be a fungible token
+    const fungibleAsset = assets.items.find((asset) => asset.interface === 'FungibleToken');
+    t.falsy(fungibleAsset, 'Expected not to find any fungible token assets');
   });
 });

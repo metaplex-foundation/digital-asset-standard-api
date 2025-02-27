@@ -419,6 +419,7 @@ export type DasApiAssetInterface =
   | 'LEGACY_NFT'
   | 'V2_NFT'
   | 'FungibleAsset'
+  | 'FungibleToken'
   | 'Custom'
   | 'Identity'
   | 'Executable'
