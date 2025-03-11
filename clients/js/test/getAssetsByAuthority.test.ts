@@ -113,9 +113,12 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     const assetWithCollectionMetadata = assets.items.find(
       (asset) => asset.grouping.length > 0
     );
-    t.truthy(assetWithCollectionMetadata, 'Expected to find an asset with grouping');
+    t.truthy(
+      assetWithCollectionMetadata,
+      'Expected to find an asset with grouping'
+    );
     if (!assetWithCollectionMetadata) return;
-    
+
     const collectionGroup = assetWithCollectionMetadata.grouping.find(
       (group) => group.group_key === 'collection'
     );
@@ -126,9 +129,11 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
       collection_metadata: {
         name: 'Chiaki Azure 55 Collection',
         symbol: '',
-        image: 'https://arweave.net/fFcYDkRHF-936IbAZ3pLTmFAmxF1WlW3KwWndYPgI8Q/chiaki-violet-azure-common.png',
-        description: 'MONMONMON is a collection from the creativity of Peelander Yellow. Each MONMONMON has unique and kind abilities that can be used to help others and play with your friends. There are secrets in each MONMONMON. We love you.'
-      }
+        image:
+          'https://arweave.net/fFcYDkRHF-936IbAZ3pLTmFAmxF1WlW3KwWndYPgI8Q/chiaki-violet-azure-common.png',
+        description:
+          'MONMONMON is a collection from the creativity of Peelander Yellow. Each MONMONMON has unique and kind abilities that can be used to help others and play with your friends. There are secrets in each MONMONMON. We love you.',
+      },
     });
   });
 });

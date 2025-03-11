@@ -151,7 +151,10 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     const assetWithCollection = assets.items.find((asset) =>
       asset.grouping?.some((group) => group.group_key === 'collection')
     );
-    t.truthy(assetWithCollection, 'Expected to find at least one asset with a collection');
+    t.truthy(
+      assetWithCollection,
+      'Expected to find at least one asset with a collection'
+    );
 
     // We've verified assetWithCollection exists with t.truthy above
     const collectionGroup = assetWithCollection!.grouping.find(
@@ -164,11 +167,12 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
       collection_metadata: {
         name: 'My cNFT Collection',
         symbol: '',
-        image: 'https://gateway.irys.xyz/8da3Er9Q39QRkdNhBNP7w5hDo5ZnydLNxLqe9i6s1Nak',
+        image:
+          'https://gateway.irys.xyz/8da3Er9Q39QRkdNhBNP7w5hDo5ZnydLNxLqe9i6s1Nak',
         // TODO: Needs to be added again after MTG-1380 is merged
-//        description: '',
-//        external_url: ''
-      }
+        //        description: '',
+        //        external_url: ''
+      },
     });
   });
 });

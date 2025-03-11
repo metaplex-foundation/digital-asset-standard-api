@@ -76,14 +76,17 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     const assetId = publicKey('5smGnzgaMsQ3JV7jWCvSxnRkHjP2dJoi1uczHTx87tji');
 
     // When we fetch the asset using its ID with display options.
-    await t.throwsAsync(async () => {
-      await umi.rpc.getAsset({
-        assetId,
-        options: { showUnverifiedCollections: false },
-      });
-    }, {
-      message: /Asset not found/
-    });
+    await t.throwsAsync(
+      async () => {
+        await umi.rpc.getAsset({
+          assetId,
+          options: { showUnverifiedCollections: false },
+        });
+      },
+      {
+        message: /Asset not found/,
+      }
+    );
   });
 
   test(`it can fetch a regular asset by ID with unverified collection data using showUnverifiedCollections true (${endpoint.name})`, async (t) => {
@@ -113,5 +116,4 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
       verified: false,
     });
   });
-
 });

@@ -109,7 +109,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     const specificAsset = assets.items.find(
       (asset) => asset.id === 'JDforNYS5Bop4VdZyGCjcUyy1mYZKR4eDveqjZnRYXzy'
     );
-    
+
     // Assert the asset exists and has group_definition
     t.truthy(specificAsset, 'Expected to find the specific asset');
     if (specificAsset) {
@@ -140,7 +140,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     const specificAsset = assets.items.find(
       (asset) => asset.id === 'JDforNYS5Bop4VdZyGCjcUyy1mYZKR4eDveqjZnRYXzy'
     );
-    
+
     // Assert the asset exists and does not have group_definition
     t.truthy(specificAsset, 'Expected to find the specific asset');
     if (specificAsset) {

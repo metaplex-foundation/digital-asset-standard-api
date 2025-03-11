@@ -117,7 +117,10 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     const assetWithCollectionMetadata = assets.find(
       (asset) => asset.grouping[0]?.collection_metadata
     );
-    t.truthy(assetWithCollectionMetadata, 'Expected to find an asset with collection metadata');
+    t.truthy(
+      assetWithCollectionMetadata,
+      'Expected to find an asset with collection metadata'
+    );
     if (!assetWithCollectionMetadata) return;
 
     t.like(assetWithCollectionMetadata.grouping[0], {
@@ -127,9 +130,11 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
       collection_metadata: {
         name: 'Chiaki Azure 55 Collection',
         symbol: '',
-        image: 'https://arweave.net/fFcYDkRHF-936IbAZ3pLTmFAmxF1WlW3KwWndYPgI8Q/chiaki-violet-azure-common.png',
-        description: 'MONMONMON is a collection from the creativity of Peelander Yellow. Each MONMONMON has unique and kind abilities that can be used to help others and play with your friends. There are secrets in each MONMONMON. We love you.'
-      }
+        image:
+          'https://arweave.net/fFcYDkRHF-936IbAZ3pLTmFAmxF1WlW3KwWndYPgI8Q/chiaki-violet-azure-common.png',
+        description:
+          'MONMONMON is a collection from the creativity of Peelander Yellow. Each MONMONMON has unique and kind abilities that can be used to help others and play with your friends. There are secrets in each MONMONMON. We love you.',
+      },
     });
   });
 
@@ -153,7 +158,9 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
 
     // Then we expect to get both assets back.
     t.is(assets.length, 2);
-    const fungibleAsset = assets.find(asset => asset.interface === 'FungibleToken');
+    const fungibleAsset = assets.find(
+      (asset) => asset.interface === 'FungibleToken'
+    );
     t.truthy(fungibleAsset, 'Expected to find a fungible token');
     t.deepEqual(fungibleAsset?.id, fungibleAssetId);
   });
