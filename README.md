@@ -43,6 +43,7 @@ Examples are provided [here](#examples) and you can learn more about this librar
 
 The plugin can be used with any RPC that supports the Metaplex DAS API specification – the following RPCs (in alphabetical order) support the specification:
 
+- [Aura](https://aura.metaplex.com/)
 - [Helius](https://docs.helius.xyz/compression-and-das-api/digital-asset-standard-das-api)
 - [Hello Moon](https://docs.hellomoon.io/reference/rpc-endpoint-for-digital-asset-standard)
 - [QuickNode](https://marketplace.quicknode.com/add-on/metaplex-digital-asset-standard-api)
