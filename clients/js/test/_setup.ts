@@ -7,8 +7,10 @@ export const DAS_API_ENDPOINTS: { name: string; url: string }[] = [];
 Object.keys(process.env).forEach(function (key) {
   if (key.startsWith('DAS_API_')) {
     const name = key.substring('DAS_API_'.length);
-    const url = process.env[key]!;
-    DAS_API_ENDPOINTS.push({ name, url });
+    const url = process.env[key];
+    if (url) {
+      DAS_API_ENDPOINTS.push({ name, url });
+    }
   }
 });
 
