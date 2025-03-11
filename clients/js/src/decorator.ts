@@ -289,61 +289,14 @@ export const createDasApiDecorator = (
           input.sort_direction ?? null,
         ]
       );
+      if (!signatures) {
+        const identifier =
+          'assetId' in input
+            ? `asset: ${input.assetId}`
+            : `tree: ${input.tree}, leaf_index: ${input.leaf_index}`;
+        throw new DasApiError(`No signatures found for ${identifier}`);
+      }
+      return signatures;
     }
-    const assetList = await rpc.call<DasApiAssetList | null>('searchAssets', [
-      input.negate ?? null,
-      input.conditionType ?? null,
-      input.interface ?? null,
-      input.owner ?? null,
-      input.ownerType ?? null,
-      input.creator ?? null,
-      input.creatorVerified ?? null,
-      input.authority ?? null,
-      input.grouping ?? null,
-      input.delegate ?? null,
-      input.frozen ?? null,
-      input.supply ?? null,
-      input.supplyMint ?? null,
-      input.compressed ?? null,
-      input.compressible ?? null,
-      input.royaltyModel ?? null,
-      input.royaltyTarget ?? null,
-      input.royaltyAmount ?? null,
-      input.burnt ?? null,
-      input.sortBy ?? null,
-      input.limit ?? null,
-      input.page ?? 1,
-      input.before ?? null,
-      input.after ?? null,
-      input.jsonUri ?? null,
-    ]);
-    if (!assetList) {
-      throw new DasApiError('No assets found for the given search criteria');
-    }
-    return assetList;
-  },
-  getAssetSignatures: async (input: GetAssetSignaturesRpcInput) => {
-    const signatures = await rpc.call<GetAssetSignaturesRpcResponse | null>(
-      'getAssetSignaturesV2',
-      [
-        'assetId' in input ? input.assetId : null,
-        input.limit ?? null,
-        input.page ?? null,
-        input.before ?? null,
-        input.after ?? null,
-        'tree' in input ? input.tree : null,
-        'tree' in input ? input.leaf_index : null,
-        input.cursor ?? null,
-        input.sort_direction ?? null,
-      ]
-    );
-    if (!signatures) {
-      const identifier =
-        'assetId' in input
-          ? `asset: ${input.assetId}`
-          : `tree: ${input.tree}, leaf_index: ${input.leaf_index}`;
-      throw new DasApiError(`No signatures found for ${identifier}`);
-    }
-    return signatures;
-  },
-});
+  };
+};
