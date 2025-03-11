@@ -1,620 +1,213 @@
 {
-  "openrpc": "1.2.1",
+  "openrpc": "1.2.6",
   "info": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "title": "Metaplex Digital Asset Standard API"
   },
   "methods": [
     {
-      "name": "getAsset",
-      "description": "Return the metadata information of a compressed/standard asset",
-      "params": [
-        {
-          "name": "id",
-          "description": "The id of the asset",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "result": {
-        "$ref": "#/components/contentDescriptors/asset"
-      }
-    },
-    {
       "name": "getAssetProof",
-      "description": "Return the merkle tree proof information for a compressed asset",
+      "summary": "Get a merkle proof for a compressed asset by its ID",
       "params": [
         {
-          "name": "id",
-          "description": "The id of the asset",
-          "required": true,
+          "name": "payload",
           "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "result": {
-        "$ref": "#/components/contentDescriptors/assetProof"
-      }
-    },
-    {
-      "name": "getAssetsByAuthority",
-      "description": "Return the list of assets given an authority address",
-      "params": [
-        {
-          "name": "authorityAddress",
-          "description": "The address of the authority of the assets",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "name": "sortBy",
-          "description": "Sorting criteria",
-          "schema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetAssetProof",
             "type": "object",
-            "$ref": "#/components/contentDescriptors/sortBy"
-          }
-        },
-        {
-          "name": "limit",
-          "description": "The maximum number of assets to retrieve",
-          "schema": {
-            "type": "number"
-          }
-        },
-        {
-          "name": "page",
-          "description": "The index of the \"page\" to retrieve",
-          "schema": {
-            "type": "number"
-          }
-        },
-        {
-          "name": "before",
-          "description": "Retrieve assets before the specified ID",
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "name": "after",
-          "description": "Retrieve assets after the specified ID",
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "result": {
-        "$ref": "#/components/contentDescriptors/assetList"
-      }
-    },
-    {
-      "name": "getAssetsByCreator",
-      "description": "Return the list of assets given a creator address",
-      "params": [
-        {
-          "name": "creatorAddress",
-          "description": "The address of the creator of the assets",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "name": "onlyVerified",
-          "description": "Indicates whether to retrieve only verified assets or not",
-          "schema": {
-            "type": "boolean"
-          }
-        },
-        {
-          "name": "sortBy",
-          "description": "Sorting criteria",
-          "schema": {
-            "type": "object",
-            "$ref": "#/components/contentDescriptors/sortBy"
-          }
-        },
-        {
-          "name": "limit",
-          "description": "The maximum number of assets to retrieve",
-          "schema": {
-            "type": "number"
-          }
-        },
-        {
-          "name": "page",
-          "description": "The index of the \"page\" to retrieve",
-          "schema": {
-            "type": "number"
-          }
-        },
-        {
-          "name": "before",
-          "description": "Retrieve assets before the specified ID",
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "name": "after",
-          "description": "Retrieve assets after the specified ID",
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "result": {
-        "$ref": "#/components/contentDescriptors/assetList"
-      }
-    },
-    {
-      "name": "getAssetsByGroup",
-      "description": "Return the list of assets given a group (key, value) pair",
-      "params": [
-        {
-          "name": "groupKey",
-          "description": "The key of the group (e.g., \"collection\")",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "name": "groupValue",
-          "description": "The value of the group",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "name": "sortBy",
-          "description": "Sorting criteria",
-          "schema": {
-            "type": "object",
-            "$ref": "#/components/contentDescriptors/sortBy"
-          }
-        },
-        {
-          "name": "limit",
-          "description": "The maximum number of assets to retrieve",
-          "schema": {
-            "type": "number"
-          }
-        },
-        {
-          "name": "page",
-          "description": "The index of the \"page\" to retrieve",
-          "schema": {
-            "type": "number"
-          }
-        },
-        {
-          "name": "before",
-          "description": "Retrieve assets before the specified ID",
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "name": "after",
-          "description": "Retrieve assets after the specified ID",
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "result": {
-        "$ref": "#/components/contentDescriptors/assetList"
-      }
-    },
-    {
-      "name": "getAssetsByOwner",
-      "description": "Return the list of assets given an owner address",
-      "params": [
-        {
-          "name": "ownerAddress",
-          "description": "The address of the owner of the assets",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "name": "sortBy",
-          "description": "Sorting criteria",
-          "schema": {
-            "type": "object",
-            "$ref": "#/components/contentDescriptors/sortBy"
-          }
-        },
-        {
-          "name": "limit",
-          "description": "The maximum number of assets to retrieve",
-          "schema": {
-            "type": "number"
-          }
-        },
-        {
-          "name": "page",
-          "description": "The index of the \"page\" to retrieve",
-          "schema": {
-            "type": "number"
-          }
-        },
-        {
-          "name": "before",
-          "description": "Retrieve assets before the specified ID",
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "name": "after",
-          "description": "Retrieve assets after the specified ID",
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "result": {
-        "$ref": "#/components/contentDescriptors/assetList"
-      }
-    },
-    {
-      "name": "searchAssets",
-      "description": "Return the list of assets given a search criteria",
-      "params": [
-        {
-          "name": "negate",
-          "description": "Indicates whether the search criteria should be inverted or not",
-          "schema": {
-            "type": "boolean"
-          }
-        },
-        {
-          "name": "conditionType",
-          "description": "Indicates whether to retrieve all or any asset that matches the search criteria",
-          "schema": {
-            "type": "string",
-            "enum": [
-              "all",
-              "any"
-            ]
-          }
-        },
-        {
-          "name": "interface",
-          "description": "The interface of the asset",
-          "schema": {
-            "type": "string",
-            "enum": [
-              "V1_NFT",
-              "V1_PRINT",
-              "LEGACY_NFT",
-              "V2_NFT",
-              "FungibleAsset",
-              "Custom",
-              "Identity",
-              "Executable"
-            ]
-          }
-        },
-        {
-          "name": "ownerAddress",
-          "description": "The address of the owner",
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "name": "ownerType",
-          "description": "Type of ownership",
-          "schema": {
-            "type": "string",
-            "enum": [
-              "single",
-              "token"
-            ]
-          }
-        },
-        {
-          "name": "creatorAddress",
-          "description": "The address of the creator",
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "name": "creatorVerified",
-          "description": "Indicates whether the creator must be verified or not",
-          "schema": {
-            "type": "boolean"
-          }
-        },
-        {
-          "name": "authorityAddress",
-          "description": "The address of the authority",
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "name": "grouping",
-          "description": "The group (key, value) pair",
-          "schema": {
-            "type": "array",
-            "prefixItems": [
-              {
-                "type": "string"
-              },
-              {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
                 "type": "string"
               }
-            ]
-          }
-        },
-        {
-          "name": "delegateAddress",
-          "description": "The address of the delegate",
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "name": "frozen",
-          "description": "Indicates whether the asset is frozen or not",
-          "schema": {
-            "type": "boolean"
-          }
-        },
-        {
-          "name": "supply",
-          "description": "The supply of the asset",
-          "schema": {
-            "type": "number"
-          }
-        },
-        {
-          "name": "supplyMint",
-          "description": "The address of the supply mint",
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "name": "compressed",
-          "description": "Indicates whether the asset is compressed or not",
-          "schema": {
-            "type": "boolean"
-          }
-        },
-        {
-          "name": "compressible",
-          "description": "Indicates whether the asset is compressible or not",
-          "schema": {
-            "type": "boolean"
-          }
-        },
-        {
-          "name": "royaltyTargetType",
-          "description": "Type of royalty",
-          "schema": {
-            "type": "string",
-            "enum": [
-              "creators",
-              "fanout",
-              "single"
-            ]
-          }
-        },
-        {
-          "name": "royaltyTarget",
-          "description": "The target address for royalties",
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "name": "royaltyAmount",
-          "description": "The royalties amount",
-          "schema": {
-            "type": "number"
-          }
-        },
-        {
-          "name": "burnt",
-          "description": "Indicates whether the asset is burnt or not",
-          "schema": {
-            "type": "boolean"
-          }
-        },
-        {
-          "name": "sortBy",
-          "description": "Sorting criteria",
-          "schema": {
-            "type": "object",
-            "$ref": "#/components/contentDescriptors/sortBy"
-          }
-        },
-        {
-          "name": "limit",
-          "description": "The maximum number of assets to retrieve",
-          "schema": {
-            "type": "number"
-          }
-        },
-        {
-          "name": "page",
-          "description": "The index of the \"page\" to retrieve",
-          "schema": {
-            "type": "number"
-          }
-        },
-        {
-          "name": "before",
-          "description": "Retrieve assets before the specified ID",
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "name": "after",
-          "description": "Retrieve assets after the specified ID",
-          "schema": {
-            "type": "string"
-          }
-        },
-        {
-          "name": "jsonUri",
-          "description": "The value for the JSON URI",
-          "schema": {
-            "type": "string"
+            },
+            "additionalProperties": false
           }
         }
       ],
       "result": {
-        "$ref": "#/components/contentDescriptors/assetList"
-      }
-    }
-  ],
-  "components": {
-    "contentDescriptors": {
-      "asset": {
-        "name": "Asset",
+        "name": "AssetProof",
         "schema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "title": "AssetProof",
           "type": "object",
+          "required": [
+            "leaf",
+            "node_index",
+            "proof",
+            "root",
+            "tree_id"
+          ],
           "properties": {
-            "interface": {
-              "type": "string",
-              "enum": [
-                "V1_NFT",
-                "V1_PRINT",
-                "LEGACY_NFT",
-                "V2_NFT",
-                "FungibleAsset",
-                "Custom",
-                "Identity",
-                "Executable",
-                "ProgrammableNFT"
-              ]
-            },
-            "id": {
+            "leaf": {
               "type": "string"
             },
-            "content": {
-              "type": "object",
-              "required": [
-                "$schema"
-              ],
-              "properties": {
-                "$schema": {
+            "node_index": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "proof": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "root": {
+              "type": "string"
+            },
+            "tree_id": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "getAssetProofs",
+      "summary": "Get merkle proofs for compressed assets by their IDs",
+      "params": [
+        {
+          "name": "payload",
+          "schema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetAssetProofs",
+            "type": "object",
+            "required": [
+              "ids"
+            ],
+            "properties": {
+              "ids": {
+                "type": "array",
+                "items": {
                   "type": "string"
-                },
-                "json_uri": {
-                  "type": "string"
-                },
-                "files": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "required": [
-                      "uri",
-                      "mime"
-                    ],
-                    "properties": {
-                      "uri": {
-                        "type": "string"
-                      },
-                      "mime": {
-                        "type": "string"
-                      },
-                      "quality": {
-                        "type": "object",
-                        "properties": {
-                          "$$schema": {
-                            "type": "string"
-                          }
-                        }
-                      },
-                      "contexts": {
-                        "type": "array",
-                        "items": {
-                          "type": "string",
-                          "enum": [
-                            "wallet-default",
-                            "web-desktop",
-                            "web-mobile",
-                            "app-mobile",
-                            "app-desktop",
-                            "app",
-                            "vr"
-                          ]
-                        }
-                      }
-                    }
-                  }
-                },
-                "metadata": {
-                  "type": "object",
-                  "required": [
-                    "name",
-                    "symbol"
-                  ],
-                  "properties": {
-                    "name": {
-                      "type": "string"
-                    },
-                    "description": {
-                      "type": "string"
-                    },
-                    "symbol": {
-                      "type": "string"
-                    },
-                    "token_standard": {
-                      "type": "string",
-                      "enum": [
-                        "NonFungible",
-                        "FungibleAsset",
-                        "Fungible",
-                        "NonFungibleEdition",
-                        "ProgrammableNonFungible",
-                        "ProgrammableNonFungibleEdition"
-                      ]
-                    },
-                    "attributes": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "value": {
-                            "type": "string"
-                          },
-                          "trait_type": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "links": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
                 }
               }
             },
+            "additionalProperties": false
+          }
+        }
+      ],
+      "result": {
+        "name": "HashMap < String, Option < AssetProof > >",
+        "schema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "title": "Map_of_Nullable_AssetProof",
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "required": [
+              "leaf",
+              "node_index",
+              "proof",
+              "root",
+              "tree_id"
+            ],
+            "properties": {
+              "leaf": {
+                "type": "string"
+              },
+              "node_index": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "proof": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "root": {
+                "type": "string"
+              },
+              "tree_id": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "getAsset",
+      "summary": "Get an asset by its ID",
+      "params": [
+        {
+          "name": "payload",
+          "schema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetAsset",
+            "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "options": {
+                "default": null,
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "showCollectionMetadata": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showFungible": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showInscription": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showUnverifiedCollections": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showZeroBalance": {
+                    "default": false,
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      ],
+      "result": {
+        "name": "Asset",
+        "schema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "title": "Asset",
+          "type": "object",
+          "required": [
+            "burnt",
+            "id",
+            "interface",
+            "mutable"
+          ],
+          "properties": {
             "authorities": {
-              "type": "array",
+              "type": [
+                "array",
+                "null"
+              ],
               "items": {
                 "type": "object",
+                "required": [
+                  "address",
+                  "scopes"
+                ],
                 "properties": {
                   "address": {
                     "type": "string"
@@ -634,52 +227,367 @@
                 }
               }
             },
+            "burnt": {
+              "type": "boolean"
+            },
             "compression": {
-              "type": "object",
+              "type": [
+                "object",
+                "null"
+              ],
+              "required": [
+                "asset_hash",
+                "compressed",
+                "creator_hash",
+                "data_hash",
+                "eligible",
+                "leaf_id",
+                "seq",
+                "tree"
+              ],
               "properties": {
-                "eligible": {
-                  "type": "boolean"
+                "asset_hash": {
+                  "type": "string"
                 },
                 "compressed": {
                   "type": "boolean"
                 },
-                "data_hash": {
-                  "type": "string"
-                },
                 "creator_hash": {
                   "type": "string"
                 },
-                "asset_hash": {
+                "data_hash": {
                   "type": "string"
                 },
-                "tree": {
-                  "type": "string"
-                },
-                "seq": {
-                  "type": "number"
+                "eligible": {
+                  "type": "boolean"
                 },
                 "leaf_id": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "seq": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "tree": {
                   "type": "string"
                 }
               }
             },
-            "grouping": {
-              "type": "array",
+            "content": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "required": [
+                "$schema",
+                "json_uri",
+                "metadata"
+              ],
+              "properties": {
+                "$schema": {
+                  "type": "string"
+                },
+                "files": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "contexts": {
+                        "type": [
+                          "array",
+                          "null"
+                        ],
+                        "items": {
+                          "type": "string",
+                          "enum": [
+                            "wallet-default",
+                            "web-desktop",
+                            "web-mobile",
+                            "app-mobile",
+                            "app-desktop",
+                            "app",
+                            "vr"
+                          ]
+                        }
+                      },
+                      "mime": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "quality": {
+                        "type": [
+                          "object",
+                          "null"
+                        ],
+                        "required": [
+                          "$$schema"
+                        ],
+                        "properties": {
+                          "$$schema": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "uri": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "json_uri": {
+                  "type": "string"
+                },
+                "links": {
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "additionalProperties": true
+                },
+                "metadata": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            },
+            "creators": {
+              "type": [
+                "array",
+                "null"
+              ],
               "items": {
                 "type": "object",
+                "required": [
+                  "address",
+                  "share",
+                  "verified"
+                ],
                 "properties": {
-                  "group_key": {
+                  "address": {
                     "type": "string"
                   },
-                  "group_value": {
-                    "type": "string"
+                  "share": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "verified": {
+                    "type": "boolean"
                   }
                 }
               }
             },
-            "royalty": {
-              "type": "object",
+            "external_plugins": true,
+            "grouping": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": "object",
+                "required": [
+                  "group_key"
+                ],
+                "properties": {
+                  "collection_metadata": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "additionalProperties": true
+                  },
+                  "group_key": {
+                    "type": "string"
+                  },
+                  "group_value": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "verified": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            },
+            "id": {
+              "type": "string"
+            },
+            "inscription": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "required": [
+                "authority",
+                "content",
+                "encoding",
+                "inscription_data",
+                "order",
+                "root",
+                "size"
+              ],
               "properties": {
+                "authority": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                },
+                "encoding": {
+                  "type": "string"
+                },
+                "inscription_data": {
+                  "type": "string"
+                },
+                "order": {
+                  "type": "integer",
+                  "format": "uint64",
+                  "minimum": 0
+                },
+                "root": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "integer",
+                  "format": "uint32",
+                  "minimum": 0
+                },
+                "validation_hash": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            },
+            "interface": {
+              "type": "string",
+              "enum": [
+                "V1_NFT",
+                "V1_PRINT",
+                "V2_NFT",
+                "LEGACY_NFT",
+                "FungibleAsset",
+                "FungibleToken",
+                "Identity",
+                "Executable",
+                "ProgrammableNFT",
+                "MplCoreAsset",
+                "MplCoreCollection",
+                "Custom"
+              ]
+            },
+            "mint_extensions": true,
+            "mpl_core_info": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "current_size": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "format": "int32"
+                },
+                "num_minted": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "format": "int32"
+                },
+                "plugins_json_version": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "format": "int32"
+                }
+              }
+            },
+            "mutable": {
+              "type": "boolean"
+            },
+            "ownership": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "required": [
+                "delegated",
+                "frozen",
+                "owner",
+                "ownership_model"
+              ],
+              "properties": {
+                "delegate": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "delegated": {
+                  "type": "boolean"
+                },
+                "frozen": {
+                  "type": "boolean"
+                },
+                "owner": {
+                  "type": "string"
+                },
+                "ownership_model": {
+                  "type": "string",
+                  "enum": [
+                    "single",
+                    "token"
+                  ]
+                }
+              }
+            },
+            "plugins": true,
+            "royalty": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "required": [
+                "basis_points",
+                "locked",
+                "percent",
+                "primary_sale_happened",
+                "royalty_model"
+              ],
+              "properties": {
+                "basis_points": {
+                  "type": "integer",
+                  "format": "uint32",
+                  "minimum": 0
+                },
+                "locked": {
+                  "type": "boolean"
+                },
+                "percent": {
+                  "type": "number",
+                  "format": "double"
+                },
+                "primary_sale_happened": {
+                  "type": "boolean"
+                },
                 "royalty_model": {
                   "type": "string",
                   "enum": [
@@ -689,178 +597,4972 @@
                   ]
                 },
                 "target": {
-                  "type": "string"
-                },
-                "percent": {
-                  "type": "number"
-                },
-                "basis_points": {
-                  "type": "number"
-                },
-                "primary_sale_happened": {
-                  "type": "boolean"
-                },
-                "locked": {
-                  "type": "boolean"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               }
             },
-            "creators": {
+            "supply": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "required": [
+                "print_current_supply",
+                "print_max_supply"
+              ],
+              "properties": {
+                "edition_nonce": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "format": "uint64",
+                  "minimum": 0
+                },
+                "print_current_supply": {
+                  "type": "integer",
+                  "format": "uint64",
+                  "minimum": 0
+                },
+                "print_max_supply": {
+                  "type": "integer",
+                  "format": "uint64",
+                  "minimum": 0
+                }
+              }
+            },
+            "token_info": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "required": [
+                "decimals",
+                "supply",
+                "token_program"
+              ],
+              "properties": {
+                "decimals": {
+                  "type": "integer",
+                  "format": "uint8",
+                  "minimum": 0
+                },
+                "freeze_authority": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "mint_authority": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "supply": {
+                  "type": "integer",
+                  "format": "uint64",
+                  "minimum": 0
+                },
+                "token_program": {
+                  "type": "string"
+                }
+              }
+            },
+            "unknown_external_plugins": true,
+            "unknown_plugins": true,
+            "uses": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "required": [
+                "remaining",
+                "total",
+                "use_method"
+              ],
+              "properties": {
+                "remaining": {
+                  "type": "integer",
+                  "format": "uint64",
+                  "minimum": 0
+                },
+                "total": {
+                  "type": "integer",
+                  "format": "uint64",
+                  "minimum": 0
+                },
+                "use_method": {
+                  "type": "string",
+                  "enum": [
+                    "Burn",
+                    "Multiple",
+                    "Single"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "getAssets",
+      "summary": "Get assets by their IDs",
+      "params": [
+        {
+          "name": "payload",
+          "schema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetAssets",
+            "type": "object",
+            "required": [
+              "ids"
+            ],
+            "properties": {
+              "ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "options": {
+                "default": null,
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "showCollectionMetadata": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showFungible": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showInscription": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showUnverifiedCollections": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showZeroBalance": {
+                    "default": false,
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      ],
+      "result": {
+        "name": "Vec < Option < Asset > >",
+        "schema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "title": "Array_of_Nullable_Asset",
+          "type": "array",
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "required": [
+              "burnt",
+              "id",
+              "interface",
+              "mutable"
+            ],
+            "properties": {
+              "authorities": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "address",
+                    "scopes"
+                  ],
+                  "properties": {
+                    "address": {
+                      "type": "string"
+                    },
+                    "scopes": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "enum": [
+                          "full",
+                          "royalty",
+                          "metadata",
+                          "extension"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "burnt": {
+                "type": "boolean"
+              },
+              "compression": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "required": [
+                  "asset_hash",
+                  "compressed",
+                  "creator_hash",
+                  "data_hash",
+                  "eligible",
+                  "leaf_id",
+                  "seq",
+                  "tree"
+                ],
+                "properties": {
+                  "asset_hash": {
+                    "type": "string"
+                  },
+                  "compressed": {
+                    "type": "boolean"
+                  },
+                  "creator_hash": {
+                    "type": "string"
+                  },
+                  "data_hash": {
+                    "type": "string"
+                  },
+                  "eligible": {
+                    "type": "boolean"
+                  },
+                  "leaf_id": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "seq": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "tree": {
+                    "type": "string"
+                  }
+                }
+              },
+              "content": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "required": [
+                  "$schema",
+                  "json_uri",
+                  "metadata"
+                ],
+                "properties": {
+                  "$schema": {
+                    "type": "string"
+                  },
+                  "files": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "contexts": {
+                          "type": [
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "wallet-default",
+                              "web-desktop",
+                              "web-mobile",
+                              "app-mobile",
+                              "app-desktop",
+                              "app",
+                              "vr"
+                            ]
+                          }
+                        },
+                        "mime": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "quality": {
+                          "type": [
+                            "object",
+                            "null"
+                          ],
+                          "required": [
+                            "$$schema"
+                          ],
+                          "properties": {
+                            "$$schema": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "uri": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "json_uri": {
+                    "type": "string"
+                  },
+                  "links": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "additionalProperties": true
+                  },
+                  "metadata": {
+                    "type": "object",
+                    "additionalProperties": true
+                  }
+                }
+              },
+              "creators": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "address",
+                    "share",
+                    "verified"
+                  ],
+                  "properties": {
+                    "address": {
+                      "type": "string"
+                    },
+                    "share": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "verified": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              },
+              "external_plugins": true,
+              "grouping": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "group_key"
+                  ],
+                  "properties": {
+                    "collection_metadata": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "additionalProperties": true
+                    },
+                    "group_key": {
+                      "type": "string"
+                    },
+                    "group_value": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "verified": {
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              },
+              "id": {
+                "type": "string"
+              },
+              "inscription": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "required": [
+                  "authority",
+                  "content",
+                  "encoding",
+                  "inscription_data",
+                  "order",
+                  "root",
+                  "size"
+                ],
+                "properties": {
+                  "authority": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "encoding": {
+                    "type": "string"
+                  },
+                  "inscription_data": {
+                    "type": "string"
+                  },
+                  "order": {
+                    "type": "integer",
+                    "format": "uint64",
+                    "minimum": 0
+                  },
+                  "root": {
+                    "type": "string"
+                  },
+                  "size": {
+                    "type": "integer",
+                    "format": "uint32",
+                    "minimum": 0
+                  },
+                  "validation_hash": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "interface": {
+                "type": "string",
+                "enum": [
+                  "V1_NFT",
+                  "V1_PRINT",
+                  "V2_NFT",
+                  "LEGACY_NFT",
+                  "FungibleAsset",
+                  "FungibleToken",
+                  "Identity",
+                  "Executable",
+                  "ProgrammableNFT",
+                  "MplCoreAsset",
+                  "MplCoreCollection",
+                  "Custom"
+                ]
+              },
+              "mint_extensions": true,
+              "mpl_core_info": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "current_size": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "format": "int32"
+                  },
+                  "num_minted": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "format": "int32"
+                  },
+                  "plugins_json_version": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "format": "int32"
+                  }
+                }
+              },
+              "mutable": {
+                "type": "boolean"
+              },
+              "ownership": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "required": [
+                  "delegated",
+                  "frozen",
+                  "owner",
+                  "ownership_model"
+                ],
+                "properties": {
+                  "delegate": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "delegated": {
+                    "type": "boolean"
+                  },
+                  "frozen": {
+                    "type": "boolean"
+                  },
+                  "owner": {
+                    "type": "string"
+                  },
+                  "ownership_model": {
+                    "type": "string",
+                    "enum": [
+                      "single",
+                      "token"
+                    ]
+                  }
+                }
+              },
+              "plugins": true,
+              "royalty": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "required": [
+                  "basis_points",
+                  "locked",
+                  "percent",
+                  "primary_sale_happened",
+                  "royalty_model"
+                ],
+                "properties": {
+                  "basis_points": {
+                    "type": "integer",
+                    "format": "uint32",
+                    "minimum": 0
+                  },
+                  "locked": {
+                    "type": "boolean"
+                  },
+                  "percent": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "primary_sale_happened": {
+                    "type": "boolean"
+                  },
+                  "royalty_model": {
+                    "type": "string",
+                    "enum": [
+                      "creators",
+                      "fanout",
+                      "single"
+                    ]
+                  },
+                  "target": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "supply": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "required": [
+                  "print_current_supply",
+                  "print_max_supply"
+                ],
+                "properties": {
+                  "edition_nonce": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "format": "uint64",
+                    "minimum": 0
+                  },
+                  "print_current_supply": {
+                    "type": "integer",
+                    "format": "uint64",
+                    "minimum": 0
+                  },
+                  "print_max_supply": {
+                    "type": "integer",
+                    "format": "uint64",
+                    "minimum": 0
+                  }
+                }
+              },
+              "token_info": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "required": [
+                  "decimals",
+                  "supply",
+                  "token_program"
+                ],
+                "properties": {
+                  "decimals": {
+                    "type": "integer",
+                    "format": "uint8",
+                    "minimum": 0
+                  },
+                  "freeze_authority": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "mint_authority": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "supply": {
+                    "type": "integer",
+                    "format": "uint64",
+                    "minimum": 0
+                  },
+                  "token_program": {
+                    "type": "string"
+                  }
+                }
+              },
+              "unknown_external_plugins": true,
+              "unknown_plugins": true,
+              "uses": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "required": [
+                  "remaining",
+                  "total",
+                  "use_method"
+                ],
+                "properties": {
+                  "remaining": {
+                    "type": "integer",
+                    "format": "uint64",
+                    "minimum": 0
+                  },
+                  "total": {
+                    "type": "integer",
+                    "format": "uint64",
+                    "minimum": 0
+                  },
+                  "use_method": {
+                    "type": "string",
+                    "enum": [
+                      "Burn",
+                      "Multiple",
+                      "Single"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "getAssetsByOwner",
+      "summary": "Get a list of assets owned by an address",
+      "params": [
+        {
+          "name": "payload",
+          "schema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetAssetsByOwner",
+            "type": "object",
+            "required": [
+              "ownerAddress"
+            ],
+            "properties": {
+              "after": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "before": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "cursor": {
+                "default": null,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "limit": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "uint32",
+                "minimum": 0
+              },
+              "options": {
+                "default": null,
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "showCollectionMetadata": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showFungible": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showInscription": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showUnverifiedCollections": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showZeroBalance": {
+                    "default": false,
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "ownerAddress": {
+                "type": "string"
+              },
+              "page": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "uint32",
+                "minimum": 0
+              },
+              "sortBy": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "required": [
+                  "sortBy"
+                ],
+                "properties": {
+                  "sortBy": {
+                    "type": "string",
+                    "enum": [
+                      "id",
+                      "created",
+                      "updated",
+                      "recent_action",
+                      "none"
+                    ]
+                  },
+                  "sortDirection": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "enum": [
+                      "asc",
+                      "desc"
+                    ]
+                  }
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      ],
+      "result": {
+        "name": "AssetList",
+        "schema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "title": "AssetList",
+          "type": "object",
+          "properties": {
+            "after": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "before": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "cursor": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "errors": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "error": {
+                    "default": "",
+                    "type": "string"
+                  },
+                  "id": {
+                    "default": "",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "items": {
+              "default": [],
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "burnt",
+                  "id",
+                  "interface",
+                  "mutable"
+                ],
+                "properties": {
+                  "authorities": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "address",
+                        "scopes"
+                      ],
+                      "properties": {
+                        "address": {
+                          "type": "string"
+                        },
+                        "scopes": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "full",
+                              "royalty",
+                              "metadata",
+                              "extension"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "burnt": {
+                    "type": "boolean"
+                  },
+                  "compression": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "asset_hash",
+                      "compressed",
+                      "creator_hash",
+                      "data_hash",
+                      "eligible",
+                      "leaf_id",
+                      "seq",
+                      "tree"
+                    ],
+                    "properties": {
+                      "asset_hash": {
+                        "type": "string"
+                      },
+                      "compressed": {
+                        "type": "boolean"
+                      },
+                      "creator_hash": {
+                        "type": "string"
+                      },
+                      "data_hash": {
+                        "type": "string"
+                      },
+                      "eligible": {
+                        "type": "boolean"
+                      },
+                      "leaf_id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "seq": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "tree": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "content": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "$schema",
+                      "json_uri",
+                      "metadata"
+                    ],
+                    "properties": {
+                      "$schema": {
+                        "type": "string"
+                      },
+                      "files": {
+                        "type": [
+                          "array",
+                          "null"
+                        ],
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "contexts": {
+                              "type": [
+                                "array",
+                                "null"
+                              ],
+                              "items": {
+                                "type": "string",
+                                "enum": [
+                                  "wallet-default",
+                                  "web-desktop",
+                                  "web-mobile",
+                                  "app-mobile",
+                                  "app-desktop",
+                                  "app",
+                                  "vr"
+                                ]
+                              }
+                            },
+                            "mime": {
+                              "type": [
+                                "string",
+                                "null"
+                              ]
+                            },
+                            "quality": {
+                              "type": [
+                                "object",
+                                "null"
+                              ],
+                              "required": [
+                                "$$schema"
+                              ],
+                              "properties": {
+                                "$$schema": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "uri": {
+                              "type": [
+                                "string",
+                                "null"
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "json_uri": {
+                        "type": "string"
+                      },
+                      "links": {
+                        "type": [
+                          "object",
+                          "null"
+                        ],
+                        "additionalProperties": true
+                      },
+                      "metadata": {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    }
+                  },
+                  "creators": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "address",
+                        "share",
+                        "verified"
+                      ],
+                      "properties": {
+                        "address": {
+                          "type": "string"
+                        },
+                        "share": {
+                          "type": "integer",
+                          "format": "int32"
+                        },
+                        "verified": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  },
+                  "external_plugins": true,
+                  "grouping": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "group_key"
+                      ],
+                      "properties": {
+                        "collection_metadata": {
+                          "type": [
+                            "object",
+                            "null"
+                          ],
+                          "additionalProperties": true
+                        },
+                        "group_key": {
+                          "type": "string"
+                        },
+                        "group_value": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "verified": {
+                          "type": [
+                            "boolean",
+                            "null"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "inscription": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "authority",
+                      "content",
+                      "encoding",
+                      "inscription_data",
+                      "order",
+                      "root",
+                      "size"
+                    ],
+                    "properties": {
+                      "authority": {
+                        "type": "string"
+                      },
+                      "content": {
+                        "type": "string"
+                      },
+                      "encoding": {
+                        "type": "string"
+                      },
+                      "inscription_data": {
+                        "type": "string"
+                      },
+                      "order": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "root": {
+                        "type": "string"
+                      },
+                      "size": {
+                        "type": "integer",
+                        "format": "uint32",
+                        "minimum": 0
+                      },
+                      "validation_hash": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  },
+                  "interface": {
+                    "type": "string",
+                    "enum": [
+                      "V1_NFT",
+                      "V1_PRINT",
+                      "V2_NFT",
+                      "LEGACY_NFT",
+                      "FungibleAsset",
+                      "FungibleToken",
+                      "Identity",
+                      "Executable",
+                      "ProgrammableNFT",
+                      "MplCoreAsset",
+                      "MplCoreCollection",
+                      "Custom"
+                    ]
+                  },
+                  "mint_extensions": true,
+                  "mpl_core_info": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "properties": {
+                      "current_size": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "int32"
+                      },
+                      "num_minted": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "int32"
+                      },
+                      "plugins_json_version": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "int32"
+                      }
+                    }
+                  },
+                  "mutable": {
+                    "type": "boolean"
+                  },
+                  "ownership": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "delegated",
+                      "frozen",
+                      "owner",
+                      "ownership_model"
+                    ],
+                    "properties": {
+                      "delegate": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "delegated": {
+                        "type": "boolean"
+                      },
+                      "frozen": {
+                        "type": "boolean"
+                      },
+                      "owner": {
+                        "type": "string"
+                      },
+                      "ownership_model": {
+                        "type": "string",
+                        "enum": [
+                          "single",
+                          "token"
+                        ]
+                      }
+                    }
+                  },
+                  "plugins": true,
+                  "royalty": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "basis_points",
+                      "locked",
+                      "percent",
+                      "primary_sale_happened",
+                      "royalty_model"
+                    ],
+                    "properties": {
+                      "basis_points": {
+                        "type": "integer",
+                        "format": "uint32",
+                        "minimum": 0
+                      },
+                      "locked": {
+                        "type": "boolean"
+                      },
+                      "percent": {
+                        "type": "number",
+                        "format": "double"
+                      },
+                      "primary_sale_happened": {
+                        "type": "boolean"
+                      },
+                      "royalty_model": {
+                        "type": "string",
+                        "enum": [
+                          "creators",
+                          "fanout",
+                          "single"
+                        ]
+                      },
+                      "target": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  },
+                  "supply": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "print_current_supply",
+                      "print_max_supply"
+                    ],
+                    "properties": {
+                      "edition_nonce": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "print_current_supply": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "print_max_supply": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      }
+                    }
+                  },
+                  "token_info": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "decimals",
+                      "supply",
+                      "token_program"
+                    ],
+                    "properties": {
+                      "decimals": {
+                        "type": "integer",
+                        "format": "uint8",
+                        "minimum": 0
+                      },
+                      "freeze_authority": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "mint_authority": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "supply": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "token_program": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "unknown_external_plugins": true,
+                  "unknown_plugins": true,
+                  "uses": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "remaining",
+                      "total",
+                      "use_method"
+                    ],
+                    "properties": {
+                      "remaining": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "total": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "use_method": {
+                        "type": "string",
+                        "enum": [
+                          "Burn",
+                          "Multiple",
+                          "Single"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "limit": {
+              "default": 0,
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
+            },
+            "page": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "uint32",
+              "minimum": 0
+            },
+            "total": {
+              "default": 0,
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "getAssetsByGroup",
+      "summary": "Get a list of assets by a group key and value",
+      "params": [
+        {
+          "name": "payload",
+          "schema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetAssetsByGroup",
+            "type": "object",
+            "required": [
+              "groupKey",
+              "groupValue"
+            ],
+            "properties": {
+              "after": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "before": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "cursor": {
+                "default": null,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "groupKey": {
+                "type": "string"
+              },
+              "groupValue": {
+                "type": "string"
+              },
+              "limit": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "uint32",
+                "minimum": 0
+              },
+              "options": {
+                "default": null,
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "showCollectionMetadata": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showFungible": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showInscription": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showUnverifiedCollections": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showZeroBalance": {
+                    "default": false,
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "page": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "uint32",
+                "minimum": 0
+              },
+              "sortBy": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "required": [
+                  "sortBy"
+                ],
+                "properties": {
+                  "sortBy": {
+                    "type": "string",
+                    "enum": [
+                      "id",
+                      "created",
+                      "updated",
+                      "recent_action",
+                      "none"
+                    ]
+                  },
+                  "sortDirection": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "enum": [
+                      "asc",
+                      "desc"
+                    ]
+                  }
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      ],
+      "result": {
+        "name": "AssetList",
+        "schema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "title": "AssetList",
+          "type": "object",
+          "properties": {
+            "after": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "before": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "cursor": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "errors": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "error": {
+                    "default": "",
+                    "type": "string"
+                  },
+                  "id": {
+                    "default": "",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "items": {
+              "default": [],
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "burnt",
+                  "id",
+                  "interface",
+                  "mutable"
+                ],
+                "properties": {
+                  "authorities": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "address",
+                        "scopes"
+                      ],
+                      "properties": {
+                        "address": {
+                          "type": "string"
+                        },
+                        "scopes": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "full",
+                              "royalty",
+                              "metadata",
+                              "extension"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "burnt": {
+                    "type": "boolean"
+                  },
+                  "compression": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "asset_hash",
+                      "compressed",
+                      "creator_hash",
+                      "data_hash",
+                      "eligible",
+                      "leaf_id",
+                      "seq",
+                      "tree"
+                    ],
+                    "properties": {
+                      "asset_hash": {
+                        "type": "string"
+                      },
+                      "compressed": {
+                        "type": "boolean"
+                      },
+                      "creator_hash": {
+                        "type": "string"
+                      },
+                      "data_hash": {
+                        "type": "string"
+                      },
+                      "eligible": {
+                        "type": "boolean"
+                      },
+                      "leaf_id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "seq": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "tree": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "content": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "$schema",
+                      "json_uri",
+                      "metadata"
+                    ],
+                    "properties": {
+                      "$schema": {
+                        "type": "string"
+                      },
+                      "files": {
+                        "type": [
+                          "array",
+                          "null"
+                        ],
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "contexts": {
+                              "type": [
+                                "array",
+                                "null"
+                              ],
+                              "items": {
+                                "type": "string",
+                                "enum": [
+                                  "wallet-default",
+                                  "web-desktop",
+                                  "web-mobile",
+                                  "app-mobile",
+                                  "app-desktop",
+                                  "app",
+                                  "vr"
+                                ]
+                              }
+                            },
+                            "mime": {
+                              "type": [
+                                "string",
+                                "null"
+                              ]
+                            },
+                            "quality": {
+                              "type": [
+                                "object",
+                                "null"
+                              ],
+                              "required": [
+                                "$$schema"
+                              ],
+                              "properties": {
+                                "$$schema": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "uri": {
+                              "type": [
+                                "string",
+                                "null"
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "json_uri": {
+                        "type": "string"
+                      },
+                      "links": {
+                        "type": [
+                          "object",
+                          "null"
+                        ],
+                        "additionalProperties": true
+                      },
+                      "metadata": {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    }
+                  },
+                  "creators": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "address",
+                        "share",
+                        "verified"
+                      ],
+                      "properties": {
+                        "address": {
+                          "type": "string"
+                        },
+                        "share": {
+                          "type": "integer",
+                          "format": "int32"
+                        },
+                        "verified": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  },
+                  "external_plugins": true,
+                  "grouping": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "group_key"
+                      ],
+                      "properties": {
+                        "collection_metadata": {
+                          "type": [
+                            "object",
+                            "null"
+                          ],
+                          "additionalProperties": true
+                        },
+                        "group_key": {
+                          "type": "string"
+                        },
+                        "group_value": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "verified": {
+                          "type": [
+                            "boolean",
+                            "null"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "inscription": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "authority",
+                      "content",
+                      "encoding",
+                      "inscription_data",
+                      "order",
+                      "root",
+                      "size"
+                    ],
+                    "properties": {
+                      "authority": {
+                        "type": "string"
+                      },
+                      "content": {
+                        "type": "string"
+                      },
+                      "encoding": {
+                        "type": "string"
+                      },
+                      "inscription_data": {
+                        "type": "string"
+                      },
+                      "order": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "root": {
+                        "type": "string"
+                      },
+                      "size": {
+                        "type": "integer",
+                        "format": "uint32",
+                        "minimum": 0
+                      },
+                      "validation_hash": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  },
+                  "interface": {
+                    "type": "string",
+                    "enum": [
+                      "V1_NFT",
+                      "V1_PRINT",
+                      "V2_NFT",
+                      "LEGACY_NFT",
+                      "FungibleAsset",
+                      "FungibleToken",
+                      "Identity",
+                      "Executable",
+                      "ProgrammableNFT",
+                      "MplCoreAsset",
+                      "MplCoreCollection",
+                      "Custom"
+                    ]
+                  },
+                  "mint_extensions": true,
+                  "mpl_core_info": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "properties": {
+                      "current_size": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "int32"
+                      },
+                      "num_minted": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "int32"
+                      },
+                      "plugins_json_version": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "int32"
+                      }
+                    }
+                  },
+                  "mutable": {
+                    "type": "boolean"
+                  },
+                  "ownership": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "delegated",
+                      "frozen",
+                      "owner",
+                      "ownership_model"
+                    ],
+                    "properties": {
+                      "delegate": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "delegated": {
+                        "type": "boolean"
+                      },
+                      "frozen": {
+                        "type": "boolean"
+                      },
+                      "owner": {
+                        "type": "string"
+                      },
+                      "ownership_model": {
+                        "type": "string",
+                        "enum": [
+                          "single",
+                          "token"
+                        ]
+                      }
+                    }
+                  },
+                  "plugins": true,
+                  "royalty": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "basis_points",
+                      "locked",
+                      "percent",
+                      "primary_sale_happened",
+                      "royalty_model"
+                    ],
+                    "properties": {
+                      "basis_points": {
+                        "type": "integer",
+                        "format": "uint32",
+                        "minimum": 0
+                      },
+                      "locked": {
+                        "type": "boolean"
+                      },
+                      "percent": {
+                        "type": "number",
+                        "format": "double"
+                      },
+                      "primary_sale_happened": {
+                        "type": "boolean"
+                      },
+                      "royalty_model": {
+                        "type": "string",
+                        "enum": [
+                          "creators",
+                          "fanout",
+                          "single"
+                        ]
+                      },
+                      "target": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  },
+                  "supply": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "print_current_supply",
+                      "print_max_supply"
+                    ],
+                    "properties": {
+                      "edition_nonce": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "print_current_supply": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "print_max_supply": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      }
+                    }
+                  },
+                  "token_info": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "decimals",
+                      "supply",
+                      "token_program"
+                    ],
+                    "properties": {
+                      "decimals": {
+                        "type": "integer",
+                        "format": "uint8",
+                        "minimum": 0
+                      },
+                      "freeze_authority": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "mint_authority": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "supply": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "token_program": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "unknown_external_plugins": true,
+                  "unknown_plugins": true,
+                  "uses": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "remaining",
+                      "total",
+                      "use_method"
+                    ],
+                    "properties": {
+                      "remaining": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "total": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "use_method": {
+                        "type": "string",
+                        "enum": [
+                          "Burn",
+                          "Multiple",
+                          "Single"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "limit": {
+              "default": 0,
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
+            },
+            "page": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "uint32",
+              "minimum": 0
+            },
+            "total": {
+              "default": 0,
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "getAssetsByCreator",
+      "summary": "Get a list of assets created by an address",
+      "params": [
+        {
+          "name": "payload",
+          "schema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetAssetsByCreator",
+            "type": "object",
+            "required": [
+              "creatorAddress"
+            ],
+            "properties": {
+              "after": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "before": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "creatorAddress": {
+                "type": "string"
+              },
+              "cursor": {
+                "default": null,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "limit": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "uint32",
+                "minimum": 0
+              },
+              "onlyVerified": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "options": {
+                "default": null,
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "showCollectionMetadata": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showFungible": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showInscription": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showUnverifiedCollections": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showZeroBalance": {
+                    "default": false,
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "page": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "uint32",
+                "minimum": 0
+              },
+              "sortBy": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "required": [
+                  "sortBy"
+                ],
+                "properties": {
+                  "sortBy": {
+                    "type": "string",
+                    "enum": [
+                      "id",
+                      "created",
+                      "updated",
+                      "recent_action",
+                      "none"
+                    ]
+                  },
+                  "sortDirection": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "enum": [
+                      "asc",
+                      "desc"
+                    ]
+                  }
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      ],
+      "result": {
+        "name": "AssetList",
+        "schema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "title": "AssetList",
+          "type": "object",
+          "properties": {
+            "after": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "before": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "cursor": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "errors": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "error": {
+                    "default": "",
+                    "type": "string"
+                  },
+                  "id": {
+                    "default": "",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "items": {
+              "default": [],
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "burnt",
+                  "id",
+                  "interface",
+                  "mutable"
+                ],
+                "properties": {
+                  "authorities": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "address",
+                        "scopes"
+                      ],
+                      "properties": {
+                        "address": {
+                          "type": "string"
+                        },
+                        "scopes": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "full",
+                              "royalty",
+                              "metadata",
+                              "extension"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "burnt": {
+                    "type": "boolean"
+                  },
+                  "compression": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "asset_hash",
+                      "compressed",
+                      "creator_hash",
+                      "data_hash",
+                      "eligible",
+                      "leaf_id",
+                      "seq",
+                      "tree"
+                    ],
+                    "properties": {
+                      "asset_hash": {
+                        "type": "string"
+                      },
+                      "compressed": {
+                        "type": "boolean"
+                      },
+                      "creator_hash": {
+                        "type": "string"
+                      },
+                      "data_hash": {
+                        "type": "string"
+                      },
+                      "eligible": {
+                        "type": "boolean"
+                      },
+                      "leaf_id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "seq": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "tree": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "content": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "$schema",
+                      "json_uri",
+                      "metadata"
+                    ],
+                    "properties": {
+                      "$schema": {
+                        "type": "string"
+                      },
+                      "files": {
+                        "type": [
+                          "array",
+                          "null"
+                        ],
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "contexts": {
+                              "type": [
+                                "array",
+                                "null"
+                              ],
+                              "items": {
+                                "type": "string",
+                                "enum": [
+                                  "wallet-default",
+                                  "web-desktop",
+                                  "web-mobile",
+                                  "app-mobile",
+                                  "app-desktop",
+                                  "app",
+                                  "vr"
+                                ]
+                              }
+                            },
+                            "mime": {
+                              "type": [
+                                "string",
+                                "null"
+                              ]
+                            },
+                            "quality": {
+                              "type": [
+                                "object",
+                                "null"
+                              ],
+                              "required": [
+                                "$$schema"
+                              ],
+                              "properties": {
+                                "$$schema": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "uri": {
+                              "type": [
+                                "string",
+                                "null"
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "json_uri": {
+                        "type": "string"
+                      },
+                      "links": {
+                        "type": [
+                          "object",
+                          "null"
+                        ],
+                        "additionalProperties": true
+                      },
+                      "metadata": {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    }
+                  },
+                  "creators": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "address",
+                        "share",
+                        "verified"
+                      ],
+                      "properties": {
+                        "address": {
+                          "type": "string"
+                        },
+                        "share": {
+                          "type": "integer",
+                          "format": "int32"
+                        },
+                        "verified": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  },
+                  "external_plugins": true,
+                  "grouping": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "group_key"
+                      ],
+                      "properties": {
+                        "collection_metadata": {
+                          "type": [
+                            "object",
+                            "null"
+                          ],
+                          "additionalProperties": true
+                        },
+                        "group_key": {
+                          "type": "string"
+                        },
+                        "group_value": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "verified": {
+                          "type": [
+                            "boolean",
+                            "null"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "inscription": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "authority",
+                      "content",
+                      "encoding",
+                      "inscription_data",
+                      "order",
+                      "root",
+                      "size"
+                    ],
+                    "properties": {
+                      "authority": {
+                        "type": "string"
+                      },
+                      "content": {
+                        "type": "string"
+                      },
+                      "encoding": {
+                        "type": "string"
+                      },
+                      "inscription_data": {
+                        "type": "string"
+                      },
+                      "order": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "root": {
+                        "type": "string"
+                      },
+                      "size": {
+                        "type": "integer",
+                        "format": "uint32",
+                        "minimum": 0
+                      },
+                      "validation_hash": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  },
+                  "interface": {
+                    "type": "string",
+                    "enum": [
+                      "V1_NFT",
+                      "V1_PRINT",
+                      "V2_NFT",
+                      "LEGACY_NFT",
+                      "FungibleAsset",
+                      "FungibleToken",
+                      "Identity",
+                      "Executable",
+                      "ProgrammableNFT",
+                      "MplCoreAsset",
+                      "MplCoreCollection",
+                      "Custom"
+                    ]
+                  },
+                  "mint_extensions": true,
+                  "mpl_core_info": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "properties": {
+                      "current_size": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "int32"
+                      },
+                      "num_minted": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "int32"
+                      },
+                      "plugins_json_version": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "int32"
+                      }
+                    }
+                  },
+                  "mutable": {
+                    "type": "boolean"
+                  },
+                  "ownership": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "delegated",
+                      "frozen",
+                      "owner",
+                      "ownership_model"
+                    ],
+                    "properties": {
+                      "delegate": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "delegated": {
+                        "type": "boolean"
+                      },
+                      "frozen": {
+                        "type": "boolean"
+                      },
+                      "owner": {
+                        "type": "string"
+                      },
+                      "ownership_model": {
+                        "type": "string",
+                        "enum": [
+                          "single",
+                          "token"
+                        ]
+                      }
+                    }
+                  },
+                  "plugins": true,
+                  "royalty": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "basis_points",
+                      "locked",
+                      "percent",
+                      "primary_sale_happened",
+                      "royalty_model"
+                    ],
+                    "properties": {
+                      "basis_points": {
+                        "type": "integer",
+                        "format": "uint32",
+                        "minimum": 0
+                      },
+                      "locked": {
+                        "type": "boolean"
+                      },
+                      "percent": {
+                        "type": "number",
+                        "format": "double"
+                      },
+                      "primary_sale_happened": {
+                        "type": "boolean"
+                      },
+                      "royalty_model": {
+                        "type": "string",
+                        "enum": [
+                          "creators",
+                          "fanout",
+                          "single"
+                        ]
+                      },
+                      "target": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  },
+                  "supply": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "print_current_supply",
+                      "print_max_supply"
+                    ],
+                    "properties": {
+                      "edition_nonce": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "print_current_supply": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "print_max_supply": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      }
+                    }
+                  },
+                  "token_info": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "decimals",
+                      "supply",
+                      "token_program"
+                    ],
+                    "properties": {
+                      "decimals": {
+                        "type": "integer",
+                        "format": "uint8",
+                        "minimum": 0
+                      },
+                      "freeze_authority": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "mint_authority": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "supply": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "token_program": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "unknown_external_plugins": true,
+                  "unknown_plugins": true,
+                  "uses": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "remaining",
+                      "total",
+                      "use_method"
+                    ],
+                    "properties": {
+                      "remaining": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "total": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "use_method": {
+                        "type": "string",
+                        "enum": [
+                          "Burn",
+                          "Multiple",
+                          "Single"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "limit": {
+              "default": 0,
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
+            },
+            "page": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "uint32",
+              "minimum": 0
+            },
+            "total": {
+              "default": 0,
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "getAssetsByAuthority",
+      "summary": "Get a list of assets with a specific authority",
+      "params": [
+        {
+          "name": "payload",
+          "schema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetAssetsByAuthority",
+            "type": "object",
+            "required": [
+              "authorityAddress"
+            ],
+            "properties": {
+              "after": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "authorityAddress": {
+                "type": "string"
+              },
+              "before": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "cursor": {
+                "default": null,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "limit": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "uint32",
+                "minimum": 0
+              },
+              "options": {
+                "default": null,
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "showCollectionMetadata": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showFungible": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showInscription": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showUnverifiedCollections": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showZeroBalance": {
+                    "default": false,
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "page": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "uint32",
+                "minimum": 0
+              },
+              "sortBy": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "required": [
+                  "sortBy"
+                ],
+                "properties": {
+                  "sortBy": {
+                    "type": "string",
+                    "enum": [
+                      "id",
+                      "created",
+                      "updated",
+                      "recent_action",
+                      "none"
+                    ]
+                  },
+                  "sortDirection": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "enum": [
+                      "asc",
+                      "desc"
+                    ]
+                  }
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      ],
+      "result": {
+        "name": "AssetList",
+        "schema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "title": "AssetList",
+          "type": "object",
+          "properties": {
+            "after": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "before": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "cursor": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "errors": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "error": {
+                    "default": "",
+                    "type": "string"
+                  },
+                  "id": {
+                    "default": "",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "items": {
+              "default": [],
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "burnt",
+                  "id",
+                  "interface",
+                  "mutable"
+                ],
+                "properties": {
+                  "authorities": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "address",
+                        "scopes"
+                      ],
+                      "properties": {
+                        "address": {
+                          "type": "string"
+                        },
+                        "scopes": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "full",
+                              "royalty",
+                              "metadata",
+                              "extension"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "burnt": {
+                    "type": "boolean"
+                  },
+                  "compression": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "asset_hash",
+                      "compressed",
+                      "creator_hash",
+                      "data_hash",
+                      "eligible",
+                      "leaf_id",
+                      "seq",
+                      "tree"
+                    ],
+                    "properties": {
+                      "asset_hash": {
+                        "type": "string"
+                      },
+                      "compressed": {
+                        "type": "boolean"
+                      },
+                      "creator_hash": {
+                        "type": "string"
+                      },
+                      "data_hash": {
+                        "type": "string"
+                      },
+                      "eligible": {
+                        "type": "boolean"
+                      },
+                      "leaf_id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "seq": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "tree": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "content": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "$schema",
+                      "json_uri",
+                      "metadata"
+                    ],
+                    "properties": {
+                      "$schema": {
+                        "type": "string"
+                      },
+                      "files": {
+                        "type": [
+                          "array",
+                          "null"
+                        ],
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "contexts": {
+                              "type": [
+                                "array",
+                                "null"
+                              ],
+                              "items": {
+                                "type": "string",
+                                "enum": [
+                                  "wallet-default",
+                                  "web-desktop",
+                                  "web-mobile",
+                                  "app-mobile",
+                                  "app-desktop",
+                                  "app",
+                                  "vr"
+                                ]
+                              }
+                            },
+                            "mime": {
+                              "type": [
+                                "string",
+                                "null"
+                              ]
+                            },
+                            "quality": {
+                              "type": [
+                                "object",
+                                "null"
+                              ],
+                              "required": [
+                                "$$schema"
+                              ],
+                              "properties": {
+                                "$$schema": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "uri": {
+                              "type": [
+                                "string",
+                                "null"
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "json_uri": {
+                        "type": "string"
+                      },
+                      "links": {
+                        "type": [
+                          "object",
+                          "null"
+                        ],
+                        "additionalProperties": true
+                      },
+                      "metadata": {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    }
+                  },
+                  "creators": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "address",
+                        "share",
+                        "verified"
+                      ],
+                      "properties": {
+                        "address": {
+                          "type": "string"
+                        },
+                        "share": {
+                          "type": "integer",
+                          "format": "int32"
+                        },
+                        "verified": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  },
+                  "external_plugins": true,
+                  "grouping": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "group_key"
+                      ],
+                      "properties": {
+                        "collection_metadata": {
+                          "type": [
+                            "object",
+                            "null"
+                          ],
+                          "additionalProperties": true
+                        },
+                        "group_key": {
+                          "type": "string"
+                        },
+                        "group_value": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "verified": {
+                          "type": [
+                            "boolean",
+                            "null"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "inscription": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "authority",
+                      "content",
+                      "encoding",
+                      "inscription_data",
+                      "order",
+                      "root",
+                      "size"
+                    ],
+                    "properties": {
+                      "authority": {
+                        "type": "string"
+                      },
+                      "content": {
+                        "type": "string"
+                      },
+                      "encoding": {
+                        "type": "string"
+                      },
+                      "inscription_data": {
+                        "type": "string"
+                      },
+                      "order": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "root": {
+                        "type": "string"
+                      },
+                      "size": {
+                        "type": "integer",
+                        "format": "uint32",
+                        "minimum": 0
+                      },
+                      "validation_hash": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  },
+                  "interface": {
+                    "type": "string",
+                    "enum": [
+                      "V1_NFT",
+                      "V1_PRINT",
+                      "V2_NFT",
+                      "LEGACY_NFT",
+                      "FungibleAsset",
+                      "FungibleToken",
+                      "Identity",
+                      "Executable",
+                      "ProgrammableNFT",
+                      "MplCoreAsset",
+                      "MplCoreCollection",
+                      "Custom"
+                    ]
+                  },
+                  "mint_extensions": true,
+                  "mpl_core_info": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "properties": {
+                      "current_size": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "int32"
+                      },
+                      "num_minted": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "int32"
+                      },
+                      "plugins_json_version": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "int32"
+                      }
+                    }
+                  },
+                  "mutable": {
+                    "type": "boolean"
+                  },
+                  "ownership": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "delegated",
+                      "frozen",
+                      "owner",
+                      "ownership_model"
+                    ],
+                    "properties": {
+                      "delegate": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "delegated": {
+                        "type": "boolean"
+                      },
+                      "frozen": {
+                        "type": "boolean"
+                      },
+                      "owner": {
+                        "type": "string"
+                      },
+                      "ownership_model": {
+                        "type": "string",
+                        "enum": [
+                          "single",
+                          "token"
+                        ]
+                      }
+                    }
+                  },
+                  "plugins": true,
+                  "royalty": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "basis_points",
+                      "locked",
+                      "percent",
+                      "primary_sale_happened",
+                      "royalty_model"
+                    ],
+                    "properties": {
+                      "basis_points": {
+                        "type": "integer",
+                        "format": "uint32",
+                        "minimum": 0
+                      },
+                      "locked": {
+                        "type": "boolean"
+                      },
+                      "percent": {
+                        "type": "number",
+                        "format": "double"
+                      },
+                      "primary_sale_happened": {
+                        "type": "boolean"
+                      },
+                      "royalty_model": {
+                        "type": "string",
+                        "enum": [
+                          "creators",
+                          "fanout",
+                          "single"
+                        ]
+                      },
+                      "target": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  },
+                  "supply": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "print_current_supply",
+                      "print_max_supply"
+                    ],
+                    "properties": {
+                      "edition_nonce": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "print_current_supply": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "print_max_supply": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      }
+                    }
+                  },
+                  "token_info": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "decimals",
+                      "supply",
+                      "token_program"
+                    ],
+                    "properties": {
+                      "decimals": {
+                        "type": "integer",
+                        "format": "uint8",
+                        "minimum": 0
+                      },
+                      "freeze_authority": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "mint_authority": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "supply": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "token_program": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "unknown_external_plugins": true,
+                  "unknown_plugins": true,
+                  "uses": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "remaining",
+                      "total",
+                      "use_method"
+                    ],
+                    "properties": {
+                      "remaining": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "total": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "use_method": {
+                        "type": "string",
+                        "enum": [
+                          "Burn",
+                          "Multiple",
+                          "Single"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "limit": {
+              "default": 0,
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
+            },
+            "page": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "uint32",
+              "minimum": 0
+            },
+            "total": {
+              "default": 0,
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "searchAssets",
+      "summary": "Search for assets by a variety of parameters",
+      "params": [
+        {
+          "name": "payload",
+          "schema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "SearchAssets",
+            "type": "object",
+            "properties": {
+              "after": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "authorityAddress": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "before": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "burnt": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "compressed": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "compressible": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "conditionType": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "all",
+                  "any"
+                ]
+              },
+              "creatorAddress": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "creatorVerified": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "cursor": {
+                "default": null,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "delegate": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "frozen": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "grouping": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "maxItems": 2,
+                "minItems": 2
+              },
+              "interface": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "V1_NFT",
+                  "V1_PRINT",
+                  "V2_NFT",
+                  "LEGACY_NFT",
+                  "FungibleAsset",
+                  "FungibleToken",
+                  "Identity",
+                  "Executable",
+                  "ProgrammableNFT",
+                  "MplCoreAsset",
+                  "MplCoreCollection",
+                  "Custom"
+                ]
+              },
+              "jsonUri": {
+                "default": null,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "limit": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "uint32",
+                "minimum": 0
+              },
+              "name": {
+                "default": null,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "negate": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "options": {
+                "default": null,
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "showCollectionMetadata": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showFungible": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showInscription": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showUnverifiedCollections": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showZeroBalance": {
+                    "default": false,
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "ownerAddress": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "ownerType": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "single",
+                  "token"
+                ]
+              },
+              "page": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "uint32",
+                "minimum": 0
+              },
+              "royaltyAmount": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "uint32",
+                "minimum": 0
+              },
+              "royaltyTarget": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "royaltyTargetType": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "creators",
+                  "fanout",
+                  "single"
+                ]
+              },
+              "sortBy": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "required": [
+                  "sortBy"
+                ],
+                "properties": {
+                  "sortBy": {
+                    "type": "string",
+                    "enum": [
+                      "id",
+                      "created",
+                      "updated",
+                      "recent_action",
+                      "none"
+                    ]
+                  },
+                  "sortDirection": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "enum": [
+                      "asc",
+                      "desc"
+                    ]
+                  }
+                }
+              },
+              "supply": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "uint64",
+                "minimum": 0
+              },
+              "supplyMint": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "tokenType": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "Fungible",
+                  "NonFungible",
+                  "Compressed",
+                  "Nft",
+                  "All"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      ],
+      "result": {
+        "name": "AssetList",
+        "schema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "title": "AssetList",
+          "type": "object",
+          "properties": {
+            "after": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "before": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "cursor": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "errors": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "error": {
+                    "default": "",
+                    "type": "string"
+                  },
+                  "id": {
+                    "default": "",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "items": {
+              "default": [],
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "burnt",
+                  "id",
+                  "interface",
+                  "mutable"
+                ],
+                "properties": {
+                  "authorities": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "address",
+                        "scopes"
+                      ],
+                      "properties": {
+                        "address": {
+                          "type": "string"
+                        },
+                        "scopes": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "full",
+                              "royalty",
+                              "metadata",
+                              "extension"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "burnt": {
+                    "type": "boolean"
+                  },
+                  "compression": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "asset_hash",
+                      "compressed",
+                      "creator_hash",
+                      "data_hash",
+                      "eligible",
+                      "leaf_id",
+                      "seq",
+                      "tree"
+                    ],
+                    "properties": {
+                      "asset_hash": {
+                        "type": "string"
+                      },
+                      "compressed": {
+                        "type": "boolean"
+                      },
+                      "creator_hash": {
+                        "type": "string"
+                      },
+                      "data_hash": {
+                        "type": "string"
+                      },
+                      "eligible": {
+                        "type": "boolean"
+                      },
+                      "leaf_id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "seq": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "tree": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "content": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "$schema",
+                      "json_uri",
+                      "metadata"
+                    ],
+                    "properties": {
+                      "$schema": {
+                        "type": "string"
+                      },
+                      "files": {
+                        "type": [
+                          "array",
+                          "null"
+                        ],
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "contexts": {
+                              "type": [
+                                "array",
+                                "null"
+                              ],
+                              "items": {
+                                "type": "string",
+                                "enum": [
+                                  "wallet-default",
+                                  "web-desktop",
+                                  "web-mobile",
+                                  "app-mobile",
+                                  "app-desktop",
+                                  "app",
+                                  "vr"
+                                ]
+                              }
+                            },
+                            "mime": {
+                              "type": [
+                                "string",
+                                "null"
+                              ]
+                            },
+                            "quality": {
+                              "type": [
+                                "object",
+                                "null"
+                              ],
+                              "required": [
+                                "$$schema"
+                              ],
+                              "properties": {
+                                "$$schema": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "uri": {
+                              "type": [
+                                "string",
+                                "null"
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "json_uri": {
+                        "type": "string"
+                      },
+                      "links": {
+                        "type": [
+                          "object",
+                          "null"
+                        ],
+                        "additionalProperties": true
+                      },
+                      "metadata": {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    }
+                  },
+                  "creators": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "address",
+                        "share",
+                        "verified"
+                      ],
+                      "properties": {
+                        "address": {
+                          "type": "string"
+                        },
+                        "share": {
+                          "type": "integer",
+                          "format": "int32"
+                        },
+                        "verified": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  },
+                  "external_plugins": true,
+                  "grouping": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "group_key"
+                      ],
+                      "properties": {
+                        "collection_metadata": {
+                          "type": [
+                            "object",
+                            "null"
+                          ],
+                          "additionalProperties": true
+                        },
+                        "group_key": {
+                          "type": "string"
+                        },
+                        "group_value": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "verified": {
+                          "type": [
+                            "boolean",
+                            "null"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "inscription": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "authority",
+                      "content",
+                      "encoding",
+                      "inscription_data",
+                      "order",
+                      "root",
+                      "size"
+                    ],
+                    "properties": {
+                      "authority": {
+                        "type": "string"
+                      },
+                      "content": {
+                        "type": "string"
+                      },
+                      "encoding": {
+                        "type": "string"
+                      },
+                      "inscription_data": {
+                        "type": "string"
+                      },
+                      "order": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "root": {
+                        "type": "string"
+                      },
+                      "size": {
+                        "type": "integer",
+                        "format": "uint32",
+                        "minimum": 0
+                      },
+                      "validation_hash": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  },
+                  "interface": {
+                    "type": "string",
+                    "enum": [
+                      "V1_NFT",
+                      "V1_PRINT",
+                      "V2_NFT",
+                      "LEGACY_NFT",
+                      "FungibleAsset",
+                      "FungibleToken",
+                      "Identity",
+                      "Executable",
+                      "ProgrammableNFT",
+                      "MplCoreAsset",
+                      "MplCoreCollection",
+                      "Custom"
+                    ]
+                  },
+                  "mint_extensions": true,
+                  "mpl_core_info": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "properties": {
+                      "current_size": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "int32"
+                      },
+                      "num_minted": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "int32"
+                      },
+                      "plugins_json_version": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "int32"
+                      }
+                    }
+                  },
+                  "mutable": {
+                    "type": "boolean"
+                  },
+                  "ownership": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "delegated",
+                      "frozen",
+                      "owner",
+                      "ownership_model"
+                    ],
+                    "properties": {
+                      "delegate": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "delegated": {
+                        "type": "boolean"
+                      },
+                      "frozen": {
+                        "type": "boolean"
+                      },
+                      "owner": {
+                        "type": "string"
+                      },
+                      "ownership_model": {
+                        "type": "string",
+                        "enum": [
+                          "single",
+                          "token"
+                        ]
+                      }
+                    }
+                  },
+                  "plugins": true,
+                  "royalty": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "basis_points",
+                      "locked",
+                      "percent",
+                      "primary_sale_happened",
+                      "royalty_model"
+                    ],
+                    "properties": {
+                      "basis_points": {
+                        "type": "integer",
+                        "format": "uint32",
+                        "minimum": 0
+                      },
+                      "locked": {
+                        "type": "boolean"
+                      },
+                      "percent": {
+                        "type": "number",
+                        "format": "double"
+                      },
+                      "primary_sale_happened": {
+                        "type": "boolean"
+                      },
+                      "royalty_model": {
+                        "type": "string",
+                        "enum": [
+                          "creators",
+                          "fanout",
+                          "single"
+                        ]
+                      },
+                      "target": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  },
+                  "supply": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "print_current_supply",
+                      "print_max_supply"
+                    ],
+                    "properties": {
+                      "edition_nonce": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "print_current_supply": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "print_max_supply": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      }
+                    }
+                  },
+                  "token_info": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "decimals",
+                      "supply",
+                      "token_program"
+                    ],
+                    "properties": {
+                      "decimals": {
+                        "type": "integer",
+                        "format": "uint8",
+                        "minimum": 0
+                      },
+                      "freeze_authority": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "mint_authority": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "supply": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "token_program": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "unknown_external_plugins": true,
+                  "unknown_plugins": true,
+                  "uses": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "required": [
+                      "remaining",
+                      "total",
+                      "use_method"
+                    ],
+                    "properties": {
+                      "remaining": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "total": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0
+                      },
+                      "use_method": {
+                        "type": "string",
+                        "enum": [
+                          "Burn",
+                          "Multiple",
+                          "Single"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "limit": {
+              "default": 0,
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
+            },
+            "page": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "uint32",
+              "minimum": 0
+            },
+            "total": {
+              "default": 0,
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "getAssetSignatures",
+      "summary": "Get transaction signatures for an asset",
+      "params": [
+        {
+          "name": "payload",
+          "schema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetAssetSignatures",
+            "type": "object",
+            "properties": {
+              "after": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "before": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "cursor": {
+                "default": null,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "leafIndex": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "int64"
+              },
+              "limit": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "uint32",
+                "minimum": 0
+              },
+              "page": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "uint32",
+                "minimum": 0
+              },
+              "sortDirection": {
+                "default": null,
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "asc",
+                  "desc"
+                ]
+              },
+              "tree": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      ],
+      "result": {
+        "name": "TransactionSignatureList",
+        "schema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "title": "TransactionSignatureList",
+          "type": "object",
+          "properties": {
+            "after": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "before": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "items": {
+              "default": [],
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "maxItems": 2,
+                "minItems": 2
+              }
+            },
+            "limit": {
+              "default": 0,
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
+            },
+            "page": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "uint32",
+              "minimum": 0
+            },
+            "total": {
+              "default": 0,
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "getGrouping",
+      "summary": "Get a list of assets grouped by a specific authority",
+      "params": [
+        {
+          "name": "payload",
+          "schema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetGrouping",
+            "type": "object",
+            "required": [
+              "groupKey",
+              "groupValue"
+            ],
+            "properties": {
+              "groupKey": {
+                "type": "string"
+              },
+              "groupValue": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      ],
+      "result": {
+        "name": "GetGroupingResponse",
+        "schema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "title": "GetGroupingResponse",
+          "type": "object",
+          "properties": {
+            "group_key": {
+              "default": "",
+              "type": "string"
+            },
+            "group_name": {
+              "default": "",
+              "type": "string"
+            },
+            "group_size": {
+              "default": 0,
+              "type": "integer",
+              "format": "uint64",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "getTokenAccounts",
+      "summary": "Get a list of token accounts by owner or mint",
+      "params": [
+        {
+          "name": "payload",
+          "schema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetTokenAccounts",
+            "type": "object",
+            "properties": {
+              "after": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "before": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "cursor": {
+                "default": null,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "limit": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "uint32",
+                "minimum": 0
+              },
+              "mintAddress": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "options": {
+                "default": null,
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "showCollectionMetadata": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showFungible": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showInscription": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showUnverifiedCollections": {
+                    "default": false,
+                    "type": "boolean"
+                  },
+                  "showZeroBalance": {
+                    "default": false,
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "ownerAddress": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "page": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "uint32",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      ],
+      "result": {
+        "name": "TokenAccountList",
+        "schema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "title": "TokenAccountList",
+          "type": "object",
+          "properties": {
+            "after": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "before": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "cursor": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "errors": {
+              "default": [],
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "error": {
+                    "default": "",
+                    "type": "string"
+                  },
+                  "id": {
+                    "default": "",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "limit": {
+              "default": 0,
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
+            },
+            "page": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "uint32",
+              "minimum": 0
+            },
+            "token_accounts": {
+              "default": [],
               "type": "array",
               "items": {
                 "type": "object",
                 "properties": {
                   "address": {
+                    "default": "",
                     "type": "string"
                   },
-                  "share": {
-                    "type": "number"
+                  "amount": {
+                    "default": 0,
+                    "type": "integer",
+                    "format": "uint64",
+                    "minimum": 0
                   },
-                  "verified": {
+                  "close_authority": {
+                    "default": null,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "delegate": {
+                    "default": null,
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "delegated_amount": {
+                    "default": 0,
+                    "type": "integer",
+                    "format": "uint64",
+                    "minimum": 0
+                  },
+                  "extensions": {
+                    "default": null
+                  },
+                  "frozen": {
+                    "default": false,
                     "type": "boolean"
+                  },
+                  "mint": {
+                    "default": "",
+                    "type": "string"
+                  },
+                  "owner": {
+                    "default": "",
+                    "type": "string"
                   }
                 }
               }
             },
-            "ownership": {
-              "type": "object",
-              "properties": {
-                "frozen": {
-                  "type": "boolean"
-                },
-                "delegated": {
-                  "type": "boolean"
-                },
-                "delegate": {
-                  "type": "string"
-                },
-                "ownership_model": {
-                  "type": "string",
-                  "enum": [
-                    "single",
-                    "token"
-                  ]
-                },
-                "owner": {
-                  "type": "string"
-                }
-              }
-            },
-            "uses": {
-              "type": "object",
-              "properties": {
-                "use_method": {
-                  "type": "string",
-                  "enum": [
-                    "burn",
-                    "multiple",
-                    "single"
-                  ]
-                },
-                "remaining": {
-                  "type": "number"
-                },
-                "total": {
-                  "type": "number"
-                }
-              }
-            },
-            "supply": {
-              "type": "object",
-              "properties": {
-                "print_max_supply": {
-                  "type": "number"
-                },
-                "print_current_supply": {
-                  "type": "number"
-                },
-                "edition_nonce": {
-                  "type": "number"
-                }
-              }
-            },
-            "mutable": {
-              "type": "boolean"
-            },
-            "burnt": {
-              "type": "boolean"
-            }
-          }
-        }
-      },
-      "assetList": {
-        "name": "AssetList",
-        "schema": {
-          "type": "object",
-          "properties": {
             "total": {
-              "type": "number"
-            },
-            "limit": {
-              "type": "number"
-            },
-            "items": {
-              "type": "array",
-              "$ref": "#/components/contentDescriptors/asset"
+              "default": 0,
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
             }
           }
         }
-      },
-      "assetProof": {
-        "name": "AssetProof",
-        "schema": {
-          "type": "object",
-          "required": [
-            "node_index",
-            "tree_id",
-            "proof"
-          ],
-          "properties": {
-            "root": {
-              "type": "string"
+      }
+    },
+    {
+      "name": "getNftEditions",
+      "summary": "Get all printable editions for a master edition NFT mint",
+      "params": [
+        {
+          "name": "payload",
+          "schema": {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "title": "GetNftEditions",
+            "type": "object",
+            "required": [
+              "mintAddress"
+            ],
+            "properties": {
+              "after": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "before": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "cursor": {
+                "default": null,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "limit": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "uint32",
+                "minimum": 0
+              },
+              "mintAddress": {
+                "type": "string"
+              },
+              "page": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "format": "uint32",
+                "minimum": 0
+              }
             },
-            "proof": {
+            "additionalProperties": false
+          }
+        }
+      ],
+      "result": {
+        "name": "NftEditions",
+        "schema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "title": "NftEditions",
+          "type": "object",
+          "properties": {
+            "after": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "before": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "cursor": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "editions": {
               "type": "array",
               "items": {
-                "type": "string"
+                "type": "object",
+                "properties": {
+                  "edition_address": {
+                    "default": "",
+                    "type": "string"
+                  },
+                  "edition_number": {
+                    "default": 0,
+                    "type": "integer",
+                    "format": "uint64",
+                    "minimum": 0
+                  },
+                  "mint_address": {
+                    "default": "",
+                    "type": "string"
+                  }
+                }
               }
             },
-            "node_index": {
-              "type": "number"
+            "limit": {
+              "default": 0,
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
             },
-            "leaf": {
+            "master_edition_address": {
+              "default": "",
               "type": "string"
             },
-            "tree_id": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "sortBy": {
-        "name": "sortBy",
-        "schema": {
-          "type": "object",
-          "properties": {
-            "sortBy": {
-              "type": "string",
-              "enum": [
-                "created",
-                "updated",
-                "recent_action",
-                "none"
-              ]
+            "max_supply": {
+              "default": null,
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "uint64",
+              "minimum": 0
             },
-            "sortDirection": {
-              "type": "string",
-              "enum": [
-                "asc",
-                "desc"
-              ]
+            "page": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "uint32",
+              "minimum": 0
+            },
+            "supply": {
+              "default": 0,
+              "type": "integer",
+              "format": "uint64",
+              "minimum": 0
+            },
+            "total": {
+              "default": 0,
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0
             }
           }
         }
       }
     }
-  }
+  ]
 }
