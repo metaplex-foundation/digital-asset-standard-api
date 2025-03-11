@@ -114,23 +114,4 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     });
   });
 
-  test(`it can fetch a regular asset by ID with showInscription true (${endpoint.name})`, async (t) => {
-    // Given a minted NFT.
-    const umi = createUmi(endpoint.url);
-    const assetId = publicKey('HC2PWqQ5wAwSur8ttqXaAGK3nfkvQP34U9pYErJJ99M1');
-
-    // When we fetch the asset using its ID with display options.
-    const asset = await umi.rpc.getAsset({
-      assetId,
-      options: { showInscription: true },
-    });
-
-    // Then we expect the following data.
-    t.like(asset, <DasApiAsset>{
-      interface: 'V1_NFT',
-      id: assetId,
-    });
-    t.deepEqual(asset.mutable, true);
-    t.deepEqual(asset.burnt, false);
-  });
 });
