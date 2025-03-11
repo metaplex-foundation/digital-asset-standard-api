@@ -297,6 +297,6 @@ export const createDasApiDecorator = (
         throw new DasApiError(`No signatures found for ${identifier}`);
       }
       return signatures;
-    }
+    },
   };
 };

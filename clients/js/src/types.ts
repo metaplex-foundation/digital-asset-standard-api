@@ -399,10 +399,10 @@ type Pagination = {
    */
   after?: Nullable<string>;
 
-    /**
+  /**
    *
    */
-    cursor?: Nullable<string>;
+  cursor?: Nullable<string>;
 };
 
 /**
