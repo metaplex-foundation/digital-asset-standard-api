@@ -327,7 +327,7 @@ type Pagination = {
  * Sorting criteria.
  */
 type DasApiParamAssetSortBy = {
-  sortBy: 'created' | 'updated' | 'recent_action' | 'none';
+  sortBy: 'created' | 'updated' | 'recent_action' | 'id' | 'none';
   sortDirection: 'asc' | 'desc';
 };
 
@@ -440,4 +440,94 @@ export type GetAssetProofRpcResponse = {
   node_index: number;
   leaf: PublicKey;
   tree_id: PublicKey;
+};
+
+export type GetAssetProofsRpcResponse = Record<
+  PublicKey,
+  GetAssetProofRpcResponse
+>;
+
+export type GetAssetSignaturesRpcInput = {
+  /**
+   * The maximum number of assets to retrieve.
+   */
+  limit?: Nullable<number>;
+
+  /**
+   * The page number of the signatures.
+   */
+  page?: Nullable<number>;
+
+  /**
+   * Retrieve signatures before the specified `ID` value.
+   */
+  before?: Nullable<string>;
+
+  /**
+   * Retrieve signatures after the specified `ID` value.
+   */
+  after?: Nullable<string>;
+
+  /**
+   *
+   */
+  cursor?: Nullable<string>;
+
+  /**
+   * The sort direction.
+   */
+  sort_direction?: Nullable<'asc' | 'desc'>;
+} & (
+  | {
+      /**
+       * The Asset ID to retrieve signatures for.
+       */
+      assetId: PublicKey;
+      tree?: never;
+      leaf_index?: never;
+    }
+  | {
+      /**
+       * The tree ID to retrieve signatures for.
+       */
+      tree: PublicKey;
+      /**
+       * The leaf index to retrieve signatures for.
+       */
+      leaf_index: number;
+      assetId?: never;
+    }
+);
+
+export type DasApiTransactionSignature = {
+  signature: string;
+  instruction: string;
+  slot: number;
+};
+
+export type GetAssetSignaturesRpcResponse = {
+  /**
+   * total number of signatures in the list.
+   */
+  total: number;
+
+  /**
+   * Limit of signatures used to create the list. When the `total` value is
+   * lower than the `limit`, it means that there are no more signatures to be
+   * retrieved.
+   */
+  limit: number;
+
+  before: string;
+  after: string;
+
+  /**
+   * The page number of the signatures.
+   */
+  page?: number;
+
+  /**
+   * List of individual signatures.
+   */
+  items: DasApiTransactionSignature[];
 };
