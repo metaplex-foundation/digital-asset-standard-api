@@ -458,3 +458,49 @@ The tests included in this repository can be run locally to test different endpo
    ```bash
    pnpm build && pnpm test
    ```
+
+## Updating the JSON Schema
+The Schema is generated from the OpenRPC specification. To update the schema, follow the steps below:
+
+1. Run [DAS](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure) locally
+2. Run the following command to generate the schema:
+
+```bash
+curl --request POST --url http://localhost:9090 --header 'Content-Type: application/json' --data '{
+    "jsonrpc": "2.0",
+    "method": "schema",
+    "id": 0
+}' | jq '.' > metaplex-das-api.json
+```
+
+3. Update the beginning of the schema in the `specification` folder manually to allow it being used in the [OpenRPC playground](https://playground.open-rpc.org/?url=https://raw.githubusercontent.com/metaplex-foundation/digital-asset-standard-api/main/specification/metaplex-das-api.json).
+
+```json
+// E.g. Instead of the following:
+
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "openrpc": "1.2.6",
+    "info": {
+      "title": "",
+      "version": ""
+    },
+[...]
+
+// replace it with this.
+{
+  "openrpc": "1.2.6",
+  "info": {
+  "title": "Metaplex Digital Asset Standard API"
+    "version": "1.1.0",
+  },
+[...]
+
+// And remove this part of the bottom of the file:
+,
+  "id": 0
+}
+``` 
+4. Format the JSON file (e.g. using [jq](https://stedolan.github.io/jq/), vscode, etc.).
+5. Update the schema in the `specification` folder with the new file.
