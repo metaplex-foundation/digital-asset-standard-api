@@ -281,6 +281,7 @@ export const createDasApiDecorator = (
       return assetList;
     },
     getAssetSignatures: async (input: GetAssetSignaturesRpcInput) => {
+      validatePagination(input.page, input.before, input.after);
       const signatures = await rpc.call<GetAssetSignaturesRpcResponse | null>(
         'getAssetSignaturesV2',
         [
