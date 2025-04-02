@@ -80,7 +80,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
       async () => {
         await umi.rpc.getAsset({
           assetId,
-          options: { showUnverifiedCollections: false },
+          displayOptions: { showUnverifiedCollections: false },
         });
       },
       {
@@ -97,7 +97,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     // When we fetch the asset using its ID.
     const asset = await umi.rpc.getAsset({
       assetId,
-      options: { showUnverifiedCollections: true },
+      displayOptions: { showUnverifiedCollections: true },
     });
 
     t.like(asset, <DasApiAsset>{

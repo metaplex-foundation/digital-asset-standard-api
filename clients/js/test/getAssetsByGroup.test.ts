@@ -104,7 +104,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     const umi = createUmi(endpoint.url);
     const groupKey = 'collection';
     const groupValue = publicKey(
-      '5RT4e9uHUgG9h13cSc3L4YvkDc9qXSznoLaX4Tx8cpWS'
+      '5g2h8NuNNdb2riSuAKC3JJrrJKGJUH9dxM23fqdYgGt2'
     );
 
     // When we fetch the asset using the group information with display options.

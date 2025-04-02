@@ -121,6 +121,12 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     // And the creator should be present.
     assets.items.forEach((asset) => {
       t.true(asset.creators.some((other) => other.address === creator));
+      
+      // And all collections should be verified
+      const collectionGroups = asset.grouping?.filter(group => group.group_key === 'collection') ?? [];
+      collectionGroups.forEach(group => {
+        t.true(group.verified, 'Expected all collection groups to be verified');
+      });
     });
   });
 

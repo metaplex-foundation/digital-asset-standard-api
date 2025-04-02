@@ -15,7 +15,6 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
 
     // Then we expect to find assets.
     t.true(assets.items.length > 0);
-
     // And the authority should be present.
     assets.items.forEach((asset) => {
       t.true(asset.authorities.some((other) => other.address === authority));
@@ -91,7 +90,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
   test(`it can fetch assets by authority with showCollectionMetadata true (${endpoint.name})`, async (t) => {
     // Given an authority address.
     const umi = createUmi(endpoint.url);
-    const authority = publicKey('DASPQfEAVcHp55eFmfstRduMT3dSfoTirFFsMHwUaWaz');
+    const authority = publicKey('DAS7Wnf86QNmwKWacTe8KShU7V6iw7wwcPjG9qXLPkEU');
 
     // When we fetch the asset using the authority with display options.
     const assets = await umi.rpc.getAssetsByAuthority({
@@ -125,7 +124,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     t.truthy(collectionGroup, 'Expected to find a collection group');
     t.like(collectionGroup, {
       group_key: 'collection',
-      group_value: '5RT4e9uHUgG9h13cSc3L4YvkDc9qXSznoLaX4Tx8cpWS',
+      group_value: 'Ce9hnNkbwNP7URw6TkhpopcKeNm8s4SchbBJS3m8tTu2',
       collection_metadata: {
         name: 'Chiaki Azure 55 Collection',
         symbol: '',

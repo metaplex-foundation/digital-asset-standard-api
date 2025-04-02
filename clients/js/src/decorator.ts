@@ -114,12 +114,12 @@ export const createDasApiDecorator = (
     getAsset: async (input: GetAssetRpcInput | PublicKey) => {
       const assetId =
         typeof input === 'object' && 'assetId' in input ? input.assetId : input;
-      const options =
-        typeof input === 'object' && 'options' in input ? input.options : {};
+      const displayOptions =
+        typeof input === 'object' && 'displayOptions' in input ? input.displayOptions : {};
 
       const asset = await rpc.call<DasApiAsset | null>('getAsset', [
         assetId,
-        options,
+        displayOptions,
       ]);
       if (!asset) throw new DasApiError(`Asset not found: ${assetId}`);
       return asset;
@@ -165,8 +165,8 @@ export const createDasApiDecorator = (
           input.page ?? 1,
           input.before ?? null,
           input.after ?? null,
-          input.cursor ?? null,
           input.displayOptions ?? {},
+          input.cursor ?? null,
         ]
       );
       if (!assetList) {
@@ -188,8 +188,8 @@ export const createDasApiDecorator = (
           input.page ?? 1,
           input.before ?? null,
           input.after ?? null,
-          input.cursor ?? null,
           input.displayOptions ?? {},
+          input.cursor ?? null,
         ]
       );
       if (!assetList) {
@@ -209,8 +209,8 @@ export const createDasApiDecorator = (
           input.page ?? 1,
           input.before ?? null,
           input.after ?? null,
-          input.cursor ?? null,
           input.displayOptions ?? {},
+          input.cursor ?? null,
         ]
       );
       if (!assetList) {
@@ -231,8 +231,8 @@ export const createDasApiDecorator = (
           input.page ?? 1,
           input.before ?? null,
           input.after ?? null,
-          input.cursor ?? null,
           input.displayOptions ?? {},
+          input.cursor ?? null,
         ]
       );
       if (!assetList) {
