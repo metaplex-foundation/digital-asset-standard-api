@@ -107,7 +107,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
 
     // Find the specific asset
     const specificAsset = assets.items.find(
-      (asset) => asset.id === 'JDforNYS5Bop4VdZyGCjcUyy1mYZKR4eDveqjZnRYXzy'
+      (asset) => asset.id === '8bFQbnBrzeiYQabEJ1ghy5T7uFpqFzPjUGsVi3SzSMHB'
     );
 
     // Assert the asset exists and has group_definition
@@ -136,18 +136,11 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     // Then we expect to find assets.
     t.true(assets.items.length > 0);
 
-    // Find the specific asset
+    // But not the specific asset which is not a verified part of a collection
     const specificAsset = assets.items.find(
-      (asset) => asset.id === 'JDforNYS5Bop4VdZyGCjcUyy1mYZKR4eDveqjZnRYXzy'
+      (asset) => asset.id === '8bFQbnBrzeiYQabEJ1ghy5T7uFpqFzPjUGsVi3SzSMHB'
     );
 
-    // Assert the asset exists and does not have group_definition
-    t.truthy(specificAsset, 'Expected to find the specific asset');
-    if (specificAsset) {
-      t.false(
-        'group_definition' in specificAsset,
-        'Expected not to find group_definition field in the specific asset when showUnverifiedCollections is false'
-      );
-    }
+    t.assert(specificAsset === undefined, 'Expected to not find the specific asset');
   });
 });

@@ -268,6 +268,10 @@ export const createDasApiDecorator = (
         input.before ?? null,
         input.after ?? null,
         input.jsonUri ?? null,
+        input.cursor ?? null,
+        input.name ?? null,
+        input.displayOptions ?? {},
+        input.tokenType ?? null,
       ]);
       if (!assetList) {
         throw new DasApiError('No assets found for the given search criteria');
