@@ -106,7 +106,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
         image:
           'https://gateway.irys.xyz/8da3Er9Q39QRkdNhBNP7w5hDo5ZnydLNxLqe9i6s1Nak',
         description: '',
-        external_url: ''
+        external_url: '',
       },
     });
   });

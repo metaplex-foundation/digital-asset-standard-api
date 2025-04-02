@@ -141,6 +141,9 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
       (asset) => asset.id === '8bFQbnBrzeiYQabEJ1ghy5T7uFpqFzPjUGsVi3SzSMHB'
     );
 
-    t.assert(specificAsset === undefined, 'Expected to not find the specific asset');
+    t.assert(
+      specificAsset === undefined,
+      'Expected to not find the specific asset'
+    );
   });
 });

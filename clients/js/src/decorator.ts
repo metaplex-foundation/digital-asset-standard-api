@@ -115,7 +115,9 @@ export const createDasApiDecorator = (
       const assetId =
         typeof input === 'object' && 'assetId' in input ? input.assetId : input;
       const displayOptions =
-        typeof input === 'object' && 'displayOptions' in input ? input.displayOptions : {};
+        typeof input === 'object' && 'displayOptions' in input
+          ? input.displayOptions
+          : {};
 
       const asset = await rpc.call<DasApiAsset | null>('getAsset', [
         assetId,

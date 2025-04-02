@@ -18,8 +18,10 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     const assets = await umi.rpc.getAssets([compressedAssetId, regularAssetId]);
 
     // Then we expect the following data.
-    const compressedAsset = assets.find(asset => asset.id === compressedAssetId);
-    const regularAsset = assets.find(asset => asset.id === regularAssetId);
+    const compressedAsset = assets.find(
+      (asset) => asset.id === compressedAssetId
+    );
+    const regularAsset = assets.find((asset) => asset.id === regularAssetId);
 
     t.truthy(compressedAsset, 'Expected to find compressed asset');
     t.truthy(regularAsset, 'Expected to find regular asset');
@@ -139,7 +141,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
         symbol: '',
         image:
           'https://gateway.irys.xyz/8da3Er9Q39QRkdNhBNP7w5hDo5ZnydLNxLqe9i6s1Nak',
-        description:'',
+        description: '',
       },
     });
   });
