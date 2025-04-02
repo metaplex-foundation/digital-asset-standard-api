@@ -203,7 +203,7 @@ export type GetAssetRpcInput = {
   /**
    * Display options for the query
    */
-  options?: DisplayOptions;
+  displayOptions?: DisplayOptions;
 };
 
 /**
