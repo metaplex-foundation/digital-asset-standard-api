@@ -175,9 +175,8 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
         symbol: '',
         image:
           'https://gateway.irys.xyz/8da3Er9Q39QRkdNhBNP7w5hDo5ZnydLNxLqe9i6s1Nak',
-        // TODO: Needs to be added again after MTG-1380 is merged
-        //        description: '',
-        //        external_url: ''
+        description: '',
+        external_url: ''
       },
     });
   });
