@@ -48,14 +48,14 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
   test(`it can fetch a regular asset by ID (${endpoint.name})`, async (t) => {
     // Given a minted NFT.
     const umi = createUmi(endpoint.url);
-    const assetId = publicKey('8bFQbnBrzeiYQabEJ1ghy5T7uFpqFzPjUGsVi3SzSMHB');
+    const assetId = publicKey('Hu9vvgNjVDxRo6F8iTEo6sRJikhqoM2zVswR86WAf4C');
 
     // When we fetch the asset using its ID.
     const asset = await umi.rpc.getAsset(assetId);
 
     // Then we expect the following data.
     t.like(asset, <DasApiAsset>{
-      interface: 'ProgrammableNFT',
+      interface: 'V1_NFT',
       id: assetId,
       content: {
         metadata: {
@@ -66,12 +66,54 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     t.like(asset.compression, <DasApiAssetCompression>{
       compressed: false,
     });
-    t.deepEqual(asset.grouping.length, 1);
-    t.like(asset.grouping[0], {
-      group_key: 'collection',
-      group_value: '5RT4e9uHUgG9h13cSc3L4YvkDc9qXSznoLaX4Tx8cpWS',
-    });
     t.deepEqual(asset.mutable, true);
     t.deepEqual(asset.burnt, false);
+  });
+
+  test(`it can fetch a regular asset by ID not showing unverified collection data using showUnverifiedCollections false (${endpoint.name})`, async (t) => {
+    // Given a minted NFT.
+    const umi = createUmi(endpoint.url);
+    const assetId = publicKey('5smGnzgaMsQ3JV7jWCvSxnRkHjP2dJoi1uczHTx87tji');
+
+    // When we fetch the asset using its ID with display options.
+    await t.throwsAsync(
+      async () => {
+        await umi.rpc.getAsset({
+          assetId,
+          displayOptions: { showUnverifiedCollections: false },
+        });
+      },
+      {
+        message: /Asset not found/,
+      }
+    );
+  });
+
+  test(`it can fetch a regular asset by ID with unverified collection data using showUnverifiedCollections true (${endpoint.name})`, async (t) => {
+    // Given a minted NFT.
+    const umi = createUmi(endpoint.url);
+    const assetId = publicKey('5smGnzgaMsQ3JV7jWCvSxnRkHjP2dJoi1uczHTx87tji');
+
+    // When we fetch the asset using its ID.
+    const asset = await umi.rpc.getAsset({
+      assetId,
+      displayOptions: { showUnverifiedCollections: true },
+    });
+
+    t.like(asset, <DasApiAsset>{
+      interface: 'V1_NFT',
+      id: assetId,
+      content: {
+        metadata: {
+          name: 'unverified Azure 55',
+        },
+      },
+    });
+    t.is(asset.grouping.length, 1);
+    t.like(asset.grouping[0], {
+      group_key: 'collection',
+      group_value: '5g2h8NuNNdb2riSuAKC3JJrrJKGJUH9dxM23fqdYgGt2',
+      verified: false,
+    });
   });
 });

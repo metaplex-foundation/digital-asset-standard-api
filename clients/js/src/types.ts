@@ -4,11 +4,38 @@ import { Nullable, PublicKey } from '@metaplex-foundation/umi';
 // RPC input.                               //
 // ---------------------------------------- //
 
+/**
+ * Display options for asset queries
+ */
+export type DisplayOptions = {
+  /**
+   * Whether to show unverified collections
+   */
+  showUnverifiedCollections?: boolean;
+  /**
+   * Whether to show collection metadata
+   */
+  showCollectionMetadata?: boolean;
+  /**
+   * Whether to show fungible assets
+   */
+  showFungible?: boolean;
+  /**
+   * Whether to show inscription data
+   */
+  showInscription?: boolean;
+};
+
 export type GetAssetsByAuthorityRpcInput = {
   /**
    * The address of the authority of the assets.
    */
   authority: PublicKey;
+
+  /**
+   * Display options for the query
+   */
+  displayOptions?: DisplayOptions;
 } & Pagination;
 
 export type GetAssetsByCreatorRpcInput = {
@@ -21,6 +48,11 @@ export type GetAssetsByCreatorRpcInput = {
    * Indicates whether to retrieve only verified assets or not.
    */
   onlyVerified: boolean;
+
+  /**
+   * Display options for the query
+   */
+  displayOptions?: DisplayOptions;
 } & Pagination;
 
 export type GetAssetsByGroupRpcInput = {
@@ -33,6 +65,11 @@ export type GetAssetsByGroupRpcInput = {
    * The value of the group
    */
   groupValue: string;
+
+  /**
+   * Display options for the query
+   */
+  displayOptions?: DisplayOptions;
 } & Pagination;
 
 export type GetAssetsByOwnerRpcInput = {
@@ -40,38 +77,18 @@ export type GetAssetsByOwnerRpcInput = {
    * The address of the owner of the assets.
    */
   owner: PublicKey;
+
+  /**
+   * Display options for the query
+   */
+  displayOptions?: DisplayOptions;
 } & Pagination;
 
 export type SearchAssetsRpcInput = {
   /**
-   * Indicates whether the search criteria should be inverted or not.
+   * The address of the authority.
    */
-  negate?: Nullable<boolean>;
-
-  /**
-   * Indicates whether to retrieve all or any asset that matches the search criteria.
-   */
-  conditionType?: Nullable<'all' | 'any'>;
-
-  /**
-   * The interface value of the asset.
-   */
-  interface?: Nullable<DasApiAssetInterface>;
-
-  /**
-   * The value for the JSON URI.
-   */
-  jsonUri?: Nullable<string>;
-
-  /**
-   * The address of the owner.
-   */
-  owner?: Nullable<PublicKey>;
-
-  /**
-   * Type of ownership.
-   */
-  ownerType?: Nullable<'single' | 'token'>;
+  authority?: Nullable<PublicKey>;
 
   /**
    * The address of the creator.
@@ -84,14 +101,39 @@ export type SearchAssetsRpcInput = {
   creatorVerified?: Nullable<boolean>;
 
   /**
-   * The address of the authority.
-   */
-  authority?: Nullable<PublicKey>;
-
-  /**
    * The grouping (`key`, `value`) pair.
    */
   grouping?: Nullable<[string, string]>;
+
+  /**
+   * The interface value of the asset.
+   */
+  interface?: Nullable<DasApiAssetInterface>;
+
+  /**
+   * Indicates whether the search criteria should be inverted or not.
+   */
+  negate?: Nullable<boolean>;
+
+  /**
+   * The name of the asset.
+   */
+  name?: Nullable<string>;
+
+  /**
+   * Indicates whether to retrieve all or any asset that matches the search criteria.
+   */
+  conditionType?: Nullable<'all' | 'any'>;
+
+  /**
+   * The address of the owner.
+   */
+  owner?: Nullable<PublicKey>;
+
+  /**
+   * Type of ownership.
+   */
+  ownerType?: Nullable<'single' | 'token'>;
 
   /**
    * The address of the delegate.
@@ -112,6 +154,11 @@ export type SearchAssetsRpcInput = {
    * The address of the supply mint.
    */
   supplyMint?: Nullable<PublicKey>;
+
+  /**
+   * The type of token to search for.
+   */
+  tokenType?: Nullable<TokenType>;
 
   /**
    * Indicates whether the asset is compressed or not.
@@ -142,7 +189,47 @@ export type SearchAssetsRpcInput = {
    * Indicates whether the asset is burnt or not.
    */
   burnt?: Nullable<boolean>;
+
+  /**
+   * The value for the JSON URI.
+   */
+  jsonUri?: Nullable<string>;
+
+  /**
+   * Display options for the query
+   */
+  displayOptions?: DisplayOptions;
 } & Pagination;
+
+/**
+ * Input parameters for getAsset RPC call
+ */
+export type GetAssetRpcInput = {
+  /**
+   * The asset ID to fetch
+   */
+  assetId: PublicKey;
+
+  /**
+   * Display options for the query
+   */
+  displayOptions?: DisplayOptions;
+};
+
+/**
+ * Input parameters for getAssets RPC call
+ */
+export type GetAssetsRpcInput = {
+  /**
+   * Array of asset IDs to fetch
+   */
+  assetIds: PublicKey[];
+
+  /**
+   * Display options for the query
+   */
+  displayOptions?: DisplayOptions;
+};
 
 // ---------------------------------------- //
 // Result types.                            //
@@ -321,6 +408,11 @@ type Pagination = {
    * Retrieve assets after the specified `ID` value.
    */
   after?: Nullable<string>;
+
+  /**
+   *
+   */
+  cursor?: Nullable<string>;
 };
 
 /**
@@ -337,6 +429,7 @@ export type DasApiAssetInterface =
   | 'LEGACY_NFT'
   | 'V2_NFT'
   | 'FungibleAsset'
+  | 'FungibleToken'
   | 'Custom'
   | 'Identity'
   | 'Executable'
@@ -407,6 +500,13 @@ export type DasApiPropGroupKey = 'collection';
 export type DasApiAssetGrouping = {
   group_key: DasApiPropGroupKey;
   group_value: string;
+  verified?: boolean;
+  collection_metadata?: {
+    name: string;
+    symbol: string;
+    description: string;
+    image: string;
+  };
 };
 
 export type DasApiAuthorityScope =
@@ -531,3 +631,10 @@ export type GetAssetSignaturesRpcResponse = {
    */
   items: DasApiTransactionSignature[];
 };
+
+export type TokenType =
+  | 'Fungible'
+  | 'NonFungible'
+  | 'regularNFT'
+  | 'compressedNFT'
+  | 'All';

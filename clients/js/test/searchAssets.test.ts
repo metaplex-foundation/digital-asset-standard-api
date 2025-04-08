@@ -64,14 +64,12 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
       },
     });
   });
-});
 
-DAS_API_ENDPOINTS.forEach((endpoint) => {
   test(`it can search a compressed asset by collection (${endpoint.name})`, async (t) => {
     // Given a DAS API endpoint.
     const umi = createUmi(endpoint.url);
 
-    // When we search for assetw given their collection.
+    // When we search for assets given their collection.
     const assets = await umi.rpc.searchAssets({
       grouping: ['collection', 'Dm1TRVw82roqpfqpzsFxSsWg6a4z3dku6ebVHSHuVo1c'],
     });
@@ -90,5 +88,62 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
         ],
       });
     });
+  });
+
+  test(`it can search assets with showUnverifiedCollections true (${endpoint.name})`, async (t) => {
+    // Given a DAS API endpoint.
+    const umi = createUmi(endpoint.url);
+
+    // When we search for assets with display options.
+    const assets = await umi.rpc.searchAssets({
+      owner: publicKey('DASPQfEAVcHp55eFmfstRduMT3dSfoTirFFsMHwUaWaz'),
+      displayOptions: {
+        showUnverifiedCollections: true,
+      },
+    });
+
+    // Then we expect to find assets.
+    t.true(assets.items.length > 0);
+
+    // Find the specific asset
+    const specificAsset = assets.items.find(
+      (asset) => asset.id === '8bFQbnBrzeiYQabEJ1ghy5T7uFpqFzPjUGsVi3SzSMHB'
+    );
+
+    // Assert the asset exists and has group_definition
+    t.truthy(specificAsset, 'Expected to find the specific asset');
+    if (specificAsset) {
+      t.is(
+        (specificAsset as any).group_definition,
+        undefined,
+        'Expected group_definition to be undefined when showUnverifiedCollections is true'
+      );
+    }
+  });
+
+  test(`it can search assets with showUnverifiedCollections false (${endpoint.name})`, async (t) => {
+    // Given a DAS API endpoint.
+    const umi = createUmi(endpoint.url);
+
+    // When we search for assets with display options.
+    const assets = await umi.rpc.searchAssets({
+      owner: publicKey('DASPQfEAVcHp55eFmfstRduMT3dSfoTirFFsMHwUaWaz'),
+      displayOptions: {
+        showUnverifiedCollections: false,
+      },
+    });
+
+    // Then we expect to find assets.
+    t.true(assets.items.length > 0);
+
+    // But not the specific asset which is not a verified part of a collection
+    const specificAsset = assets.items.find(
+      (asset) => asset.id === '8bFQbnBrzeiYQabEJ1ghy5T7uFpqFzPjUGsVi3SzSMHB'
+    );
+
+    t.assert(
+      specificAsset === undefined,
+      'Expected to not find the specific asset'
+    );
   });
 });
