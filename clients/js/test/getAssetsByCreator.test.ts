@@ -135,7 +135,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
   test(`it can fetch assets by creator with showCollectionMetadata true (${endpoint.name})`, async (t) => {
     // Given an creator address.
     const umi = createUmi(endpoint.url);
-    const creator = publicKey('DASPQfEAVcHp55eFmfstRduMT3dSfoTirFFsMHwUaWaz');
+    const creator = publicKey('DAS7Wnf86QNmwKWacTe8KShU7V6iw7wwcPjG9qXLPkEU');
 
     // When we fetch the asset using the creator with display options.
     const assets = await umi.rpc.getAssetsByCreator({
@@ -157,7 +157,11 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
 
     // And collection metadata should be present in the grouping for assets that have collections
     const assetWithCollection = assets.items.find((asset) =>
-      asset.grouping?.some((group) => group.group_key === 'collection')
+      asset.grouping?.some(
+        (group) =>
+          group.group_key === 'collection' &&
+          group.group_value === 'Ce9hnNkbwNP7URw6TkhpopcKeNm8s4SchbBJS3m8tTu2'
+      )
     );
     t.truthy(
       assetWithCollection,
@@ -171,13 +175,14 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     t.truthy(collectionGroup, 'Expected to find a collection group');
     t.like(collectionGroup, {
       group_key: 'collection',
-      group_value: 'Dm1TRVw82roqpfqpzsFxSsWg6a4z3dku6ebVHSHuVo1c',
+      group_value: 'Ce9hnNkbwNP7URw6TkhpopcKeNm8s4SchbBJS3m8tTu2',
       collection_metadata: {
-        name: 'My cNFT Collection',
+        name: 'Chiaki Azure 55 Collection',
         symbol: '',
         image:
-          'https://gateway.irys.xyz/8da3Er9Q39QRkdNhBNP7w5hDo5ZnydLNxLqe9i6s1Nak',
-        description: '',
+          'https://arweave.net/fFcYDkRHF-936IbAZ3pLTmFAmxF1WlW3KwWndYPgI8Q/chiaki-violet-azure-common.png',
+        description:
+          'MONMONMON is a collection from the creativity of Peelander Yellow. Each MONMONMON has unique and kind abilities that can be used to help others and play with your friends. There are secrets in each MONMONMON. We love you.',
         external_url: '',
       },
     });

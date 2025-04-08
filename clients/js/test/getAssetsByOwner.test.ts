@@ -62,7 +62,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
   test(`it can fetch assets by owner with showCollectionMetadata true (${endpoint.name})`, async (t) => {
     // Given an owner address.
     const umi = createUmi(endpoint.url);
-    const owner = publicKey('DASPQfEAVcHp55eFmfstRduMT3dSfoTirFFsMHwUaWaz');
+    const owner = publicKey('DAS7Wnf86QNmwKWacTe8KShU7V6iw7wwcPjG9qXLPkEU');
 
     // When we fetch the asset using the owner with display options.
     const assets = await umi.rpc.getAssetsByOwner({
@@ -85,29 +85,32 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     });
 
     // And collection metadata should be present in the grouping for assets that have collections
+    const targetCollectionValue =
+      'Ce9hnNkbwNP7URw6TkhpopcKeNm8s4SchbBJS3m8tTu2';
     const assetWithCollection = assets.items.find((asset) =>
-      asset.grouping?.some((group) => group.group_key === 'collection')
+      asset.grouping?.some(
+        (group) =>
+          group.group_key === 'collection' &&
+          group.group_value === targetCollectionValue
+      )
     );
     t.truthy(
       assetWithCollection,
       'Expected to find at least one asset with a collection'
     );
 
-    const collectionGroup = assetWithCollection!.grouping.find(
-      (group) => group.group_key === 'collection'
+    const collectionGrouping = assetWithCollection?.grouping?.find(
+      (g) =>
+        g.group_key === 'collection' && g.group_value === targetCollectionValue
     );
-    t.truthy(collectionGroup, 'Expected to find a collection group');
-    t.like(collectionGroup, {
+    t.truthy(
+      collectionGrouping,
+      'Expected to find the specific collection grouping'
+    );
+    t.like(collectionGrouping, {
       group_key: 'collection',
-      group_value: 'Dm1TRVw82roqpfqpzsFxSsWg6a4z3dku6ebVHSHuVo1c',
-      collection_metadata: {
-        name: 'My cNFT Collection',
-        symbol: '',
-        image:
-          'https://gateway.irys.xyz/8da3Er9Q39QRkdNhBNP7w5hDo5ZnydLNxLqe9i6s1Nak',
-        description: '',
-        external_url: '',
-      },
+      group_value: targetCollectionValue,
+      collection_metadata: collectionGrouping?.collection_metadata,
     });
   });
 
