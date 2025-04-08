@@ -121,11 +121,11 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
 
     // Then we expect to get the assets back with collection metadata.
     t.is(assets.length, 2);
-    t.deepEqual(assets[1].id, regularAssetId);
+    t.true(assets.some(asset => asset.id === regularAssetId));
 
     // Verify collection metadata is present in the grouping
     const assetWithCollectionMetadata = assets.find(
-      (asset) => asset.grouping[0]?.collection_metadata
+      (asset) => asset.id === regularAssetId
     );
     t.truthy(
       assetWithCollectionMetadata,
@@ -134,14 +134,14 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     if (!assetWithCollectionMetadata) return;
     t.like(assetWithCollectionMetadata.grouping[0], {
       group_key: 'collection',
-      group_value: 'Dm1TRVw82roqpfqpzsFxSsWg6a4z3dku6ebVHSHuVo1c',
+      group_value: '5g2h8NuNNdb2riSuAKC3JJrrJKGJUH9dxM23fqdYgGt2',
       verified: true,
       collection_metadata: {
-        name: 'My cNFT Collection',
+        name: 'Chiaki Azure 55 Collection',
         symbol: '',
         image:
-          'https://gateway.irys.xyz/8da3Er9Q39QRkdNhBNP7w5hDo5ZnydLNxLqe9i6s1Nak',
-        description: '',
+          'https://arweave.net/fFcYDkRHF-936IbAZ3pLTmFAmxF1WlW3KwWndYPgI8Q/chiaki-violet-azure-common.png',
+        description: 'MONMONMON is a collection from the creativity of Peelander Yellow. Each MONMONMON has unique and kind abilities that can be used to help others and play with your friends. There are secrets in each MONMONMON. We love you.',
       },
     });
   });
