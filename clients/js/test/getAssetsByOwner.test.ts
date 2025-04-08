@@ -85,9 +85,14 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     });
 
     // And collection metadata should be present in the grouping for assets that have collections
-    const targetCollectionValue = 'Ce9hnNkbwNP7URw6TkhpopcKeNm8s4SchbBJS3m8tTu2';
+    const targetCollectionValue =
+      'Ce9hnNkbwNP7URw6TkhpopcKeNm8s4SchbBJS3m8tTu2';
     const assetWithCollection = assets.items.find((asset) =>
-      asset.grouping?.some((group) => group.group_key === 'collection' && group.group_value === targetCollectionValue)
+      asset.grouping?.some(
+        (group) =>
+          group.group_key === 'collection' &&
+          group.group_value === targetCollectionValue
+      )
     );
     t.truthy(
       assetWithCollection,
@@ -95,13 +100,17 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     );
 
     const collectionGrouping = assetWithCollection?.grouping?.find(
-      g => g.group_key === 'collection' && g.group_value === targetCollectionValue
+      (g) =>
+        g.group_key === 'collection' && g.group_value === targetCollectionValue
     );
-    t.truthy(collectionGrouping, 'Expected to find the specific collection grouping');
+    t.truthy(
+      collectionGrouping,
+      'Expected to find the specific collection grouping'
+    );
     t.like(collectionGrouping, {
       group_key: 'collection',
       group_value: targetCollectionValue,
-      collection_metadata: collectionGrouping?.collection_metadata
+      collection_metadata: collectionGrouping?.collection_metadata,
     });
   });
 

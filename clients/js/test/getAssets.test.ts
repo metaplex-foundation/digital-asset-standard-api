@@ -121,7 +121,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
 
     // Then we expect to get the assets back with collection metadata.
     t.is(assets.length, 2);
-    t.true(assets.some(asset => asset.id === regularAssetId));
+    t.true(assets.some((asset) => asset.id === regularAssetId));
 
     // Verify collection metadata is present in the grouping
     const assetWithCollectionMetadata = assets.find(
@@ -141,7 +141,8 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
         symbol: '',
         image:
           'https://arweave.net/fFcYDkRHF-936IbAZ3pLTmFAmxF1WlW3KwWndYPgI8Q/chiaki-violet-azure-common.png',
-        description: 'MONMONMON is a collection from the creativity of Peelander Yellow. Each MONMONMON has unique and kind abilities that can be used to help others and play with your friends. There are secrets in each MONMONMON. We love you.',
+        description:
+          'MONMONMON is a collection from the creativity of Peelander Yellow. Each MONMONMON has unique and kind abilities that can be used to help others and play with your friends. There are secrets in each MONMONMON. We love you.',
       },
     });
   });
