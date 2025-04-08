@@ -110,7 +110,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
 
     // And collection metadata should be present in the grouping
     const assetWithCollectionMetadata = assets.items.find(
-      (asset) => asset.grouping.length > 0
+      (asset) => asset.grouping.some((group) => group.group_value === 'Ce9hnNkbwNP7URw6TkhpopcKeNm8s4SchbBJS3m8tTu2')
     );
     t.truthy(
       assetWithCollectionMetadata,
