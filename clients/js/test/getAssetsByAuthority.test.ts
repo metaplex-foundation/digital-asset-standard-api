@@ -6,7 +6,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
   test(`it can fetch compressed assets by authority (${endpoint.name})`, async (t) => {
     // Given an authority address.
     const umi = createUmi(endpoint.url);
-    const authority = publicKey('DASPQfEAVcHp55eFmfstRduMT3dSfoTirFFsMHwUaWaz');
+    const authority = publicKey('8dFibVsqyHR7FXAwMuvkLMj86Xa6TAg6X1NsmHbJHTio');
 
     // When we fetch the asset using the authority.
     const assets = await umi.rpc.getAssetsByAuthority({
@@ -24,7 +24,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
   test(`it can fetch assets by authority with showUnverifiedCollections true (${endpoint.name})`, async (t) => {
     // Given an authority address.
     const umi = createUmi(endpoint.url);
-    const authority = publicKey('DASPQfEAVcHp55eFmfstRduMT3dSfoTirFFsMHwUaWaz');
+    const authority = publicKey('3p1hnJ5ffeDamjAeBRReBdVfnef3jd19wBiTSLd3ikDE');
 
     // When we fetch the asset using the authority with display options.
     const assets = await umi.rpc.getAssetsByAuthority({
@@ -57,7 +57,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
   test(`it can fetch assets by authority with showUnverifiedCollections false (${endpoint.name})`, async (t) => {
     // Given an authority address.
     const umi = createUmi(endpoint.url);
-    const authority = publicKey('DASPQfEAVcHp55eFmfstRduMT3dSfoTirFFsMHwUaWaz');
+    const authority = publicKey('3p1hnJ5ffeDamjAeBRReBdVfnef3jd19wBiTSLd3ikDE');
 
     // When we fetch the asset using the authority with display options.
     const assets = await umi.rpc.getAssetsByAuthority({
@@ -90,7 +90,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
   test(`it can fetch assets by authority with showCollectionMetadata true (${endpoint.name})`, async (t) => {
     // Given an authority address.
     const umi = createUmi(endpoint.url);
-    const authority = publicKey('DAS7Wnf86QNmwKWacTe8KShU7V6iw7wwcPjG9qXLPkEU');
+    const authority = publicKey('mdaoxg4DVGptU4WSpzGyVpK3zqsgn7Qzx5XNgWTcEA2');
 
     // When we fetch the asset using the authority with display options.
     const assets = await umi.rpc.getAssetsByAuthority({
@@ -112,7 +112,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     const assetWithCollectionMetadata = assets.items.find((asset) =>
       asset.grouping.some(
         (group) =>
-          group.group_value === 'Ce9hnNkbwNP7URw6TkhpopcKeNm8s4SchbBJS3m8tTu2'
+          group.group_value === 'SMBtHCCC6RYRutFEPb4gZqeBLUZbMNhRKaMKZZLHi7W'
       )
     );
     t.truthy(
@@ -127,14 +127,15 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     t.truthy(collectionGroup, 'Expected to find a collection group');
     t.like(collectionGroup, {
       group_key: 'collection',
-      group_value: 'Ce9hnNkbwNP7URw6TkhpopcKeNm8s4SchbBJS3m8tTu2',
+      group_value: 'SMBtHCCC6RYRutFEPb4gZqeBLUZbMNhRKaMKZZLHi7W',
       collection_metadata: {
-        name: 'Chiaki Azure 55 Collection',
-        symbol: '',
+        name: 'SMB Gen2',
+        symbol: 'SMB',
         image:
-          'https://arweave.net/fFcYDkRHF-936IbAZ3pLTmFAmxF1WlW3KwWndYPgI8Q/chiaki-violet-azure-common.png',
+          'https://arweave.net/lZ5FdIVagNoNvI4QFoHhB6Xyn4oVGLV9xOTW32WBC20',
         description:
-          'MONMONMON is a collection from the creativity of Peelander Yellow. Each MONMONMON has unique and kind abilities that can be used to help others and play with your friends. There are secrets in each MONMONMON. We love you.',
+          'SMB is a collection of 5000 randomly generated 24x24 pixels NFTs on the Solana Blockchain. Each SolanaMonkey is unique and comes with different type and attributes varying in rarity.',
+        external_url: 'https://solanamonkey.business/',
       },
     });
   });
