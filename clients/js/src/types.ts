@@ -460,6 +460,9 @@ export type DasApiAssetCompression = {
   compressed: boolean;
   data_hash: PublicKey;
   creator_hash: PublicKey;
+  collection_hash?: PublicKey;
+  asset_data_hash?: PublicKey;
+  flags?: number;
   asset_hash: PublicKey;
   tree: PublicKey;
   seq: number;
@@ -468,6 +471,7 @@ export type DasApiAssetCompression = {
 
 export type DasApiAssetOwnership = {
   frozen: boolean;
+  non_transferable?: boolean;
   delegated: boolean;
   delegate: PublicKey | null;
   ownership_model: 'single' | 'token';
