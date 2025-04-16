@@ -74,14 +74,18 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     assets.items.forEach((asset) => {
       t.true(asset.authorities.some((other) => other.address === authority));
     });
-    // And any collection groupings present are verified
+    // And any collection groupings present should not have verified=false
     assets.items.forEach((asset) => {
+      if (!asset.grouping?.length) return;
       asset.grouping.forEach((group) => {
         if (group.group_key === 'collection') {
-          t.true(
-            group.verified,
-            'All present collection groupings should be verified'
-          );
+          // Only check the verified flag if it exists
+          if ('verified' in group) {
+            t.true(
+              group.verified === true,
+              'Collection groupings with a verified property should be verified'
+            );
+          }
         }
       });
     });

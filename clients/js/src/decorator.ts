@@ -174,18 +174,19 @@ export const createDasApiDecorator = (
     },
     getAssetsByAuthority: async (input: GetAssetsByAuthorityRpcInput) => {
       validatePagination(input.page, input.before, input.after);
-      const assetList = await rpc.call<DasApiAssetList | null, GetAssetsByAuthorityRpcInput>(
+      const cleanedInput = cleanInput({
+        authorityAddress: input.authority,
+        sortBy: input.sortBy ?? null,
+        limit: input.limit ?? null,
+        page: input.page ?? 1,
+        before: input.before ?? null,
+        after: input.after ?? null,
+        displayOptions: input.displayOptions ?? {},
+        cursor: input.cursor ?? null,
+      });
+      const assetList = await rpc.call<DasApiAssetList | null, typeof cleanedInput>(
         'getAssetsByAuthority',
-        {
-          authority: input.authority,
-          sortBy: input.sortBy ?? null,
-          limit: input.limit ?? null,
-          page: input.page ?? 1,
-          before: input.before ?? null,
-          after: input.after ?? null,
-          displayOptions: input.displayOptions ?? {},
-          cursor: input.cursor ?? null,
-        }
+        cleanedInput
       );
       if (!assetList) {
         throw new DasApiError(
