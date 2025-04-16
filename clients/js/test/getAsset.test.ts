@@ -89,7 +89,6 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
         },
       },
     });
-    console.log(asset);
     t.is(asset.grouping.length, 0);
   });
 
@@ -113,7 +112,6 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
         },
       },
     });
-    console.log(asset);
     t.is(asset.grouping.length, 1);
     t.like(asset.grouping[0], {
       group_key: 'collection',

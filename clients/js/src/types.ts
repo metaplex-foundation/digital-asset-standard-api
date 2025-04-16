@@ -418,7 +418,7 @@ type Pagination = {
 /**
  * Sorting criteria.
  */
-type DasApiParamAssetSortBy = {
+export type DasApiParamAssetSortBy = {
   sortBy: 'created' | 'updated' | 'recent_action' | 'id' | 'none';
   sortDirection: 'asc' | 'desc';
 };

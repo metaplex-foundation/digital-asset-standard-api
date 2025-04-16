@@ -95,7 +95,6 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     t.is(assets.length, 2);
     t.deepEqual(assets[0].id, compressedAssetId);
     t.deepEqual(assets[1].id, regularAssetId);
-    console.log(assets[1]);
     //And asset1, which is not verified in a collection should have grouping data
     t.deepEqual(assets[1].grouping.length, 1);
     t.like(assets[1].grouping[0], {
@@ -144,8 +143,8 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
         name: 'Mad Lads',
         symbol: 'MAD',
         image:
-          'https://madlads.s3.us-west-2.amazonaws.com/images/4221.png',
-        description: undefined,
+          'https://madlads-collection.s3.us-west-2.amazonaws.com/_collection.png',
+        description: 'Fock it.',
       },
     });
   });
