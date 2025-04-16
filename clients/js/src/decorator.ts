@@ -15,10 +15,6 @@ import {
   GetAssetsRpcInput,
   GetAssetRpcInput,
   DisplayOptions,
-  DasApiParamAssetSortBy,
-  DasApiPropGroupKey,
-  DasApiAssetInterface,
-  TokenType,
 } from './types';
 
 export interface DasApiInterface {
@@ -97,6 +93,15 @@ export interface DasApiInterface {
   getAssetSignatures(
     input: GetAssetSignaturesRpcInput
   ): Promise<GetAssetSignaturesRpcResponse>;
+}
+
+// Utility function to remove null and empty object properties
+function cleanInput<T extends Record<string, unknown>>(obj: T): Partial<T> {
+  return Object.fromEntries(
+    Object.entries(obj).filter(
+      ([_, value]) => value !== null && (typeof value !== 'object' || (value && Object.keys(value).length > 0))
+    )
+  ) as Partial<T>;
 }
 
 export const createDasApiDecorator = (
@@ -191,29 +196,20 @@ export const createDasApiDecorator = (
     },
     getAssetsByCreator: async (input: GetAssetsByCreatorRpcInput) => {
       validatePagination(input.page, input.before, input.after);
-      const assetList = await rpc.call<DasApiAssetList | null, {
-        creatorAddress: PublicKey;
-        onlyVerified: boolean;
-        sortBy: DasApiParamAssetSortBy | null;
-        limit: number | null;
-        page: number;
-        before: string | null;
-        after: string | null;
-        displayOptions: DisplayOptions;
-        cursor: string | null;
-      }>(
+      const cleanedInput = cleanInput({
+        creatorAddress: input.creator,
+        onlyVerified: input.onlyVerified,
+        sortBy: input.sortBy ?? null,
+        limit: input.limit ?? null,
+        page: input.page ?? 1,
+        before: input.before ?? null,
+        after: input.after ?? null,
+        displayOptions: input.displayOptions ?? {},
+        cursor: input.cursor ?? null,
+      });
+      const assetList = await rpc.call<DasApiAssetList | null, typeof cleanedInput>(
         'getAssetsByCreator',
-        {
-          creatorAddress: input.creator,
-          onlyVerified: input.onlyVerified,
-          sortBy: input.sortBy ?? null,
-          limit: input.limit ?? null,
-          page: input.page ?? 1,
-          before: input.before ?? null,
-          after: input.after ?? null,
-          displayOptions: input.displayOptions ?? {},
-          cursor: input.cursor ?? null,
-        }
+        cleanedInput
       );
       if (!assetList) {
         throw new DasApiError(`No assets found for creator: ${input.creator}`);
@@ -222,29 +218,20 @@ export const createDasApiDecorator = (
     },
     getAssetsByGroup: async (input: GetAssetsByGroupRpcInput) => {
       validatePagination(input.page, input.before, input.after);
-      const assetList = await rpc.call<DasApiAssetList | null, {
-        groupKey: DasApiPropGroupKey;
-        groupValue: string;
-        sortBy: DasApiParamAssetSortBy | null;
-        limit: number | null;
-        page: number;
-        before: string | null;
-        after: string | null;
-        displayOptions: DisplayOptions;
-        cursor: string | null;
-      }>(
+      const cleanedInput = cleanInput({
+        groupKey: input.groupKey,
+        groupValue: input.groupValue,
+        sortBy: input.sortBy ?? null,
+        limit: input.limit ?? null,
+        page: input.page ?? 1,
+        before: input.before ?? null,
+        after: input.after ?? null,
+        displayOptions: input.displayOptions ?? {},
+        cursor: input.cursor ?? null,
+      });
+      const assetList = await rpc.call<DasApiAssetList | null, typeof cleanedInput>(
         'getAssetsByGroup',
-        {
-          groupKey: input.groupKey,
-          groupValue: input.groupValue,
-          sortBy: input.sortBy ?? null,
-          limit: input.limit ?? null,
-          page: input.page ?? 1,
-          before: input.before ?? null,
-          after: input.after ?? null,
-          displayOptions: input.displayOptions ?? {},
-          cursor: input.cursor ?? null,
-        }
+        cleanedInput
       );
       if (!assetList) {
         throw new DasApiError(
@@ -255,27 +242,19 @@ export const createDasApiDecorator = (
     },
     getAssetsByOwner: async (input: GetAssetsByOwnerRpcInput) => {
       validatePagination(input.page, input.before, input.after);
-      const assetList = await rpc.call<DasApiAssetList | null, {
-        ownerAddress: PublicKey;
-        sortBy: DasApiParamAssetSortBy | null;
-        limit: number | null;
-        page: number;
-        before: string | null;
-        after: string | null;
-        displayOptions: DisplayOptions;
-        cursor: string | null;
-      }>(
+      const cleanedInput = cleanInput({
+        ownerAddress: input.owner,
+        sortBy: input.sortBy ?? null,
+        limit: input.limit ?? null,
+        page: input.page ?? 1,
+        before: input.before ?? null,
+        after: input.after ?? null,
+        displayOptions: input.displayOptions ?? {},
+        cursor: input.cursor ?? null,
+      });
+      const assetList = await rpc.call<DasApiAssetList | null, typeof cleanedInput>(
         'getAssetsByOwner',
-        {
-          ownerAddress: input.owner,
-          sortBy: input.sortBy ?? null,
-          limit: input.limit ?? null,
-          page: input.page ?? 1,
-          before: input.before ?? null,
-          after: input.after ?? null,
-          displayOptions: input.displayOptions ?? {},
-          cursor: input.cursor ?? null,
-        }
+        cleanedInput
       );
       if (!assetList) {
         throw new DasApiError(`No assets found for owner: ${input.owner}`);
@@ -284,69 +263,40 @@ export const createDasApiDecorator = (
     },
     searchAssets: async (input: SearchAssetsRpcInput) => {
       validatePagination(input.page, input.before, input.after);
-      const assetList = await rpc.call<DasApiAssetList | null, {
-        negate: boolean | null;
-        conditionType: 'all' | 'any' | null;
-        interface: DasApiAssetInterface | null;
-        ownerAddress: PublicKey | null;
-        ownerType: 'single' | 'token' | null;
-        creatorAddress: PublicKey | null;
-        creatorVerified: boolean | null;
-        authorityAddress: PublicKey | null;
-        grouping: [string, string] | null;
-        delegateAddress: PublicKey | null;
-        frozen: boolean | null;
-        supply: number | null;
-        supplyMint: PublicKey | null;
-        compressed: boolean | null;
-        compressible: boolean | null;
-        royaltyTargetType: 'creators' | 'fanout' | 'single' | null;
-        royaltyTarget: PublicKey | null;
-        royaltyAmount: number | null;
-        burnt: boolean | null;
-        sortBy: DasApiParamAssetSortBy | null;
-        limit: number | null;
-        page: number;
-        before: string | null;
-        after: string | null;
-        jsonUri: string | null;
-        cursor: string | null;
-        name: string | null;
-        displayOptions: DisplayOptions;
-        tokenType: TokenType | null;
-      }>(
+      const cleanedInput = cleanInput({
+        negate: input.negate ?? null,
+        conditionType: input.conditionType ?? null,
+        interface: input.interface ?? null,
+        ownerAddress: input.owner ?? null,
+        ownerType: input.ownerType ?? null,
+        creatorAddress: input.creator ?? null,
+        creatorVerified: input.creatorVerified ?? null,
+        authorityAddress: input.authority ?? null,
+        grouping: input.grouping ?? null,
+        delegateAddress: input.delegate ?? null,
+        frozen: input.frozen ?? null,
+        supply: input.supply ?? null,
+        supplyMint: input.supplyMint ?? null,
+        compressed: input.compressed ?? null,
+        compressible: input.compressible ?? null,
+        royaltyTargetType: input.royaltyModel ?? null,
+        royaltyTarget: input.royaltyTarget ?? null,
+        royaltyAmount: input.royaltyAmount ?? null,
+        burnt: input.burnt ?? null,
+        sortBy: input.sortBy ?? null,
+        limit: input.limit ?? null,
+        page: input.page ?? 1,
+        before: input.before ?? null,
+        after: input.after ?? null,
+        jsonUri: input.jsonUri ?? null,
+        cursor: input.cursor ?? null,
+        name: input.name ?? null,
+        displayOptions: input.displayOptions ?? {},
+        tokenType: input.tokenType ?? null,
+      });
+      const assetList = await rpc.call<DasApiAssetList | null, typeof cleanedInput>(
         'searchAssets',
-        {
-          negate: input.negate ?? null,
-          conditionType: input.conditionType ?? null,
-          interface: input.interface ?? null,
-          ownerAddress: input.owner ?? null,
-          ownerType: input.ownerType ?? null,
-          creatorAddress: input.creator ?? null,
-          creatorVerified: input.creatorVerified ?? null,
-          authorityAddress: input.authority ?? null,
-          grouping: input.grouping ?? null,
-          delegateAddress: input.delegate ?? null,
-          frozen: input.frozen ?? null,
-          supply: input.supply ?? null,
-          supplyMint: input.supplyMint ?? null,
-          compressed: input.compressed ?? null,
-          compressible: input.compressible ?? null,
-          royaltyTargetType: input.royaltyModel ?? null,
-          royaltyTarget: input.royaltyTarget ?? null,
-          royaltyAmount: input.royaltyAmount ?? null,
-          burnt: input.burnt ?? null,
-          sortBy: input.sortBy ?? null,
-          limit: input.limit ?? null,
-          page: input.page ?? 1,
-          before: input.before ?? null,
-          after: input.after ?? null,
-          jsonUri: input.jsonUri ?? null,
-          cursor: input.cursor ?? null,
-          name: input.name ?? null,
-          displayOptions: input.displayOptions ?? {},
-          tokenType: input.tokenType ?? null,
-        }
+        cleanedInput
       );
       if (!assetList) {
         throw new DasApiError('No assets found for the given search criteria');
@@ -355,29 +305,20 @@ export const createDasApiDecorator = (
     },
     getAssetSignatures: async (input: GetAssetSignaturesRpcInput) => {
       validatePagination(input.page, input.before, input.after);
-      const signatures = await rpc.call<GetAssetSignaturesRpcResponse | null, {
-        id: PublicKey | null;
-        limit: number | null;
-        page: number | null;
-        before: string | null;
-        after: string | null;
-        treeId: PublicKey | null;
-        leafIndex: number | null;
-        cursor: string | null;
-        sortDirection: 'asc' | 'desc' | null;
-      }>(
+      const cleanedInput = cleanInput({
+        id: 'assetId' in input ? input.assetId ?? null : null,
+        limit: input.limit ?? null,
+        page: input.page ?? null,
+        before: input.before ?? null,
+        after: input.after ?? null,
+        treeId: 'tree' in input ? input.tree ?? null : null,
+        leafIndex: 'tree' in input ? input.leaf_index ?? null : null,
+        cursor: input.cursor ?? null,
+        sortDirection: input.sort_direction ?? null,
+      });
+      const signatures = await rpc.call<GetAssetSignaturesRpcResponse | null, typeof cleanedInput>(
         'getAssetSignaturesV2',
-        {
-          id: 'assetId' in input ? input.assetId ?? null : null,
-          limit: input.limit ?? null,
-          page: input.page ?? null,
-          before: input.before ?? null,
-          after: input.after ?? null,
-          treeId: 'tree' in input ? input.tree ?? null : null,
-          leafIndex: 'tree' in input ? input.leaf_index ?? null : null,
-          cursor: input.cursor ?? null,
-          sortDirection: input.sort_direction ?? null,
-        }
+        cleanedInput
       );
       if (!signatures) {
         const identifier =
