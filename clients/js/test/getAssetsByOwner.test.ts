@@ -7,7 +7,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
   test(`it can fetch compressed assets by owner (${endpoint.name})`, async (t) => {
     // Given an owner address.
     const umi = createUmi(endpoint.url);
-    const owner = publicKey('DASPQfEAVcHp55eFmfstRduMT3dSfoTirFFsMHwUaWaz');
+    const owner = publicKey('9Qo4631XNdLYVUw1S1iBhDmu1DtcPwHqrg5ZjPbzUqGQ');
 
     // When we fetch the asset using the owner.
     const assets = await umi.rpc.getAssetsByOwner({ owner });
@@ -28,7 +28,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
   test(`it can fetch compressed assets by owner with showUnverifiedCollections true (${endpoint.name})`, async (t) => {
     // Given an owner address.
     const umi = createUmi(endpoint.url);
-    const owner = publicKey('DASPQfEAVcHp55eFmfstRduMT3dSfoTirFFsMHwUaWaz');
+    const owner = publicKey('3p1hnJ5ffeDamjAeBRReBdVfnef3jd19wBiTSLd3ikDE');
 
     // When we fetch the asset using the owner with display options.
     const assets = await umi.rpc.getAssetsByOwner({
@@ -62,7 +62,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
   test(`it can fetch assets by owner with showCollectionMetadata true (${endpoint.name})`, async (t) => {
     // Given an owner address.
     const umi = createUmi(endpoint.url);
-    const owner = publicKey('DAS7Wnf86QNmwKWacTe8KShU7V6iw7wwcPjG9qXLPkEU');
+    const owner = publicKey('JAVGVpREYzCA6b1WgQFsdDw4zNdZjCUruE4monFpkWx1');
 
     // When we fetch the asset using the owner with display options.
     const assets = await umi.rpc.getAssetsByOwner({
@@ -86,7 +86,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
 
     // And collection metadata should be present in the grouping for assets that have collections
     const targetCollectionValue =
-      'Ce9hnNkbwNP7URw6TkhpopcKeNm8s4SchbBJS3m8tTu2';
+      'FYhU4iQ18TowPBKS3bgPnKCR274zSLTcXixvJ51wVqrC';
     const assetWithCollection = assets.items.find((asset) =>
       asset.grouping?.some(
         (group) =>
@@ -117,7 +117,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
   test(`it can fetch assets by owner with showFungible true (${endpoint.name})`, async (t) => {
     // Given an owner address.
     const umi = createUmi(endpoint.url);
-    const owner = publicKey('DASPQfEAVcHp55eFmfstRduMT3dSfoTirFFsMHwUaWaz');
+    const owner = publicKey('JAVGVpREYzCA6b1WgQFsdDw4zNdZjCUruE4monFpkWx1');
 
     // When we fetch the asset using the owner with display options.
     const assets = await umi.rpc.getAssetsByOwner({
@@ -152,7 +152,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
   test(`it can fetch assets by owner with showFungible false (${endpoint.name})`, async (t) => {
     // Given an owner address.
     const umi = createUmi(endpoint.url);
-    const owner = publicKey('DASPQfEAVcHp55eFmfstRduMT3dSfoTirFFsMHwUaWaz');
+    const owner = publicKey('JAVGVpREYzCA6b1WgQFsdDw4zNdZjCUruE4monFpkWx1');
 
     // When we fetch the asset using the owner with display options.
     const assets = await umi.rpc.getAssetsByOwner({
