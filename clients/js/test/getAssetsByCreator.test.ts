@@ -114,7 +114,6 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
         showUnverifiedCollections: false,
       },
     });
-    console.log(JSON.stringify(assets, null, 2));
     // Then we expect to find assets.
     t.true(assets.items.length > 1);
 
