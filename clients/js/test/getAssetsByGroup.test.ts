@@ -76,9 +76,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
       displayOptions: {
         showUnverifiedCollections: true,
       },
-      
     });
-
 
     // And at least one asset should have an unverified collection
     const assetWithUnverifiedCollection = assets.items.find((asset) =>
@@ -99,9 +97,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     // Given a group (key, value) pair.
     const umi = createUmi(endpoint.url);
     const groupKey = 'collection';
-    const groupValue = publicKey(
-      'SMBtHCCC6RYRutFEPb4gZqeBLUZbMNhRKaMKZZLHi7W'
-    );
+    const groupValue = publicKey('SMBtHCCC6RYRutFEPb4gZqeBLUZbMNhRKaMKZZLHi7W');
 
     // When we fetch the asset using the group information with display options.
     const assets = await umi.rpc.getAssetsByGroup({

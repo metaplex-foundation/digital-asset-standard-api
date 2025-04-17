@@ -79,7 +79,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
       assetId,
       displayOptions: { showUnverifiedCollections: false },
     });
-    
+
     t.like(asset, <DasApiAsset>{
       interface: 'V1_NFT',
       id: assetId,

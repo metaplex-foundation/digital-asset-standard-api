@@ -15,7 +15,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     const assets = await umi.rpc.searchAssets({
       owner: publicKey('9Qo4631XNdLYVUw1S1iBhDmu1DtcPwHqrg5ZjPbzUqGQ'),
       compressed: true,
-      jsonUri: "https://example.com/my-nft.json"
+      jsonUri: 'https://example.com/my-nft.json',
     });
 
     // Then we expect to find an asset.
@@ -141,6 +141,10 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     );
 
     t.truthy(specificAsset, 'Expected to find the specific asset');
-    t.is(specificAsset?.grouping.length, 0, 'Expected grouping array to be empty');
+    t.is(
+      specificAsset?.grouping.length,
+      0,
+      'Expected grouping array to be empty'
+    );
   });
 });

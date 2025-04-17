@@ -43,7 +43,10 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     const assetWithUnverifiedCreator = assets.items.find((asset) =>
       asset.creators.some((creator) => creator.verified === false)
     );
-    t.truthy(assetWithUnverifiedCreator, 'Expected to find at least one asset with an unverified creator');
+    t.truthy(
+      assetWithUnverifiedCreator,
+      'Expected to find at least one asset with an unverified creator'
+    );
   });
 
   test(`it can fetch assets by creator limiting to verified creators (${endpoint.name})`, async (t) => {
@@ -111,7 +114,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
         showUnverifiedCollections: false,
       },
     });
-console.log(JSON.stringify(assets, null, 2))
+    console.log(JSON.stringify(assets, null, 2));
     // Then we expect to find assets.
     t.true(assets.items.length > 1);
 
@@ -124,7 +127,10 @@ console.log(JSON.stringify(assets, null, 2))
         asset.grouping?.filter((group) => group.group_key === 'collection') ??
         [];
       collectionGroups.forEach((group) => {
-        t.true(group.verified !== false, 'Expected all collection groups to be verified or have no verified field');
+        t.true(
+          group.verified !== false,
+          'Expected all collection groups to be verified or have no verified field'
+        );
       });
     });
   });

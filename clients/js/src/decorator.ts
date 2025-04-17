@@ -99,7 +99,9 @@ export interface DasApiInterface {
 function cleanInput<T extends Record<string, unknown>>(obj: T): Partial<T> {
   return Object.fromEntries(
     Object.entries(obj).filter(
-      ([_, value]) => value !== null && (typeof value !== 'object' || (value && Object.keys(value).length > 0))
+      ([_, value]) =>
+        value !== null &&
+        (typeof value !== 'object' || (value && Object.keys(value).length > 0))
     )
   ) as Partial<T>;
 }
@@ -184,10 +186,10 @@ export const createDasApiDecorator = (
         displayOptions: input.displayOptions ?? {},
         cursor: input.cursor ?? null,
       });
-      const assetList = await rpc.call<DasApiAssetList | null, typeof cleanedInput>(
-        'getAssetsByAuthority',
-        cleanedInput
-      );
+      const assetList = await rpc.call<
+        DasApiAssetList | null,
+        typeof cleanedInput
+      >('getAssetsByAuthority', cleanedInput);
       if (!assetList) {
         throw new DasApiError(
           `No assets found for authority: ${input.authority}`
@@ -208,10 +210,10 @@ export const createDasApiDecorator = (
         displayOptions: input.displayOptions ?? {},
         cursor: input.cursor ?? null,
       });
-      const assetList = await rpc.call<DasApiAssetList | null, typeof cleanedInput>(
-        'getAssetsByCreator',
-        cleanedInput
-      );
+      const assetList = await rpc.call<
+        DasApiAssetList | null,
+        typeof cleanedInput
+      >('getAssetsByCreator', cleanedInput);
       if (!assetList) {
         throw new DasApiError(`No assets found for creator: ${input.creator}`);
       }
@@ -230,10 +232,10 @@ export const createDasApiDecorator = (
         displayOptions: input.displayOptions ?? {},
         cursor: input.cursor ?? null,
       });
-      const assetList = await rpc.call<DasApiAssetList | null, typeof cleanedInput>(
-        'getAssetsByGroup',
-        cleanedInput
-      );
+      const assetList = await rpc.call<
+        DasApiAssetList | null,
+        typeof cleanedInput
+      >('getAssetsByGroup', cleanedInput);
       if (!assetList) {
         throw new DasApiError(
           `No assets found for group: ${input.groupKey} => ${input.groupValue}`
@@ -253,10 +255,10 @@ export const createDasApiDecorator = (
         displayOptions: input.displayOptions ?? {},
         cursor: input.cursor ?? null,
       });
-      const assetList = await rpc.call<DasApiAssetList | null, typeof cleanedInput>(
-        'getAssetsByOwner',
-        cleanedInput
-      );
+      const assetList = await rpc.call<
+        DasApiAssetList | null,
+        typeof cleanedInput
+      >('getAssetsByOwner', cleanedInput);
       if (!assetList) {
         throw new DasApiError(`No assets found for owner: ${input.owner}`);
       }
@@ -295,10 +297,10 @@ export const createDasApiDecorator = (
         displayOptions: input.displayOptions ?? {},
         tokenType: input.tokenType ?? null,
       });
-      const assetList = await rpc.call<DasApiAssetList | null, typeof cleanedInput>(
-        'searchAssets',
-        cleanedInput
-      );
+      const assetList = await rpc.call<
+        DasApiAssetList | null,
+        typeof cleanedInput
+      >('searchAssets', cleanedInput);
       if (!assetList) {
         throw new DasApiError('No assets found for the given search criteria');
       }
@@ -317,10 +319,10 @@ export const createDasApiDecorator = (
         cursor: input.cursor ?? null,
         sortDirection: input.sort_direction ?? null,
       });
-      const signatures = await rpc.call<GetAssetSignaturesRpcResponse | null, typeof cleanedInput>(
-        'getAssetSignaturesV2',
-        cleanedInput
-      );
+      const signatures = await rpc.call<
+        GetAssetSignaturesRpcResponse | null,
+        typeof cleanedInput
+      >('getAssetSignaturesV2', cleanedInput);
       if (!signatures) {
         const identifier =
           'assetId' in input
