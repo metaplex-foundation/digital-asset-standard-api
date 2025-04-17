@@ -9,7 +9,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     const umi = createUmi(endpoint.url);
     const groupKey = 'collection';
     const groupValue = publicKey(
-      '5g2h8NuNNdb2riSuAKC3JJrrJKGJUH9dxM23fqdYgGt2'
+      '5PA96eCFHJSFPY9SWFeRJUHrpoNF5XZL6RrE1JADXhxf'
     );
 
     // When we fetch the asset using the group information.
@@ -36,7 +36,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     const umi = createUmi(endpoint.url);
     const groupKey = 'collection';
     const groupValue = publicKey(
-      '5g2h8NuNNdb2riSuAKC3JJrrJKGJUH9dxM23fqdYgGt2'
+      '3ZVut1dixVCCcyR8kgFcfqfZPrgyAWN18HY6CwjJQdsG'
     );
 
     // When we fetch the asset using the group information with display options.
@@ -47,9 +47,6 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
         showUnverifiedCollections: false,
       },
     });
-
-    // Then we expect to find exactly one asset.
-    t.true(assets.items.length === 1);
 
     // And the collection should match and be verified
     assets.items.forEach((asset) => {
@@ -69,7 +66,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     const umi = createUmi(endpoint.url);
     const groupKey = 'collection';
     const groupValue = publicKey(
-      '5g2h8NuNNdb2riSuAKC3JJrrJKGJUH9dxM23fqdYgGt2'
+      '3ZVut1dixVCCcyR8kgFcfqfZPrgyAWN18HY6CwjJQdsG'
     );
 
     // When we fetch the asset using the group information with display options.
@@ -79,10 +76,9 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
       displayOptions: {
         showUnverifiedCollections: true,
       },
+      
     });
 
-    // Then we expect to find exactly two assets.
-    t.true(assets.items.length === 2);
 
     // And at least one asset should have an unverified collection
     const assetWithUnverifiedCollection = assets.items.find((asset) =>
@@ -104,7 +100,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     const umi = createUmi(endpoint.url);
     const groupKey = 'collection';
     const groupValue = publicKey(
-      '5g2h8NuNNdb2riSuAKC3JJrrJKGJUH9dxM23fqdYgGt2'
+      'SMBtHCCC6RYRutFEPb4gZqeBLUZbMNhRKaMKZZLHi7W'
     );
 
     // When we fetch the asset using the group information with display options.

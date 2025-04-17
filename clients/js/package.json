@@ -75,8 +75,5 @@
             "undici@>=4.5.0 <5.28.5": ">=5.28.5",
             "path-to-regexp@>=4.0.0 <6.3.0": ">=6.3.0"
         }
-    },
-    "dependencies": {
-        "@metaplex-foundation/umi-rpc-web3js": "^1.2.0"
     }
 }
