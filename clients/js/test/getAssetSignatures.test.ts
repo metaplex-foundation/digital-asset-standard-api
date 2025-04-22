@@ -16,7 +16,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     t.is(signatures.limit, 1000);
     t.deepEqual(signatures.items[0], [
       '2LzGEe1JZcf5SqtGhajrusvfRWSeL3Fm4sduQC1gbfPgMyQySf2tqS1yU5yTiHEutdUZkswHXHg6zzyjK6Vg92GA',
-      'MintToCollectionV1'
+      'MintToCollectionV1',
     ]);
   });
 
@@ -34,7 +34,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     t.is(signatures.items.length, 1);
     t.deepEqual(signatures.items[0], [
       '2LzGEe1JZcf5SqtGhajrusvfRWSeL3Fm4sduQC1gbfPgMyQySf2tqS1yU5yTiHEutdUZkswHXHg6zzyjK6Vg92GA',
-      'MintToCollectionV1'
+      'MintToCollectionV1',
     ]);
   });
 });

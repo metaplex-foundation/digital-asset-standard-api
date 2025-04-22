@@ -144,9 +144,7 @@ export const createDasApiDecorator = (
     },
     getAssets: async (input: GetAssetsRpcInput | PublicKey[]) => {
       const assetIds = Array.isArray(input) ? input : input.assetIds;
-      const displayOptions = Array.isArray(input)
-        ? {}
-        : input.displayOptions;
+      const displayOptions = Array.isArray(input) ? {} : input.displayOptions;
 
       const assets = await rpc.call<
         DasApiAsset[] | null,
@@ -185,7 +183,7 @@ export const createDasApiDecorator = (
         before: input.before,
         after: input.after,
         displayOptions: input.displayOptions,
-        cursor: input.cursor
+        cursor: input.cursor,
       });
       const assetList = await rpc.call<
         DasApiAssetList | null,
@@ -209,7 +207,7 @@ export const createDasApiDecorator = (
         before: input.before,
         after: input.after,
         displayOptions: input.displayOptions,
-        cursor: input.cursor
+        cursor: input.cursor,
       });
       const assetList = await rpc.call<
         DasApiAssetList | null,
@@ -231,7 +229,7 @@ export const createDasApiDecorator = (
         before: input.before,
         after: input.after,
         displayOptions: input.displayOptions,
-        cursor: input.cursor
+        cursor: input.cursor,
       });
       const assetList = await rpc.call<
         DasApiAssetList | null,
@@ -254,7 +252,7 @@ export const createDasApiDecorator = (
         before: input.before,
         after: input.after,
         displayOptions: input.displayOptions,
-        cursor: input.cursor
+        cursor: input.cursor,
       });
       const assetList = await rpc.call<
         DasApiAssetList | null,
@@ -296,7 +294,7 @@ export const createDasApiDecorator = (
         cursor: input.cursor,
         name: input.name,
         displayOptions: input.displayOptions,
-        tokenType: input.tokenType
+        tokenType: input.tokenType,
       });
       const assetList = await rpc.call<
         DasApiAssetList | null,
@@ -318,7 +316,7 @@ export const createDasApiDecorator = (
         tree: input.tree,
         leafIndex: input.leaf_index,
         cursor: input.cursor,
-        sortDirection: input.sort_direction
+        sortDirection: input.sort_direction,
       });
       const signatures = await rpc.call<
         GetAssetSignaturesRpcResponse | null,
