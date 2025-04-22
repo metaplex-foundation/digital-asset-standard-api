@@ -310,20 +310,20 @@ export const createDasApiDecorator = (
     getAssetSignatures: async (input: GetAssetSignaturesRpcInput) => {
       validatePagination(input.page, input.before, input.after);
       const cleanedInput = cleanInput({
-        id: 'assetId' in input ? input.assetId : undefined,
+        id: input.assetId,
         limit: input.limit,
         page: input.page,
         before: input.before,
         after: input.after,
-        treeId: 'tree' in input ? input.tree : undefined,
-        leafIndex: 'tree' in input ? input.leaf_index : undefined,
+        tree: input.tree,
+        leafIndex: input.leaf_index,
         cursor: input.cursor,
         sortDirection: input.sort_direction
       });
       const signatures = await rpc.call<
         GetAssetSignaturesRpcResponse | null,
         typeof cleanedInput
-      >('getAssetSignaturesV2', cleanedInput);
+      >('getAssetSignatures', cleanedInput);
       if (!signatures) {
         const identifier =
           'assetId' in input
