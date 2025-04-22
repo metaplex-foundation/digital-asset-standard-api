@@ -101,6 +101,7 @@ function cleanInput<T extends Record<string, unknown>>(obj: T): Partial<T> {
     Object.entries(obj).filter(
       ([_, value]) =>
         value !== null &&
+        value !== undefined &&
         (typeof value !== 'object' || (value && Object.keys(value).length > 0))
     )
   ) as Partial<T>;
@@ -145,7 +146,7 @@ export const createDasApiDecorator = (
       const assetIds = Array.isArray(input) ? input : input.assetIds;
       const displayOptions = Array.isArray(input)
         ? {}
-        : input.displayOptions ?? {};
+        : input.displayOptions;
 
       const assets = await rpc.call<
         DasApiAsset[] | null,
@@ -178,13 +179,13 @@ export const createDasApiDecorator = (
       validatePagination(input.page, input.before, input.after);
       const cleanedInput = cleanInput({
         authorityAddress: input.authority,
-        sortBy: input.sortBy ?? null,
-        limit: input.limit ?? null,
-        page: input.page ?? 1,
-        before: input.before ?? null,
-        after: input.after ?? null,
-        displayOptions: input.displayOptions ?? {},
-        cursor: input.cursor ?? null,
+        sortBy: input.sortBy,
+        limit: input.limit,
+        page: input.page,
+        before: input.before,
+        after: input.after,
+        displayOptions: input.displayOptions,
+        cursor: input.cursor
       });
       const assetList = await rpc.call<
         DasApiAssetList | null,
@@ -202,13 +203,13 @@ export const createDasApiDecorator = (
       const cleanedInput = cleanInput({
         creatorAddress: input.creator,
         onlyVerified: input.onlyVerified,
-        sortBy: input.sortBy ?? null,
-        limit: input.limit ?? null,
-        page: input.page ?? 1,
-        before: input.before ?? null,
-        after: input.after ?? null,
-        displayOptions: input.displayOptions ?? {},
-        cursor: input.cursor ?? null,
+        sortBy: input.sortBy,
+        limit: input.limit,
+        page: input.page,
+        before: input.before,
+        after: input.after,
+        displayOptions: input.displayOptions,
+        cursor: input.cursor
       });
       const assetList = await rpc.call<
         DasApiAssetList | null,
@@ -224,13 +225,13 @@ export const createDasApiDecorator = (
       const cleanedInput = cleanInput({
         groupKey: input.groupKey,
         groupValue: input.groupValue,
-        sortBy: input.sortBy ?? null,
-        limit: input.limit ?? null,
-        page: input.page ?? 1,
-        before: input.before ?? null,
-        after: input.after ?? null,
-        displayOptions: input.displayOptions ?? {},
-        cursor: input.cursor ?? null,
+        sortBy: input.sortBy,
+        limit: input.limit,
+        page: input.page,
+        before: input.before,
+        after: input.after,
+        displayOptions: input.displayOptions,
+        cursor: input.cursor
       });
       const assetList = await rpc.call<
         DasApiAssetList | null,
@@ -247,13 +248,13 @@ export const createDasApiDecorator = (
       validatePagination(input.page, input.before, input.after);
       const cleanedInput = cleanInput({
         ownerAddress: input.owner,
-        sortBy: input.sortBy ?? null,
-        limit: input.limit ?? null,
-        page: input.page ?? 1,
-        before: input.before ?? null,
-        after: input.after ?? null,
-        displayOptions: input.displayOptions ?? {},
-        cursor: input.cursor ?? null,
+        sortBy: input.sortBy,
+        limit: input.limit,
+        page: input.page,
+        before: input.before,
+        after: input.after,
+        displayOptions: input.displayOptions,
+        cursor: input.cursor
       });
       const assetList = await rpc.call<
         DasApiAssetList | null,
@@ -267,35 +268,35 @@ export const createDasApiDecorator = (
     searchAssets: async (input: SearchAssetsRpcInput) => {
       validatePagination(input.page, input.before, input.after);
       const cleanedInput = cleanInput({
-        negate: input.negate ?? null,
-        conditionType: input.conditionType ?? null,
-        interface: input.interface ?? null,
-        ownerAddress: input.owner ?? null,
-        ownerType: input.ownerType ?? null,
-        creatorAddress: input.creator ?? null,
-        creatorVerified: input.creatorVerified ?? null,
-        authorityAddress: input.authority ?? null,
-        grouping: input.grouping ?? null,
-        delegateAddress: input.delegate ?? null,
-        frozen: input.frozen ?? null,
-        supply: input.supply ?? null,
-        supplyMint: input.supplyMint ?? null,
-        compressed: input.compressed ?? null,
-        compressible: input.compressible ?? null,
-        royaltyTargetType: input.royaltyModel ?? null,
-        royaltyTarget: input.royaltyTarget ?? null,
-        royaltyAmount: input.royaltyAmount ?? null,
-        burnt: input.burnt ?? null,
-        sortBy: input.sortBy ?? null,
-        limit: input.limit ?? null,
-        page: input.page ?? 1,
-        before: input.before ?? null,
-        after: input.after ?? null,
-        jsonUri: input.jsonUri ?? null,
-        cursor: input.cursor ?? null,
-        name: input.name ?? null,
-        displayOptions: input.displayOptions ?? {},
-        tokenType: input.tokenType ?? null,
+        negate: input.negate,
+        conditionType: input.conditionType,
+        interface: input.interface,
+        ownerAddress: input.owner,
+        ownerType: input.ownerType,
+        creatorAddress: input.creator,
+        creatorVerified: input.creatorVerified,
+        authorityAddress: input.authority,
+        grouping: input.grouping,
+        delegateAddress: input.delegate,
+        frozen: input.frozen,
+        supply: input.supply,
+        supplyMint: input.supplyMint,
+        compressed: input.compressed,
+        compressible: input.compressible,
+        royaltyTargetType: input.royaltyModel,
+        royaltyTarget: input.royaltyTarget,
+        royaltyAmount: input.royaltyAmount,
+        burnt: input.burnt,
+        sortBy: input.sortBy,
+        limit: input.limit,
+        page: input.page,
+        before: input.before,
+        after: input.after,
+        jsonUri: input.jsonUri,
+        cursor: input.cursor,
+        name: input.name,
+        displayOptions: input.displayOptions,
+        tokenType: input.tokenType
       });
       const assetList = await rpc.call<
         DasApiAssetList | null,
@@ -309,15 +310,15 @@ export const createDasApiDecorator = (
     getAssetSignatures: async (input: GetAssetSignaturesRpcInput) => {
       validatePagination(input.page, input.before, input.after);
       const cleanedInput = cleanInput({
-        id: 'assetId' in input ? input.assetId ?? null : null,
-        limit: input.limit ?? null,
-        page: input.page ?? null,
-        before: input.before ?? null,
-        after: input.after ?? null,
-        treeId: 'tree' in input ? input.tree ?? null : null,
-        leafIndex: 'tree' in input ? input.leaf_index ?? null : null,
-        cursor: input.cursor ?? null,
-        sortDirection: input.sort_direction ?? null,
+        id: 'assetId' in input ? input.assetId : undefined,
+        limit: input.limit,
+        page: input.page,
+        before: input.before,
+        after: input.after,
+        treeId: 'tree' in input ? input.tree : undefined,
+        leafIndex: 'tree' in input ? input.leaf_index : undefined,
+        cursor: input.cursor,
+        sortDirection: input.sort_direction
       });
       const signatures = await rpc.call<
         GetAssetSignaturesRpcResponse | null,
