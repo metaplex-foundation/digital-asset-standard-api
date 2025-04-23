@@ -8,10 +8,10 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     // Given a minted NFT.
     const umi = createUmi(endpoint.url);
     const compressedAssetId = publicKey(
-      'GGRbPQhwmo3dXBkJSAjMFc1QYTKGBt8qc11tTp3LkEKA'
+      'DNzerLDcC5apcAQQ2Wx3qfRK1NPP6g5Bsg11fPpWkRtA'
     );
     const regularAssetId = publicKey(
-      'Hu9vvgNjVDxRo6F8iTEo6sRJikhqoM2zVswR86WAf4C'
+      'G3nEdTzAvPvSuj2Z5oSSiMN42NayQDZvkC3usMrnGaTi'
     );
 
     // When we fetch the asset using its ID.
@@ -30,36 +30,35 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     t.deepEqual(compressedAsset!.interface, 'V1_NFT');
     t.deepEqual(compressedAsset!.id, compressedAssetId);
     t.like(compressedAsset!.content, <DasApiAssetContent>{
-      json_uri:
-        'https://arweave.net/c9aGs5fOk7gD4wWnSvmzeqgtfxAGRgtI1jYzvl8-IVs/chiaki-violet-azure-common.json',
+      json_uri: 'https://example.com/my-nft.json',
       metadata: {
-        name: 'Chiaki Azure 55',
+        name: 'My NFT',
       },
     });
     t.deepEqual(compressedAsset!.compression, <DasApiAssetCompression>{
       eligible: false,
       compressed: true,
-      data_hash: '29BdgNWxNB1sinkfmWKFQi3zWXRpsotp2FKoZhoqVa9F',
-      creator_hash: 'FGAvkyrzeEgvGGMfmi6ztGpvybHMYAL9w82nx6wzLVqn',
-      asset_hash: 'FGWfA5v5SZnpe9r32NEvDyX9hLeVEoBf3GqEkHX6YK9w',
-      tree: 'J1imb8C8SPzofrtgCxkN4nsKwHevzxgvHGeYBKFEDEmE',
+      data_hash: '2YDXnkcksCo3RZdVFJC8oq1CMQoYFgN6TMWnkffFrHAM',
+      creator_hash: 'EKDHSGbrGztomDfuiV4iqiZ6LschDJPsFiXjZ83f92Md',
+      asset_hash: '8KPK2EQ7g3edRv4au36fRNwFPcfAvP3HnH2VFqsBQje7',
+      tree: 'Hw2qE4TKe8rt3VGWupLEH7wZtTrbBAzuU7LWBXfhGNMJ',
       seq: 1,
       leaf_id: 0,
     });
     t.deepEqual(compressedAsset!.grouping.length, 1);
     t.like(compressedAsset!.grouping[0], {
       group_key: 'collection',
-      group_value: 'Dm1TRVw82roqpfqpzsFxSsWg6a4z3dku6ebVHSHuVo1c',
+      group_value: '3KPARzW2CoGhFYMKbxjGuGQfF3w2o9shnnjKZmCHCjBU',
     });
     t.deepEqual(compressedAsset!.mutable, true);
     t.deepEqual(compressedAsset!.burnt, false);
 
     // Regular asset assertions
-    t.deepEqual(regularAsset!.interface, 'V1_NFT');
+    t.deepEqual(regularAsset!.interface, 'ProgrammableNFT');
     t.deepEqual(regularAsset!.id, regularAssetId);
     t.like(regularAsset!.content, <DasApiAssetContent>{
       metadata: {
-        name: 'Chiaki Azure 55',
+        name: 'Mad Lads #4221',
       },
     });
     t.like(regularAsset!.compression, <DasApiAssetCompression>{
@@ -68,7 +67,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     t.deepEqual(regularAsset!.grouping.length, 1);
     t.like(regularAsset!.grouping[0], {
       group_key: 'collection',
-      group_value: '5g2h8NuNNdb2riSuAKC3JJrrJKGJUH9dxM23fqdYgGt2',
+      group_value: 'J1S9H3QjnRtBbbuD4HjPV6RpRhwuk4zKbxsnCHuTgh9w',
     });
     t.deepEqual(regularAsset!.mutable, true);
     t.deepEqual(regularAsset!.burnt, false);
@@ -78,10 +77,10 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     // Given a minted NFT.
     const umi = createUmi(endpoint.url);
     const compressedAssetId = publicKey(
-      'GGRbPQhwmo3dXBkJSAjMFc1QYTKGBt8qc11tTp3LkEKA'
+      'DNzerLDcC5apcAQQ2Wx3qfRK1NPP6g5Bsg11fPpWkRtA'
     );
     const regularAssetId = publicKey(
-      '8bFQbnBrzeiYQabEJ1ghy5T7uFpqFzPjUGsVi3SzSMHB'
+      'DSDRbKDyCVH3EhghB3djTCM1Ktj4Vbk6cXrPnMCbPXqs'
     );
 
     // When we fetch the assets using their IDs with display options.
@@ -96,19 +95,23 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     t.is(assets.length, 2);
     t.deepEqual(assets[0].id, compressedAssetId);
     t.deepEqual(assets[1].id, regularAssetId);
-
-    //And asset1 should have grouping data
+    //And asset1, which is not verified in a collection should have grouping data
     t.deepEqual(assets[1].grouping.length, 1);
+    t.like(assets[1].grouping[0], {
+      group_key: 'collection',
+      group_value: 'SMBtHCCC6RYRutFEPb4gZqeBLUZbMNhRKaMKZZLHi7W',
+      verified: false,
+    });
   });
 
   test(`it can fetch multiple assets by ID with showCollectionMetadata true (${endpoint.name})`, async (t) => {
     // Given a minted NFT.
     const umi = createUmi(endpoint.url);
     const compressedAssetId = publicKey(
-      'GGRbPQhwmo3dXBkJSAjMFc1QYTKGBt8qc11tTp3LkEKA'
+      'DNzerLDcC5apcAQQ2Wx3qfRK1NPP6g5Bsg11fPpWkRtA'
     );
     const regularAssetId = publicKey(
-      'Hu9vvgNjVDxRo6F8iTEo6sRJikhqoM2zVswR86WAf4C'
+      'G3nEdTzAvPvSuj2Z5oSSiMN42NayQDZvkC3usMrnGaTi'
     );
 
     // When we fetch the assets using their IDs with display options.
@@ -134,15 +137,14 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     if (!assetWithCollectionMetadata) return;
     t.like(assetWithCollectionMetadata.grouping[0], {
       group_key: 'collection',
-      group_value: '5g2h8NuNNdb2riSuAKC3JJrrJKGJUH9dxM23fqdYgGt2',
-      verified: true,
+      group_value: 'J1S9H3QjnRtBbbuD4HjPV6RpRhwuk4zKbxsnCHuTgh9w',
+      verified: undefined,
       collection_metadata: {
-        name: 'Chiaki Azure 55 Collection',
-        symbol: '',
+        name: 'Mad Lads',
+        symbol: 'MAD',
         image:
-          'https://arweave.net/fFcYDkRHF-936IbAZ3pLTmFAmxF1WlW3KwWndYPgI8Q/chiaki-violet-azure-common.png',
-        description:
-          'MONMONMON is a collection from the creativity of Peelander Yellow. Each MONMONMON has unique and kind abilities that can be used to help others and play with your friends. There are secrets in each MONMONMON. We love you.',
+          'https://madlads-collection.s3.us-west-2.amazonaws.com/_collection.png',
+        description: 'Fock it.',
       },
     });
   });
@@ -151,10 +153,10 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     // Given a minted NFT and a fungible token.
     const umi = createUmi(endpoint.url);
     const nftAssetId = publicKey(
-      'GGRbPQhwmo3dXBkJSAjMFc1QYTKGBt8qc11tTp3LkEKA'
+      'DNzerLDcC5apcAQQ2Wx3qfRK1NPP6g5Bsg11fPpWkRtA'
     );
     const fungibleAssetId = publicKey(
-      '4oZjhZTiKAbuLtfCPukCgTDAcUngDUyccctpLVT9zJuP'
+      '9BB6NFEcjBCtnNLFko2FqVQBq8HHM13kCyYcdQbgpump'
     );
 
     // When we fetch the assets using their IDs with showFungible true.

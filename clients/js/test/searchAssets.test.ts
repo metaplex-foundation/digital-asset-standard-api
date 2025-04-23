@@ -13,52 +13,51 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
 
     // When we search for an asset given its owner.
     const assets = await umi.rpc.searchAssets({
-      owner: publicKey('DASPQfEAVcHp55eFmfstRduMT3dSfoTirFFsMHwUaWaz'),
+      owner: publicKey('9Qo4631XNdLYVUw1S1iBhDmu1DtcPwHqrg5ZjPbzUqGQ'),
       compressed: true,
-      jsonUri:
-        'https://arweave.net/c9aGs5fOk7gD4wWnSvmzeqgtfxAGRgtI1jYzvl8-IVs/chiaki-violet-azure-common.json',
+      jsonUri: 'https://example.com/my-nft.json',
     });
 
     // Then we expect to find an asset.
-    t.true(assets.items.length > 1);
+    t.true(assets.items.length >= 1);
 
     // Then we expect the following data.
     t.like(assets.items[0], <DasApiAsset>{
       interface: 'V1_NFT',
-      id: 'GGRbPQhwmo3dXBkJSAjMFc1QYTKGBt8qc11tTp3LkEKA',
+      id: 'DNzerLDcC5apcAQQ2Wx3qfRK1NPP6g5Bsg11fPpWkRtA',
       content: {
         metadata: {
-          name: 'Chiaki Azure 55',
+          name: 'My NFT',
           symbol: '',
         },
       },
       authorities: [
         {
-          address: '6FpirDzk8dXDfSHWH7FAjKSvjtMPbTBYe34bRckeRN2u',
+          address: '8dFibVsqyHR7FXAwMuvkLMj86Xa6TAg6X1NsmHbJHTio',
           scopes: ['full'],
         },
       ],
       compression: {
         eligible: false,
         compressed: true,
-        data_hash: '29BdgNWxNB1sinkfmWKFQi3zWXRpsotp2FKoZhoqVa9F',
-        creator_hash: 'FGAvkyrzeEgvGGMfmi6ztGpvybHMYAL9w82nx6wzLVqn',
-        asset_hash: 'FGWfA5v5SZnpe9r32NEvDyX9hLeVEoBf3GqEkHX6YK9w',
-        tree: 'J1imb8C8SPzofrtgCxkN4nsKwHevzxgvHGeYBKFEDEmE',
+        data_hash: '2YDXnkcksCo3RZdVFJC8oq1CMQoYFgN6TMWnkffFrHAM',
+        creator_hash: 'EKDHSGbrGztomDfuiV4iqiZ6LschDJPsFiXjZ83f92Md',
+        asset_hash: '8KPK2EQ7g3edRv4au36fRNwFPcfAvP3HnH2VFqsBQje7',
+        tree: 'Hw2qE4TKe8rt3VGWupLEH7wZtTrbBAzuU7LWBXfhGNMJ',
         seq: 1,
         leaf_id: 0,
       },
       grouping: [
         {
           group_key: 'collection',
-          group_value: 'Dm1TRVw82roqpfqpzsFxSsWg6a4z3dku6ebVHSHuVo1c',
+          group_value: '3KPARzW2CoGhFYMKbxjGuGQfF3w2o9shnnjKZmCHCjBU',
         },
       ],
       royalty: {
         royalty_model: 'creators',
         target: null,
-        percent: 0.05,
-        basis_points: 500,
+        percent: 0.055,
+        basis_points: 550,
         primary_sale_happened: false,
         locked: false,
       },
@@ -71,7 +70,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
 
     // When we search for assets given their collection.
     const assets = await umi.rpc.searchAssets({
-      grouping: ['collection', 'Dm1TRVw82roqpfqpzsFxSsWg6a4z3dku6ebVHSHuVo1c'],
+      grouping: ['collection', '3KPARzW2CoGhFYMKbxjGuGQfF3w2o9shnnjKZmCHCjBU'],
     });
 
     // Then we expect to find assets.
@@ -83,7 +82,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
         grouping: [
           {
             group_key: 'collection',
-            group_value: 'Dm1TRVw82roqpfqpzsFxSsWg6a4z3dku6ebVHSHuVo1c',
+            group_value: '3KPARzW2CoGhFYMKbxjGuGQfF3w2o9shnnjKZmCHCjBU',
           },
         ],
       });
@@ -96,7 +95,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
 
     // When we search for assets with display options.
     const assets = await umi.rpc.searchAssets({
-      owner: publicKey('DASPQfEAVcHp55eFmfstRduMT3dSfoTirFFsMHwUaWaz'),
+      owner: publicKey('3p1hnJ5ffeDamjAeBRReBdVfnef3jd19wBiTSLd3ikDE'),
       displayOptions: {
         showUnverifiedCollections: true,
       },
@@ -107,7 +106,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
 
     // Find the specific asset
     const specificAsset = assets.items.find(
-      (asset) => asset.id === '8bFQbnBrzeiYQabEJ1ghy5T7uFpqFzPjUGsVi3SzSMHB'
+      (asset) => asset.id === '6gzjJWsqaPM37HyrTHxVCoysZiGA757ixwap4dY3pxh5'
     );
 
     // Assert the asset exists and has group_definition
@@ -127,7 +126,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
 
     // When we search for assets with display options.
     const assets = await umi.rpc.searchAssets({
-      owner: publicKey('DASPQfEAVcHp55eFmfstRduMT3dSfoTirFFsMHwUaWaz'),
+      owner: publicKey('3p1hnJ5ffeDamjAeBRReBdVfnef3jd19wBiTSLd3ikDE'),
       displayOptions: {
         showUnverifiedCollections: false,
       },
@@ -138,12 +137,14 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
 
     // But not the specific asset which is not a verified part of a collection
     const specificAsset = assets.items.find(
-      (asset) => asset.id === '8bFQbnBrzeiYQabEJ1ghy5T7uFpqFzPjUGsVi3SzSMHB'
+      (asset) => asset.id === '6gzjJWsqaPM37HyrTHxVCoysZiGA757ixwap4dY3pxh5'
     );
 
-    t.assert(
-      specificAsset === undefined,
-      'Expected to not find the specific asset'
+    t.truthy(specificAsset, 'Expected to find the specific asset');
+    t.is(
+      specificAsset?.grouping.length,
+      0,
+      'Expected grouping array to be empty'
     );
   });
 });

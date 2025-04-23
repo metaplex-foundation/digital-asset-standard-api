@@ -35,7 +35,7 @@
     },
     "devDependencies": {
         "@ava/typescript": "^5.0.0",
-        "@metaplex-foundation/umi": "^1.0.0",
+        "@metaplex-foundation/umi": "^1.2.0",
         "@metaplex-foundation/umi-bundle-tests": "^1.0.0",
         "@solana/web3.js": "^1.73.0",
         "@types/node": "^22.12.0",
