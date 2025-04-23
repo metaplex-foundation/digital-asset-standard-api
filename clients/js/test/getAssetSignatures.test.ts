@@ -14,7 +14,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     // Then we expect to find 1 signature.
     t.is(signatures.total, 1);
     t.is(signatures.limit, 1000);
-    t.deepEqual(signatures.items[0] as [string, string], [
+    t.deepEqual(signatures.items[0], [
       '2LzGEe1JZcf5SqtGhajrusvfRWSeL3Fm4sduQC1gbfPgMyQySf2tqS1yU5yTiHEutdUZkswHXHg6zzyjK6Vg92GA',
       'MintToCollectionV1',
     ]);
@@ -32,7 +32,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     t.is(signatures.total, 1);
     t.is(signatures.limit, 1000);
     t.is(signatures.items.length, 1);
-    t.deepEqual(signatures.items[0] as [string, string], [
+    t.deepEqual(signatures.items[0], [
       '2LzGEe1JZcf5SqtGhajrusvfRWSeL3Fm4sduQC1gbfPgMyQySf2tqS1yU5yTiHEutdUZkswHXHg6zzyjK6Vg92GA',
       'MintToCollectionV1',
     ]);
