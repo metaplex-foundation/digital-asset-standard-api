@@ -2,7 +2,7 @@
   "openrpc": "1.2.6",
   "info": {
     "title": "Metaplex Digital Asset Standard API",
-    "version": "1.1.1"
+    "version": "1.1.0"
   },
   "methods": [
     {
@@ -197,6 +197,18 @@
             "mutable"
           ],
           "properties": {
+            "agent_token": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "asset_signer": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
             "authorities": {
               "type": [
                 "array",
@@ -508,8 +520,15 @@
                 "ProgrammableNFT",
                 "MplCoreAsset",
                 "MplCoreCollection",
+                "MplCoreGroup",
                 "MplBubblegumV2",
                 "Custom"
+              ]
+            },
+            "is_agent": {
+              "type": [
+                "boolean",
+                "null"
               ]
             },
             "mint_extensions": true,
@@ -606,6 +625,14 @@
                   "format": "uint32",
                   "minimum": 0
                 },
+                "basis_points_raw": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "format": "uint32",
+                  "minimum": 0
+                },
                 "locked": {
                   "type": "boolean"
                 },
@@ -622,6 +649,12 @@
                     "creators",
                     "fanout",
                     "single"
+                  ]
+                },
+                "sfbp_inherited": {
+                  "type": [
+                    "boolean",
+                    "null"
                   ]
                 },
                 "target": {
@@ -810,6 +843,18 @@
               "mutable"
             ],
             "properties": {
+              "agent_token": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "asset_signer": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
               "authorities": {
                 "type": [
                   "array",
@@ -1121,8 +1166,15 @@
                   "ProgrammableNFT",
                   "MplCoreAsset",
                   "MplCoreCollection",
+                  "MplCoreGroup",
                   "MplBubblegumV2",
                   "Custom"
+                ]
+              },
+              "is_agent": {
+                "type": [
+                  "boolean",
+                  "null"
                 ]
               },
               "mint_extensions": true,
@@ -1219,6 +1271,14 @@
                     "format": "uint32",
                     "minimum": 0
                   },
+                  "basis_points_raw": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "format": "uint32",
+                    "minimum": 0
+                  },
                   "locked": {
                     "type": "boolean"
                   },
@@ -1235,6 +1295,12 @@
                       "creators",
                       "fanout",
                       "single"
+                    ]
+                  },
+                  "sfbp_inherited": {
+                    "type": [
+                      "boolean",
+                      "null"
                     ]
                   },
                   "target": {
@@ -1522,6 +1588,18 @@
                   "mutable"
                 ],
                 "properties": {
+                  "agent_token": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "asset_signer": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
                   "authorities": {
                     "type": [
                       "array",
@@ -1833,8 +1911,15 @@
                       "ProgrammableNFT",
                       "MplCoreAsset",
                       "MplCoreCollection",
+                      "MplCoreGroup",
                       "MplBubblegumV2",
                       "Custom"
+                    ]
+                  },
+                  "is_agent": {
+                    "type": [
+                      "boolean",
+                      "null"
                     ]
                   },
                   "mint_extensions": true,
@@ -1931,6 +2016,14 @@
                         "format": "uint32",
                         "minimum": 0
                       },
+                      "basis_points_raw": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "uint32",
+                        "minimum": 0
+                      },
                       "locked": {
                         "type": "boolean"
                       },
@@ -1947,6 +2040,12 @@
                           "creators",
                           "fanout",
                           "single"
+                        ]
+                      },
+                      "sfbp_inherited": {
+                        "type": [
+                          "boolean",
+                          "null"
                         ]
                       },
                       "target": {
@@ -2260,6 +2359,18 @@
                   "mutable"
                 ],
                 "properties": {
+                  "agent_token": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "asset_signer": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
                   "authorities": {
                     "type": [
                       "array",
@@ -2571,8 +2682,15 @@
                       "ProgrammableNFT",
                       "MplCoreAsset",
                       "MplCoreCollection",
+                      "MplCoreGroup",
                       "MplBubblegumV2",
                       "Custom"
+                    ]
+                  },
+                  "is_agent": {
+                    "type": [
+                      "boolean",
+                      "null"
                     ]
                   },
                   "mint_extensions": true,
@@ -2669,6 +2787,14 @@
                         "format": "uint32",
                         "minimum": 0
                       },
+                      "basis_points_raw": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "uint32",
+                        "minimum": 0
+                      },
                       "locked": {
                         "type": "boolean"
                       },
@@ -2685,6 +2811,12 @@
                           "creators",
                           "fanout",
                           "single"
+                        ]
+                      },
+                      "sfbp_inherited": {
+                        "type": [
+                          "boolean",
+                          "null"
                         ]
                       },
                       "target": {
@@ -3000,6 +3132,18 @@
                   "mutable"
                 ],
                 "properties": {
+                  "agent_token": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "asset_signer": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
                   "authorities": {
                     "type": [
                       "array",
@@ -3311,8 +3455,15 @@
                       "ProgrammableNFT",
                       "MplCoreAsset",
                       "MplCoreCollection",
+                      "MplCoreGroup",
                       "MplBubblegumV2",
                       "Custom"
+                    ]
+                  },
+                  "is_agent": {
+                    "type": [
+                      "boolean",
+                      "null"
                     ]
                   },
                   "mint_extensions": true,
@@ -3409,6 +3560,14 @@
                         "format": "uint32",
                         "minimum": 0
                       },
+                      "basis_points_raw": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "uint32",
+                        "minimum": 0
+                      },
                       "locked": {
                         "type": "boolean"
                       },
@@ -3425,6 +3584,12 @@
                           "creators",
                           "fanout",
                           "single"
+                        ]
+                      },
+                      "sfbp_inherited": {
+                        "type": [
+                          "boolean",
+                          "null"
                         ]
                       },
                       "target": {
@@ -3734,6 +3899,18 @@
                   "mutable"
                 ],
                 "properties": {
+                  "agent_token": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "asset_signer": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
                   "authorities": {
                     "type": [
                       "array",
@@ -4045,8 +4222,15 @@
                       "ProgrammableNFT",
                       "MplCoreAsset",
                       "MplCoreCollection",
+                      "MplCoreGroup",
                       "MplBubblegumV2",
                       "Custom"
+                    ]
+                  },
+                  "is_agent": {
+                    "type": [
+                      "boolean",
+                      "null"
                     ]
                   },
                   "mint_extensions": true,
@@ -4143,6 +4327,14 @@
                         "format": "uint32",
                         "minimum": 0
                       },
+                      "basis_points_raw": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "uint32",
+                        "minimum": 0
+                      },
                       "locked": {
                         "type": "boolean"
                       },
@@ -4159,6 +4351,12 @@
                           "creators",
                           "fanout",
                           "single"
+                        ]
+                      },
+                      "sfbp_inherited": {
+                        "type": [
+                          "boolean",
+                          "null"
                         ]
                       },
                       "target": {
@@ -4314,6 +4512,20 @@
                   "null"
                 ]
               },
+              "agentToken": {
+                "default": null,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "assetSigner": {
+                "default": null,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
               "authorityAddress": {
                 "type": [
                   "string",
@@ -4418,8 +4630,16 @@
                   "ProgrammableNFT",
                   "MplCoreAsset",
                   "MplCoreCollection",
+                  "MplCoreGroup",
                   "MplBubblegumV2",
                   "Custom"
+                ]
+              },
+              "isAgent": {
+                "default": null,
+                "type": [
+                  "boolean",
+                  "null"
                 ]
               },
               "jsonUri": {
@@ -4645,6 +4865,18 @@
                   "mutable"
                 ],
                 "properties": {
+                  "agent_token": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "asset_signer": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
                   "authorities": {
                     "type": [
                       "array",
@@ -4956,8 +5188,15 @@
                       "ProgrammableNFT",
                       "MplCoreAsset",
                       "MplCoreCollection",
+                      "MplCoreGroup",
                       "MplBubblegumV2",
                       "Custom"
+                    ]
+                  },
+                  "is_agent": {
+                    "type": [
+                      "boolean",
+                      "null"
                     ]
                   },
                   "mint_extensions": true,
@@ -5054,6 +5293,14 @@
                         "format": "uint32",
                         "minimum": 0
                       },
+                      "basis_points_raw": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "uint32",
+                        "minimum": 0
+                      },
                       "locked": {
                         "type": "boolean"
                       },
@@ -5070,6 +5317,12 @@
                           "creators",
                           "fanout",
                           "single"
+                        ]
+                      },
+                      "sfbp_inherited": {
+                        "type": [
+                          "boolean",
+                          "null"
                         ]
                       },
                       "target": {
