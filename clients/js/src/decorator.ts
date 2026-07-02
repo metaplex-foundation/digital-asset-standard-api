@@ -14,8 +14,21 @@ import {
   GetAssetSignaturesRpcInput,
   GetAssetsRpcInput,
   GetAssetRpcInput,
+  GetNftEditionsRpcInput,
+  GetNftEditionsRpcResponse,
+  GetTokenAccountsRpcInput,
+  GetTokenAccountsRpcResponse,
+  DasApiNftEdition,
   DisplayOptions,
 } from './types';
+
+export type DasApiDecoratorOptions = {
+  /**
+   * Use Helius DAS parameter names (`mint`, `owner`) for methods where Helius
+   * diverges from the Metaplex DAS specification (`mintAddress`, `ownerAddress`).
+   */
+  heliusCompatibility?: boolean;
+};
 
 export interface DasApiInterface {
   /**
@@ -93,6 +106,24 @@ export interface DasApiInterface {
   getAssetSignatures(
     input: GetAssetSignaturesRpcInput
   ): Promise<GetAssetSignaturesRpcResponse>;
+
+  /**
+   * Return all printable editions for a master edition NFT mint
+   *
+   * @param input the input parameters for the RPC call
+   */
+  getNftEditions(
+    input: GetNftEditionsRpcInput
+  ): Promise<GetNftEditionsRpcResponse>;
+
+  /**
+   * Return a list of token accounts by owner or mint
+   *
+   * @param input the input parameters for the RPC call
+   */
+  getTokenAccounts(
+    input: GetTokenAccountsRpcInput
+  ): Promise<GetTokenAccountsRpcResponse>;
 }
 
 // Utility function to remove null and empty object properties
@@ -107,9 +138,30 @@ function cleanInput<T extends Record<string, unknown>>(obj: T): Partial<T> {
   ) as Partial<T>;
 }
 
+function normalizeNftEdition(edition: Record<string, unknown>): DasApiNftEdition {
+  return {
+    edition_address: edition.edition_address as string,
+    edition_number: (edition.edition_number ?? edition.edition) as number,
+    mint_address: (edition.mint_address ?? edition.mint) as string,
+  };
+}
+
+function normalizeNftEditionsResponse(
+  response: GetNftEditionsRpcResponse
+): GetNftEditionsRpcResponse {
+  return {
+    ...response,
+    editions: response.editions.map((edition) =>
+      normalizeNftEdition(edition as unknown as Record<string, unknown>)
+    ),
+  };
+}
+
 export const createDasApiDecorator = (
-  rpc: RpcInterface
+  rpc: RpcInterface,
+  options: DasApiDecoratorOptions = {}
 ): RpcInterface & DasApiInterface => {
+  const { heliusCompatibility = false } = options;
   const validatePagination = (
     page: number | null | undefined,
     before?: string | null,
@@ -330,6 +382,63 @@ export const createDasApiDecorator = (
         throw new DasApiError(`No signatures found for ${identifier}`);
       }
       return signatures;
+    },
+    getNftEditions: async (input: GetNftEditionsRpcInput) => {
+      validatePagination(input.page, input.before, input.after);
+      const cleanedInput = cleanInput({
+        ...(heliusCompatibility
+          ? { mint: input.mintAddress }
+          : { mintAddress: input.mintAddress }),
+        limit: input.limit,
+        page: input.page,
+        before: input.before,
+        after: input.after,
+        cursor: input.cursor,
+      });
+      const editions = await rpc.call<
+        GetNftEditionsRpcResponse | null,
+        typeof cleanedInput
+      >('getNftEditions', cleanedInput);
+      if (!editions) {
+        throw new DasApiError(
+          `No editions found for mint: ${input.mintAddress}`
+        );
+      }
+      return normalizeNftEditionsResponse(editions);
+    },
+    getTokenAccounts: async (input: GetTokenAccountsRpcInput) => {
+      validatePagination(input.page, input.before, input.after);
+      const cleanedInput = cleanInput({
+        ...(heliusCompatibility
+          ? {
+              owner: input.ownerAddress,
+              mint: input.mintAddress,
+            }
+          : {
+              ownerAddress: input.ownerAddress,
+              mintAddress: input.mintAddress,
+            }),
+        limit: input.limit,
+        page: input.page,
+        before: input.before,
+        after: input.after,
+        cursor: input.cursor,
+        options: input.options ?? input.displayOptions,
+      });
+      const tokenAccounts = await rpc.call<
+        GetTokenAccountsRpcResponse | null,
+        typeof cleanedInput
+      >('getTokenAccounts', cleanedInput);
+      const response = tokenAccounts ?? {
+        total: 0,
+        limit: input.limit ?? 0,
+        token_accounts: [],
+        errors: [],
+      };
+      return {
+        ...response,
+        errors: response.errors ?? [],
+      };
     },
   };
 };

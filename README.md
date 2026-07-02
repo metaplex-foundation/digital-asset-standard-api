@@ -67,6 +67,8 @@ The plugin can be used with any RPC that supports the Metaplex DAS API specifica
 | `getAssetsByCreator`   | Return the list of assets given a creator address               |  [➡](#-getassetsbycreator)  |
 | `getAssetsByGroup`     | Return the list of assets given a group (key, value) pair       |   [➡](#-getassetsbygroup)   |
 | `getAssetSignatures`   | Return the transaction signatures for a compressed asset        |  [➡](#-getassetsignatures)  |
+| `getNftEditions`       | Return all printable editions for a master edition NFT mint     |   [➡](#-getnfteditions)     |
+| `getTokenAccounts`     | Return a list of token accounts by owner or mint                |  [➡](#-gettokenaccounts)    |
 | `searchAssets`         | Return the list of assets given a search criteria               |     [➡](#-searchassets)     |
 
 ## Examples
@@ -518,6 +520,131 @@ curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json'
     "method": "getAssetSignaturesV2",
     "params": {
         "assetId": "GGRbPQhwmo3dXBkJSAjMFc1QYTKGBt8qc11tTp3LkEKA"
+    },
+    "id": 0
+}'
+```
+
+</details>
+
+#### 📌 `getNftEditions`
+
+<details>
+  <summary>parameters</summary>
+
+| Name | Required | Description |
+| ---- | :------: | ----------- |
+| `mintAddress` | ✅ | The master edition mint address to get editions for. |
+| `limit` | | The maximum number of editions to retrieve. |
+| `page` | | The index of the "page" to retrieve. |
+| `before` | | Retrieve editions before the specified ID. |
+| `after` | | Retrieve editions after the specified ID. |
+| `cursor` | | The cursor for pagination. |
+
+</details>
+
+<details>
+  <summary>typescript</summary>
+
+```typescript
+import { publicKey } from "@metaplex-foundation/umi";
+import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
+import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
+
+const umi = createUmi("<ENDPOINT>").use(dasApi());
+const masterEditionMint = publicKey("Ey2Qb8kLctbchQsMnhZs5DjY32To2QtPuXNwWvk4NosL");
+
+const editions = await umi.rpc.getNftEditions({
+  mintAddress: masterEditionMint,
+  limit: 10,
+});
+console.log(editions.total);
+console.log(editions.supply);
+console.log(editions.editions.length);
+```
+
+</details>
+
+<details>
+  <summary>curl</summary>
+
+```sh
+curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
+    "jsonrpc": "2.0",
+    "method": "getNftEditions",
+    "params": {
+        "mintAddress": "Ey2Qb8kLctbchQsMnhZs5DjY32To2QtPuXNwWvk4NosL",
+        "limit": 10,
+        "page": 1
+    },
+    "id": 0
+}'
+```
+
+</details>
+
+#### 📌 `getTokenAccounts`
+
+<details>
+  <summary>parameters</summary>
+
+| Name | Required | Description |
+| ---- | :------: | ----------- |
+| `ownerAddress` | | The owner address to get token accounts for. At least one of `ownerAddress` or `mintAddress` is required. |
+| `mintAddress` | | The mint address to filter token accounts by. At least one of `ownerAddress` or `mintAddress` is required. |
+| `options` | | Display options for the query. Also accepted as `displayOptions`. |
+| `options.showZeroBalance` | | Whether to include zero-balance accounts in results. |
+| `options.showFungible` | | Accepted by the API; reserved for future use on this method. |
+| `options.showCollectionMetadata` | | Accepted by the API; reserved for future use on this method. |
+| `options.showUnverifiedCollections` | | Accepted by the API; reserved for future use on this method. |
+| `options.showInscription` | | Accepted by the API; reserved for future use on this method. |
+| `limit` | | The maximum number of token accounts to retrieve. |
+| `page` | | The index of the "page" to retrieve. |
+| `before` | | Retrieve token accounts before the specified ID. |
+| `after` | | Retrieve token accounts after the specified ID. |
+| `cursor` | | The cursor for pagination. |
+
+</details>
+
+<details>
+  <summary>typescript</summary>
+
+```typescript
+import { publicKey } from "@metaplex-foundation/umi";
+import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
+import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
+
+const umi = createUmi("<ENDPOINT>").use(dasApi());
+
+// Get token accounts by owner
+const tokenAccountsByOwner = await umi.rpc.getTokenAccounts({
+  ownerAddress: publicKey("N4f6zftYsuu4yT7icsjLwh4i6pB1zvvKbseHj2NmSQw"),
+  limit: 10,
+});
+console.log(tokenAccountsByOwner.total);
+console.log(tokenAccountsByOwner.token_accounts.length);
+
+// Get token accounts by mint
+const tokenAccountsByMint = await umi.rpc.getTokenAccounts({
+  mintAddress: publicKey("EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"),
+  limit: 5,
+});
+console.log(tokenAccountsByMint.token_accounts.length);
+```
+
+</details>
+
+<details>
+  <summary>curl</summary>
+
+```sh
+curl --request POST --url "<ENDPOINT>" --header 'Content-Type: application/json' --data '{
+    "jsonrpc": "2.0",
+    "method": "getTokenAccounts",
+    "params": {
+        "ownerAddress": "N4f6zftYsuu4yT7icsjLwh4i6pB1zvvKbseHj2NmSQw",
+        "limit": 10,
+        "page": 1
     },
     "id": 0
 }'
