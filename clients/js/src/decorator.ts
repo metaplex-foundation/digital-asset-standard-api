@@ -138,7 +138,9 @@ function cleanInput<T extends Record<string, unknown>>(obj: T): Partial<T> {
   ) as Partial<T>;
 }
 
-function normalizeNftEdition(edition: Record<string, unknown>): DasApiNftEdition {
+function normalizeNftEdition(
+  edition: Record<string, unknown>
+): DasApiNftEdition {
   return {
     edition_address: edition.edition_address as string,
     edition_number: (edition.edition_number ?? edition.edition) as number,
