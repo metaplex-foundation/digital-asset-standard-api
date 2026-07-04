@@ -150,9 +150,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     // Mainnet mpl-core GroupV1 cyclic pair (DAS test fixtures).
     const umi = createUmi(endpoint.url);
     const groupKey = 'group';
-    const groupValue = publicKey(
-      '1CTME6duRH3SaBd5bmSikw1nhxpENe1xS2nHkwUGhgQ'
-    );
+    const groupValue = publicKey('1CTME6duRH3SaBd5bmSikw1nhxpENe1xS2nHkwUGhgQ');
 
     const assets = await umi.rpc.getAssetsByGroup({ groupKey, groupValue });
 
