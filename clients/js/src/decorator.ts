@@ -14,6 +14,8 @@ import {
   GetAssetSignaturesRpcInput,
   GetAssetsRpcInput,
   GetAssetRpcInput,
+  GetGroupingRpcInput,
+  GetGroupingRpcResponse,
   DisplayOptions,
 } from './types';
 
@@ -70,6 +72,13 @@ export interface DasApiInterface {
    * @param input the input parameters for the RPC call
    */
   getAssetsByGroup(input: GetAssetsByGroupRpcInput): Promise<DasApiAssetList>;
+
+  /**
+   * Return grouping metadata for a group key/value pair.
+   *
+   * @param input the input parameters for the RPC call
+   */
+  getGrouping(input: GetGroupingRpcInput): Promise<GetGroupingRpcResponse>;
 
   /**
    * Return the list of assets given an owner address.
@@ -241,6 +250,22 @@ export const createDasApiDecorator = (
         );
       }
       return assetList;
+    },
+    getGrouping: async (input: GetGroupingRpcInput) => {
+      const cleanedInput = cleanInput({
+        groupKey: input.groupKey,
+        groupValue: input.groupValue,
+      });
+      const grouping = await rpc.call<
+        GetGroupingRpcResponse | null,
+        typeof cleanedInput
+      >('getGrouping', cleanedInput);
+      if (!grouping) {
+        throw new DasApiError(
+          `No grouping found for: ${input.groupKey} => ${input.groupValue}`
+        );
+      }
+      return grouping;
     },
     getAssetsByOwner: async (input: GetAssetsByOwnerRpcInput) => {
       validatePagination(input.page, input.before, input.after);
