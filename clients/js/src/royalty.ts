@@ -18,7 +18,7 @@ export function isInheritedSfbpRoyalty(royalty: DasApiAssetRoyalty): boolean {
 export function getRawSellerFeeBasisPoints(
   royalty: DasApiAssetRoyalty
 ): number {
-  if (royalty.basis_points_raw !== undefined) {
+  if (royalty.basis_points_raw != null) {
     return royalty.basis_points_raw;
   }
   if (royalty.sfbp_inherited) {

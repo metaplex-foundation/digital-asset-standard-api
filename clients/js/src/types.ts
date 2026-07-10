@@ -495,12 +495,12 @@ export type DasApiAssetRoyalty = {
    * Raw seller fee basis points stored on the leaf (65535 when inheriting from
    * collection). Omitted when the leaf stores an explicit rate.
    */
-  basis_points_raw?: number;
+  basis_points_raw?: number | null;
   /**
    * True when the leaf uses the inherit sentinel and `basis_points` was resolved
    * from the collection Royalties plugin.
    */
-  sfbp_inherited?: boolean;
+  sfbp_inherited?: boolean | null;
   primary_sale_happened: boolean;
   locked: boolean;
 };
