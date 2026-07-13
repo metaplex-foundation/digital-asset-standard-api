@@ -199,6 +199,21 @@ export type SearchAssetsRpcInput = {
    * Display options for the query
    */
   displayOptions?: DisplayOptions;
+
+  /**
+   * Filter by registered agent status (MPL Core assets only).
+   */
+  isAgent?: Nullable<boolean>;
+
+  /**
+   * Filter by the agent's canonical token mint (MPL Core assets only).
+   */
+  agentToken?: Nullable<PublicKey>;
+
+  /**
+   * Filter by the Core Asset Signer PDA (MPL Core assets only).
+   */
+  assetSigner?: Nullable<PublicKey>;
 } & Pagination;
 
 /**
@@ -408,6 +423,18 @@ export type DasApiCoreAssetFields = {
     current_size?: number;
     plugins_json_version: number;
   };
+  /**
+   * Whether the Core asset has an AgentIdentity external plugin.
+   */
+  is_agent?: boolean;
+  /**
+   * Canonical token mint from the AgentIdentityV2 PDA, when set.
+   */
+  agent_token?: PublicKey;
+  /**
+   * Core Asset Signer PDA — the agent's onchain wallet.
+   */
+  asset_signer?: PublicKey;
 };
 
 /**

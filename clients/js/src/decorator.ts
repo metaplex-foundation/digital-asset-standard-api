@@ -349,6 +349,9 @@ export const createDasApiDecorator = (
         name: input.name,
         displayOptions: input.displayOptions,
         tokenType: input.tokenType,
+        isAgent: input.isAgent,
+        agentToken: input.agentToken,
+        assetSigner: input.assetSigner,
       });
       const assetList = await rpc.call<
         DasApiAssetList | null,
