@@ -14,5 +14,14 @@ Object.keys(process.env).forEach(function (key) {
   }
 });
 
+const isHeliusEndpoint = (endpoint: string) =>
+  endpoint.includes('helius-rpc.com');
+
 export const createUmi = (endpoint: string) =>
-  baseCreateUmi().use(testPlugins(endpoint)).use(dasApi());
+  baseCreateUmi()
+    .use(testPlugins(endpoint))
+    .use(
+      dasApi({
+        heliusCompatibility: isHeliusEndpoint(endpoint),
+      })
+    );

@@ -104,9 +104,9 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     // Then we expect to find assets.
     t.true(assets.items.length > 0);
 
-    // Find the specific asset
+    // Find the specific asset with an unverified collection grouping
     const specificAsset = assets.items.find(
-      (asset) => asset.id === '6gzjJWsqaPM37HyrTHxVCoysZiGA757ixwap4dY3pxh5'
+      (asset) => asset.id === 'FRWq4DQDNDCmiRNDjk687kdKZF83bnt3gscgB5qtvFoa'
     );
 
     // Assert the asset exists and has group_definition
@@ -137,7 +137,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
 
     // But not the specific asset which is not a verified part of a collection
     const specificAsset = assets.items.find(
-      (asset) => asset.id === '6gzjJWsqaPM37HyrTHxVCoysZiGA757ixwap4dY3pxh5'
+      (asset) => asset.id === 'FRWq4DQDNDCmiRNDjk687kdKZF83bnt3gscgB5qtvFoa'
     );
 
     t.truthy(specificAsset, 'Expected to find the specific asset');
