@@ -1,9 +1,15 @@
 import { RpcInterface, UmiPlugin } from '@metaplex-foundation/umi';
-import { DasApiInterface, createDasApiDecorator } from './decorator';
+import {
+  DasApiDecoratorOptions,
+  DasApiInterface,
+  createDasApiDecorator,
+} from './decorator';
 
-export const dasApi = (): UmiPlugin => ({
+export type DasApiOptions = DasApiDecoratorOptions;
+
+export const dasApi = (options: DasApiOptions = {}): UmiPlugin => ({
   install(umi) {
-    umi.rpc = createDasApiDecorator(umi.rpc);
+    umi.rpc = createDasApiDecorator(umi.rpc, options);
   },
 });
 

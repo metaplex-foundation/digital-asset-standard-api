@@ -249,6 +249,67 @@ export type GetAssetsRpcInput = {
   displayOptions?: DisplayOptions;
 };
 
+/**
+ * Input parameters for getNftEditions RPC call
+ */
+export type GetNftEditionsRpcInput = {
+  /**
+   * The master edition mint address to get editions for
+   */
+  mintAddress: PublicKey;
+} & Pagination;
+
+/**
+ * Display options for token accounts query
+ */
+export type TokenAccountDisplayOptions = {
+  /**
+   * Whether to show unverified collections
+   */
+  showUnverifiedCollections?: boolean;
+  /**
+   * Whether to show collection metadata
+   */
+  showCollectionMetadata?: boolean;
+  /**
+   * Whether to show fungible assets
+   */
+  showFungible?: boolean;
+  /**
+   * Whether to show inscription data
+   */
+  showInscription?: boolean;
+  /**
+   * Whether to show zero balance accounts
+   */
+  showZeroBalance?: boolean;
+};
+
+/**
+ * Input parameters for getTokenAccounts RPC call
+ */
+export type GetTokenAccountsRpcInput = {
+  /**
+   * The owner address to get token accounts for
+   */
+  ownerAddress?: Nullable<PublicKey>;
+
+  /**
+   * The mint address to filter token accounts by
+   */
+  mintAddress?: Nullable<PublicKey>;
+
+  /**
+   * Display options for the query
+   */
+  options?: TokenAccountDisplayOptions;
+
+  /**
+   * Alias for `options`, accepted by the RPC for compatibility with asset query methods
+   */
+  displayOptions?: TokenAccountDisplayOptions;
+} & Pagination;
+
 // ---------------------------------------- //
 // Result types.                            //
 // ---------------------------------------- //
@@ -653,6 +714,192 @@ export type GetAssetSignaturesRpcResponse = {
    * List of individual signatures.
    */
   items: DasApiTransactionSignature[];
+};
+
+/**
+ * Individual NFT edition information
+ */
+export type DasApiNftEdition = {
+  /**
+   * The address of the edition
+   */
+  edition_address: string;
+
+  /**
+   * The edition number
+   */
+  edition_number: number;
+
+  /**
+   * The mint address of the edition
+   */
+  mint_address: string;
+};
+
+/**
+ * Response type for getNftEditions RPC call
+ */
+export type GetNftEditionsRpcResponse = {
+  /**
+   * Number of editions returned in the current page.
+   * Use `supply` for the total minted edition count.
+   */
+  total: number;
+
+  /**
+   * Limit used for pagination
+   */
+  limit: number;
+
+  /**
+   * Current page number
+   */
+  page?: number;
+
+  /**
+   * Cursor for pagination
+   */
+  cursor?: string;
+
+  /**
+   * Before cursor for pagination
+   */
+  before?: string;
+
+  /**
+   * After cursor for pagination
+   */
+  after?: string;
+
+  /**
+   * The master edition address
+   */
+  master_edition_address: string;
+
+  /**
+   * Maximum supply of the master edition
+   */
+  max_supply?: number;
+
+  /**
+   * Current supply of editions
+   */
+  supply: number;
+
+  /**
+   * Array of edition information
+   */
+  editions: DasApiNftEdition[];
+};
+
+/**
+ * Error information for token account queries
+ */
+export type DasApiTokenAccountError = {
+  /**
+   * The error message
+   */
+  error: string;
+
+  /**
+   * The ID associated with the error
+   */
+  id: string;
+};
+
+/**
+ * Individual token account information
+ */
+export type DasApiTokenAccount = {
+  /**
+   * The address of the token account
+   */
+  address: string;
+
+  /**
+   * The amount of tokens in the account
+   */
+  amount: number;
+
+  /**
+   * The close authority for the account
+   */
+  close_authority?: string;
+
+  /**
+   * The delegate address for the account
+   */
+  delegate?: string;
+
+  /**
+   * The delegated amount
+   */
+  delegated_amount: number;
+
+  /**
+   * Extensions on the token account
+   */
+  extensions?: any;
+
+  /**
+   * Whether the account is frozen
+   */
+  frozen: boolean;
+
+  /**
+   * The mint address of the token
+   */
+  mint: string;
+
+  /**
+   * The owner of the token account
+   */
+  owner: string;
+};
+
+/**
+ * Response type for getTokenAccounts RPC call
+ */
+export type GetTokenAccountsRpcResponse = {
+  /**
+   * Number of token accounts returned in the current page
+   */
+  total: number;
+
+  /**
+   * Limit used for pagination
+   */
+  limit: number;
+
+  /**
+   * Current page number
+   */
+  page?: number;
+
+  /**
+   * Cursor for pagination
+   */
+  cursor?: string;
+
+  /**
+   * Before cursor for pagination
+   */
+  before?: string;
+
+  /**
+   * After cursor for pagination
+   */
+  after?: string;
+
+  /**
+   * Array of token account information
+   */
+  token_accounts: DasApiTokenAccount[];
+
+  /**
+   * Array of errors encountered during the query
+   */
+  errors: DasApiTokenAccountError[];
 };
 
 export type TokenType =
