@@ -1,8 +1,8 @@
 {
   "openrpc": "1.2.6",
   "info": {
-    "version": "1.1.0",
-    "title": "Metaplex Digital Asset Standard API"
+    "title": "Metaplex Digital Asset Standard API",
+    "version": "1.1.0"
   },
   "methods": [
     {
@@ -197,6 +197,18 @@
             "mutable"
           ],
           "properties": {
+            "agent_token": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "asset_signer": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
             "authorities": {
               "type": [
                 "array",
@@ -246,8 +258,20 @@
                 "tree"
               ],
               "properties": {
+                "asset_data_hash": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
                 "asset_hash": {
                   "type": "string"
+                },
+                "collection_hash": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "compressed": {
                   "type": "boolean"
@@ -260,6 +284,14 @@
                 },
                 "eligible": {
                   "type": "boolean"
+                },
+                "flags": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "format": "uint8",
+                  "minimum": 0
                 },
                 "leaf_id": {
                   "type": "integer",
@@ -288,6 +320,7 @@
                 "$schema": {
                   "type": "string"
                 },
+                "category": true,
                 "files": {
                   "type": [
                     "array",
@@ -360,6 +393,32 @@
               }
             },
             "creators": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": "object",
+                "required": [
+                  "address",
+                  "share",
+                  "verified"
+                ],
+                "properties": {
+                  "address": {
+                    "type": "string"
+                  },
+                  "share": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "verified": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            },
+            "creators_inherited": {
               "type": [
                 "array",
                 "null"
@@ -487,7 +546,15 @@
                 "ProgrammableNFT",
                 "MplCoreAsset",
                 "MplCoreCollection",
+                "MplCoreGroup",
+                "MplBubblegumV2",
                 "Custom"
+              ]
+            },
+            "is_agent": {
+              "type": [
+                "boolean",
+                "null"
               ]
             },
             "mint_extensions": true,
@@ -547,6 +614,12 @@
                 "frozen": {
                   "type": "boolean"
                 },
+                "non_transferable": {
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                },
                 "owner": {
                   "type": "string"
                 },
@@ -578,6 +651,21 @@
                   "format": "uint32",
                   "minimum": 0
                 },
+                "basis_points_inherited": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "format": "uint32",
+                  "minimum": 0
+                },
+                "percent_inherited": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "format": "double"
+                },
                 "locked": {
                   "type": "boolean"
                 },
@@ -596,6 +684,7 @@
                     "single"
                   ]
                 },
+
                 "target": {
                   "type": [
                     "string",
@@ -782,6 +871,18 @@
               "mutable"
             ],
             "properties": {
+              "agent_token": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "asset_signer": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
               "authorities": {
                 "type": [
                   "array",
@@ -831,8 +932,20 @@
                   "tree"
                 ],
                 "properties": {
+                  "asset_data_hash": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
                   "asset_hash": {
                     "type": "string"
+                  },
+                  "collection_hash": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "compressed": {
                     "type": "boolean"
@@ -845,6 +958,14 @@
                   },
                   "eligible": {
                     "type": "boolean"
+                  },
+                  "flags": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "format": "uint8",
+                    "minimum": 0
                   },
                   "leaf_id": {
                     "type": "integer",
@@ -873,6 +994,7 @@
                   "$schema": {
                     "type": "string"
                   },
+                  "category": true,
                   "files": {
                     "type": [
                       "array",
@@ -945,6 +1067,32 @@
                 }
               },
               "creators": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "address",
+                    "share",
+                    "verified"
+                  ],
+                  "properties": {
+                    "address": {
+                      "type": "string"
+                    },
+                    "share": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "verified": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              },
+              "creators_inherited": {
                 "type": [
                   "array",
                   "null"
@@ -1072,7 +1220,15 @@
                   "ProgrammableNFT",
                   "MplCoreAsset",
                   "MplCoreCollection",
+                  "MplCoreGroup",
+                  "MplBubblegumV2",
                   "Custom"
+                ]
+              },
+              "is_agent": {
+                "type": [
+                  "boolean",
+                  "null"
                 ]
               },
               "mint_extensions": true,
@@ -1132,6 +1288,12 @@
                   "frozen": {
                     "type": "boolean"
                   },
+                  "non_transferable": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
                   "owner": {
                     "type": "string"
                   },
@@ -1163,6 +1325,21 @@
                     "format": "uint32",
                     "minimum": 0
                   },
+                  "basis_points_inherited": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "format": "uint32",
+                    "minimum": 0
+                  },
+                  "percent_inherited": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "format": "double"
+                  },
                   "locked": {
                     "type": "boolean"
                   },
@@ -1181,6 +1358,7 @@
                       "single"
                     ]
                   },
+
                   "target": {
                     "type": [
                       "string",
@@ -1466,6 +1644,18 @@
                   "mutable"
                 ],
                 "properties": {
+                  "agent_token": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "asset_signer": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
                   "authorities": {
                     "type": [
                       "array",
@@ -1515,8 +1705,20 @@
                       "tree"
                     ],
                     "properties": {
+                      "asset_data_hash": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
                       "asset_hash": {
                         "type": "string"
+                      },
+                      "collection_hash": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
                       },
                       "compressed": {
                         "type": "boolean"
@@ -1529,6 +1731,14 @@
                       },
                       "eligible": {
                         "type": "boolean"
+                      },
+                      "flags": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "uint8",
+                        "minimum": 0
                       },
                       "leaf_id": {
                         "type": "integer",
@@ -1557,6 +1767,7 @@
                       "$schema": {
                         "type": "string"
                       },
+                      "category": true,
                       "files": {
                         "type": [
                           "array",
@@ -1756,7 +1967,15 @@
                       "ProgrammableNFT",
                       "MplCoreAsset",
                       "MplCoreCollection",
+                      "MplCoreGroup",
+                      "MplBubblegumV2",
                       "Custom"
+                    ]
+                  },
+                  "is_agent": {
+                    "type": [
+                      "boolean",
+                      "null"
                     ]
                   },
                   "mint_extensions": true,
@@ -1816,6 +2035,12 @@
                       "frozen": {
                         "type": "boolean"
                       },
+                      "non_transferable": {
+                        "type": [
+                          "boolean",
+                          "null"
+                        ]
+                      },
                       "owner": {
                         "type": "string"
                       },
@@ -1847,6 +2072,21 @@
                         "format": "uint32",
                         "minimum": 0
                       },
+                      "basis_points_inherited": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "uint32",
+                        "minimum": 0
+                      },
+                      "percent_inherited": {
+                        "type": [
+                          "number",
+                          "null"
+                        ],
+                        "format": "double"
+                      },
                       "locked": {
                         "type": "boolean"
                       },
@@ -1865,6 +2105,7 @@
                           "single"
                         ]
                       },
+
                       "target": {
                         "type": [
                           "string",
@@ -2176,6 +2417,18 @@
                   "mutable"
                 ],
                 "properties": {
+                  "agent_token": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "asset_signer": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
                   "authorities": {
                     "type": [
                       "array",
@@ -2225,8 +2478,20 @@
                       "tree"
                     ],
                     "properties": {
+                      "asset_data_hash": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
                       "asset_hash": {
                         "type": "string"
+                      },
+                      "collection_hash": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
                       },
                       "compressed": {
                         "type": "boolean"
@@ -2239,6 +2504,14 @@
                       },
                       "eligible": {
                         "type": "boolean"
+                      },
+                      "flags": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "uint8",
+                        "minimum": 0
                       },
                       "leaf_id": {
                         "type": "integer",
@@ -2267,6 +2540,7 @@
                       "$schema": {
                         "type": "string"
                       },
+                      "category": true,
                       "files": {
                         "type": [
                           "array",
@@ -2466,7 +2740,15 @@
                       "ProgrammableNFT",
                       "MplCoreAsset",
                       "MplCoreCollection",
+                      "MplCoreGroup",
+                      "MplBubblegumV2",
                       "Custom"
+                    ]
+                  },
+                  "is_agent": {
+                    "type": [
+                      "boolean",
+                      "null"
                     ]
                   },
                   "mint_extensions": true,
@@ -2526,6 +2808,12 @@
                       "frozen": {
                         "type": "boolean"
                       },
+                      "non_transferable": {
+                        "type": [
+                          "boolean",
+                          "null"
+                        ]
+                      },
                       "owner": {
                         "type": "string"
                       },
@@ -2557,6 +2845,21 @@
                         "format": "uint32",
                         "minimum": 0
                       },
+                      "basis_points_inherited": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "uint32",
+                        "minimum": 0
+                      },
+                      "percent_inherited": {
+                        "type": [
+                          "number",
+                          "null"
+                        ],
+                        "format": "double"
+                      },
                       "locked": {
                         "type": "boolean"
                       },
@@ -2575,6 +2878,7 @@
                           "single"
                         ]
                       },
+
                       "target": {
                         "type": [
                           "string",
@@ -2888,6 +3192,18 @@
                   "mutable"
                 ],
                 "properties": {
+                  "agent_token": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "asset_signer": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
                   "authorities": {
                     "type": [
                       "array",
@@ -2937,8 +3253,20 @@
                       "tree"
                     ],
                     "properties": {
+                      "asset_data_hash": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
                       "asset_hash": {
                         "type": "string"
+                      },
+                      "collection_hash": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
                       },
                       "compressed": {
                         "type": "boolean"
@@ -2951,6 +3279,14 @@
                       },
                       "eligible": {
                         "type": "boolean"
+                      },
+                      "flags": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "uint8",
+                        "minimum": 0
                       },
                       "leaf_id": {
                         "type": "integer",
@@ -2979,6 +3315,7 @@
                       "$schema": {
                         "type": "string"
                       },
+                      "category": true,
                       "files": {
                         "type": [
                           "array",
@@ -3178,7 +3515,15 @@
                       "ProgrammableNFT",
                       "MplCoreAsset",
                       "MplCoreCollection",
+                      "MplCoreGroup",
+                      "MplBubblegumV2",
                       "Custom"
+                    ]
+                  },
+                  "is_agent": {
+                    "type": [
+                      "boolean",
+                      "null"
                     ]
                   },
                   "mint_extensions": true,
@@ -3238,6 +3583,12 @@
                       "frozen": {
                         "type": "boolean"
                       },
+                      "non_transferable": {
+                        "type": [
+                          "boolean",
+                          "null"
+                        ]
+                      },
                       "owner": {
                         "type": "string"
                       },
@@ -3269,6 +3620,21 @@
                         "format": "uint32",
                         "minimum": 0
                       },
+                      "basis_points_inherited": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "uint32",
+                        "minimum": 0
+                      },
+                      "percent_inherited": {
+                        "type": [
+                          "number",
+                          "null"
+                        ],
+                        "format": "double"
+                      },
                       "locked": {
                         "type": "boolean"
                       },
@@ -3287,6 +3653,7 @@
                           "single"
                         ]
                       },
+
                       "target": {
                         "type": [
                           "string",
@@ -3594,6 +3961,18 @@
                   "mutable"
                 ],
                 "properties": {
+                  "agent_token": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "asset_signer": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
                   "authorities": {
                     "type": [
                       "array",
@@ -3643,8 +4022,20 @@
                       "tree"
                     ],
                     "properties": {
+                      "asset_data_hash": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
                       "asset_hash": {
                         "type": "string"
+                      },
+                      "collection_hash": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
                       },
                       "compressed": {
                         "type": "boolean"
@@ -3657,6 +4048,14 @@
                       },
                       "eligible": {
                         "type": "boolean"
+                      },
+                      "flags": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "uint8",
+                        "minimum": 0
                       },
                       "leaf_id": {
                         "type": "integer",
@@ -3685,6 +4084,7 @@
                       "$schema": {
                         "type": "string"
                       },
+                      "category": true,
                       "files": {
                         "type": [
                           "array",
@@ -3884,7 +4284,15 @@
                       "ProgrammableNFT",
                       "MplCoreAsset",
                       "MplCoreCollection",
+                      "MplCoreGroup",
+                      "MplBubblegumV2",
                       "Custom"
+                    ]
+                  },
+                  "is_agent": {
+                    "type": [
+                      "boolean",
+                      "null"
                     ]
                   },
                   "mint_extensions": true,
@@ -3944,6 +4352,12 @@
                       "frozen": {
                         "type": "boolean"
                       },
+                      "non_transferable": {
+                        "type": [
+                          "boolean",
+                          "null"
+                        ]
+                      },
                       "owner": {
                         "type": "string"
                       },
@@ -3975,6 +4389,21 @@
                         "format": "uint32",
                         "minimum": 0
                       },
+                      "basis_points_inherited": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "uint32",
+                        "minimum": 0
+                      },
+                      "percent_inherited": {
+                        "type": [
+                          "number",
+                          "null"
+                        ],
+                        "format": "double"
+                      },
                       "locked": {
                         "type": "boolean"
                       },
@@ -3993,6 +4422,7 @@
                           "single"
                         ]
                       },
+
                       "target": {
                         "type": [
                           "string",
@@ -4146,6 +4576,20 @@
                   "null"
                 ]
               },
+              "agentToken": {
+                "default": null,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "assetSigner": {
+                "default": null,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
               "authorityAddress": {
                 "type": [
                   "string",
@@ -4250,7 +4694,16 @@
                   "ProgrammableNFT",
                   "MplCoreAsset",
                   "MplCoreCollection",
+                  "MplCoreGroup",
+                  "MplBubblegumV2",
                   "Custom"
+                ]
+              },
+              "isAgent": {
+                "default": null,
+                "type": [
+                  "boolean",
+                  "null"
                 ]
               },
               "jsonUri": {
@@ -4476,6 +4929,18 @@
                   "mutable"
                 ],
                 "properties": {
+                  "agent_token": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "asset_signer": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
                   "authorities": {
                     "type": [
                       "array",
@@ -4525,8 +4990,20 @@
                       "tree"
                     ],
                     "properties": {
+                      "asset_data_hash": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
                       "asset_hash": {
                         "type": "string"
+                      },
+                      "collection_hash": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
                       },
                       "compressed": {
                         "type": "boolean"
@@ -4539,6 +5016,14 @@
                       },
                       "eligible": {
                         "type": "boolean"
+                      },
+                      "flags": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "uint8",
+                        "minimum": 0
                       },
                       "leaf_id": {
                         "type": "integer",
@@ -4567,6 +5052,7 @@
                       "$schema": {
                         "type": "string"
                       },
+                      "category": true,
                       "files": {
                         "type": [
                           "array",
@@ -4766,7 +5252,15 @@
                       "ProgrammableNFT",
                       "MplCoreAsset",
                       "MplCoreCollection",
+                      "MplCoreGroup",
+                      "MplBubblegumV2",
                       "Custom"
+                    ]
+                  },
+                  "is_agent": {
+                    "type": [
+                      "boolean",
+                      "null"
                     ]
                   },
                   "mint_extensions": true,
@@ -4826,6 +5320,12 @@
                       "frozen": {
                         "type": "boolean"
                       },
+                      "non_transferable": {
+                        "type": [
+                          "boolean",
+                          "null"
+                        ]
+                      },
                       "owner": {
                         "type": "string"
                       },
@@ -4857,6 +5357,21 @@
                         "format": "uint32",
                         "minimum": 0
                       },
+                      "basis_points_inherited": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "format": "uint32",
+                        "minimum": 0
+                      },
+                      "percent_inherited": {
+                        "type": [
+                          "number",
+                          "null"
+                        ],
+                        "format": "double"
+                      },
                       "locked": {
                         "type": "boolean"
                       },
@@ -4875,6 +5390,7 @@
                           "single"
                         ]
                       },
+
                       "target": {
                         "type": [
                           "string",
