@@ -104,7 +104,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     // Then we expect to find assets.
     t.true(assets.items.length > 0);
 
-    // Find the specific asset
+    // Find the specific asset with an unverified collection grouping
     const specificAsset = assets.items.find(
       (asset) => asset.id === 'FRWq4DQDNDCmiRNDjk687kdKZF83bnt3gscgB5qtvFoa'
     );

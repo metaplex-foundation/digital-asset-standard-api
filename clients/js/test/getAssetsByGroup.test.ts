@@ -145,4 +145,27 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
       );
     });
   });
+
+  test(`it can fetch mpl core group members (${endpoint.name})`, async (t) => {
+    // Mainnet mpl-core GroupV1 cyclic pair (DAS test fixtures).
+    const umi = createUmi(endpoint.url);
+    const groupKey = 'group';
+    const groupValue = publicKey('1CTME6duRH3SaBd5bmSikw1nhxpENe1xS2nHkwUGhgQ');
+
+    const assets = await umi.rpc.getAssetsByGroup({ groupKey, groupValue });
+
+    t.true(assets.items.length > 0);
+
+    assets.items.forEach((asset) => {
+      const groupMembership = asset.grouping?.find(
+        (group) =>
+          group.group_key === groupKey &&
+          group.group_value === groupValue.toString()
+      );
+      t.truthy(
+        groupMembership,
+        'Expected asset to belong to the mpl-core group'
+      );
+    });
+  });
 });
