@@ -57,7 +57,7 @@ export type GetAssetsByCreatorRpcInput = {
 
 export type GetAssetsByGroupRpcInput = {
   /**
-   * The key of the group (e.g., `"collection"`).
+   * The key of the group (e.g., `"collection"` or `"group"` for mpl-core groups).
    */
   groupKey: DasApiPropGroupKey;
 
@@ -71,6 +71,24 @@ export type GetAssetsByGroupRpcInput = {
    */
   displayOptions?: DisplayOptions;
 } & Pagination;
+
+export type GetGroupingRpcInput = {
+  /**
+   * The key of the group (e.g., `"collection"` or `"group"` for mpl-core groups).
+   */
+  groupKey: DasApiPropGroupKey;
+
+  /**
+   * The value of the group.
+   */
+  groupValue: string;
+};
+
+export type GetGroupingRpcResponse = {
+  group_key: string;
+  group_name: string;
+  group_size: number;
+};
 
 export type GetAssetsByOwnerRpcInput = {
   /**
@@ -382,7 +400,7 @@ export type DasApiAsset = {
 } & DasApiCoreAssetFields;
 
 /**
- * Optional fields on an asset if the interface is for Core (i.e. interface is 'MplCoreAsset' or 'MplCoreCollection')
+ * Optional fields on an asset if the interface is for Core (i.e. interface is 'MplCoreAsset', 'MplCoreCollection', or 'MplCoreGroup')
  * It is recommended to use the mpl-core-das package along with this one to convert the types
  * to be consistent with mpl-core (e.g. AssetV1)
  */
@@ -523,7 +541,8 @@ export type DasApiAssetInterface =
   | 'Executable'
   | 'ProgrammableNFT'
   | 'MplCoreAsset'
-  | 'MplCoreCollection';
+  | 'MplCoreCollection'
+  | 'MplCoreGroup';
 
 export type DasApiAssetContent = {
   json_uri: string;
@@ -587,11 +606,11 @@ export type DasApiAssetCreator = {
   verified: boolean;
 };
 
-export type DasApiPropGroupKey = 'collection';
+export type DasApiPropGroupKey = 'collection' | 'group';
 
 export type DasApiAssetGrouping = {
   group_key: DasApiPropGroupKey;
-  group_value: string;
+  group_value: string | null;
   verified?: boolean;
   collection_metadata?: {
     name: string;
