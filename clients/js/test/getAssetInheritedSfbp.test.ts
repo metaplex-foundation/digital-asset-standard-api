@@ -41,7 +41,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
       percent: 0.075,
       basis_points: 750,
       basis_points_raw: SELLER_FEE_BASIS_POINTS_INHERIT,
-      sfbp_inherited: true,
+      inherited: true,
       primary_sale_happened: false,
       locked: false,
     });

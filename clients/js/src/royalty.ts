@@ -6,7 +6,7 @@ export const SELLER_FEE_BASIS_POINTS_INHERIT = 0xffff;
 /** Returns true when royalty was inherited from a collection Royalties plugin. */
 export function isInheritedSfbpRoyalty(royalty: DasApiAssetRoyalty): boolean {
   return (
-    royalty.sfbp_inherited === true ||
+    royalty.inherited === true ||
     royalty.basis_points_raw === SELLER_FEE_BASIS_POINTS_INHERIT
   );
 }
@@ -21,7 +21,7 @@ export function getRawSellerFeeBasisPoints(
   if (royalty.basis_points_raw != null) {
     return royalty.basis_points_raw;
   }
-  if (royalty.sfbp_inherited) {
+  if (royalty.inherited) {
     return SELLER_FEE_BASIS_POINTS_INHERIT;
   }
   return royalty.basis_points;

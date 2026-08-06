@@ -614,7 +614,7 @@ export type DasApiAssetRoyalty = {
    * True when the leaf uses the inherit sentinel and `basis_points` was resolved
    * from the collection Royalties plugin.
    */
-  sfbp_inherited?: boolean | null;
+  inherited?: boolean | null;
   primary_sale_happened: boolean;
   locked: boolean;
 };

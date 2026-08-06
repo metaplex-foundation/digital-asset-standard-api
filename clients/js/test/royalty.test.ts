@@ -22,7 +22,7 @@ const inheritedRoyalty: DasApiAssetRoyalty = {
   percent: 0.075,
   basis_points: 750,
   basis_points_raw: SELLER_FEE_BASIS_POINTS_INHERIT,
-  sfbp_inherited: true,
+  inherited: true,
   primary_sale_happened: false,
   locked: false,
 };
@@ -31,7 +31,7 @@ test('isInheritedSfbpRoyalty returns false for explicit leaf SFBP', (t) => {
   t.false(isInheritedSfbpRoyalty(explicitRoyalty));
 });
 
-test('isInheritedSfbpRoyalty returns true when sfbp_inherited is set', (t) => {
+test('isInheritedSfbpRoyalty returns true when inherited is set', (t) => {
   t.true(isInheritedSfbpRoyalty(inheritedRoyalty));
 });
 

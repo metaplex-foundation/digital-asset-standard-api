@@ -659,7 +659,7 @@
                   "format": "uint32",
                   "minimum": 0
                 },
-                "sfbp_inherited": {
+                "inherited": {
                   "type": [
                     "boolean",
                     "null"
@@ -1332,7 +1332,7 @@
                     "format": "uint32",
                     "minimum": 0
                   },
-                  "sfbp_inherited": {
+                  "inherited": {
                     "type": [
                       "boolean",
                       "null"
@@ -2078,7 +2078,7 @@
                         "format": "uint32",
                         "minimum": 0
                       },
-                      "sfbp_inherited": {
+                      "inherited": {
                         "type": [
                           "boolean",
                           "null"
@@ -2850,7 +2850,7 @@
                         "format": "uint32",
                         "minimum": 0
                       },
-                      "sfbp_inherited": {
+                      "inherited": {
                         "type": [
                           "boolean",
                           "null"
@@ -3624,7 +3624,7 @@
                         "format": "uint32",
                         "minimum": 0
                       },
-                      "sfbp_inherited": {
+                      "inherited": {
                         "type": [
                           "boolean",
                           "null"
@@ -4392,7 +4392,7 @@
                         "format": "uint32",
                         "minimum": 0
                       },
-                      "sfbp_inherited": {
+                      "inherited": {
                         "type": [
                           "boolean",
                           "null"
@@ -5359,7 +5359,7 @@
                         "format": "uint32",
                         "minimum": 0
                       },
-                      "sfbp_inherited": {
+                      "inherited": {
                         "type": [
                           "boolean",
                           "null"
