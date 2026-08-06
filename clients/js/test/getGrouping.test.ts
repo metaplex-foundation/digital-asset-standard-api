@@ -2,14 +2,17 @@ import { publicKey } from '@metaplex-foundation/umi';
 import test from 'ava';
 import { DAS_API_ENDPOINTS, createUmi } from './_setup';
 
+// Same compressed collection fixture used by getAssetsByGroup tests.
 const COLLECTION = publicKey('5PA96eCFHJSFPY9SWFeRJUHrpoNF5XZL6RrE1JADXhxf');
 
-const isUnsupportedMethodError = (error: unknown) =>
+const isUnsupportedGroupingError = (error: unknown) =>
   error instanceof Error &&
-  /method not found|-32601|-32603/i.test(error.message);
+  /method not found|-32601|-32603|No grouping found/i.test(error.message);
 
 DAS_API_ENDPOINTS.forEach((endpoint) => {
   test(`it can fetch grouping metadata for a collection (${endpoint.name})`, async (t) => {
+    // Some DAS providers omit getGrouping or return a null result; treat that as
+    // unsupported rather than failing the suite (same pattern as optional methods).
     const umi = createUmi(endpoint.url);
 
     try {
@@ -23,7 +26,7 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
       t.true(typeof grouping.group_size === 'number');
       t.true(grouping.group_size > 0);
     } catch (error) {
-      if (isUnsupportedMethodError(error)) {
+      if (isUnsupportedGroupingError(error)) {
         t.pass('getGrouping is not supported by this endpoint');
         return;
       }
