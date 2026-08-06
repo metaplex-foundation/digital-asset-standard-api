@@ -369,15 +369,16 @@ export type DasApiAsset = {
   royalty: DasApiAssetRoyalty;
 
   /**
-   * Creators stored on the leaf (used for hashing).
+   * Creators for display / royalty payout. When SFBP is inherited, these are
+   * the collection Royalties plugin creators.
    */
   creators: Array<DasApiAssetCreator>;
 
   /**
-   * Collection creators when the leaf uses inherited SFBP. For display and
-   * royalty payout only — not used for leaf creator hashing.
+   * Leaf creators used for hashing. Present when royalties are inherited
+   * (typically empty); display payees remain on `creators`.
    */
-  creators_inherited?: Array<DasApiAssetCreator> | null;
+  creators_raw?: Array<DasApiAssetCreator> | null;
 
   /**
    * Ownership information.
@@ -601,14 +602,19 @@ export type DasApiAssetSupply = {
 export type DasApiAssetRoyalty = {
   royalty_model: 'creators' | 'fanout' | 'single';
   target: PublicKey | null;
-  /** Percent derived from the leaf seller fee basis points. */
   percent: number;
-  /** Seller fee basis points stored on the leaf (65535 when inheriting). */
+  /** Resolved royalty rate (e.g. from collection when SFBP is inherited). */
   basis_points: number;
-  /** Resolved collection royalty rate when SFBP is inherited. */
-  basis_points_inherited?: number | null;
-  /** Resolved collection royalty percent when SFBP is inherited. */
-  percent_inherited?: number | null;
+  /**
+   * Raw seller fee basis points stored on the leaf (65535 when inheriting from
+   * collection). Omitted when the leaf stores an explicit rate.
+   */
+  basis_points_raw?: number | null;
+  /**
+   * True when the leaf uses the inherit sentinel and `basis_points` was resolved
+   * from the collection Royalties plugin.
+   */
+  sfbp_inherited?: boolean | null;
   primary_sale_happened: boolean;
   locked: boolean;
 };

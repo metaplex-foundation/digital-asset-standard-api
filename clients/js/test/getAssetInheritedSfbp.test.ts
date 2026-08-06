@@ -4,6 +4,7 @@ import {
   DasApiAsset,
   DasApiAssetRoyalty,
   SELLER_FEE_BASIS_POINTS_INHERIT,
+  getRawSellerFeeBasisPoints,
   getResolvedSellerFeeBasisPoints,
   isInheritedSfbpRoyalty,
 } from '../src';
@@ -37,25 +38,25 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     t.like(asset.royalty, <DasApiAssetRoyalty>{
       royalty_model: 'creators',
       target: null,
-      percent: 6.5535,
-      basis_points: SELLER_FEE_BASIS_POINTS_INHERIT,
-      basis_points_inherited: 750,
-      percent_inherited: 0.075,
+      percent: 0.075,
+      basis_points: 750,
+      basis_points_raw: SELLER_FEE_BASIS_POINTS_INHERIT,
+      sfbp_inherited: true,
       primary_sale_happened: false,
       locked: false,
     });
 
     t.true(isInheritedSfbpRoyalty(asset.royalty));
-    t.is(asset.royalty.basis_points, SELLER_FEE_BASIS_POINTS_INHERIT);
+    t.is(getRawSellerFeeBasisPoints(asset.royalty), 65535);
     t.is(getResolvedSellerFeeBasisPoints(asset.royalty), 750);
 
-    t.deepEqual(asset.creators, []);
-    t.is(asset.creators_inherited?.length, 1);
-    t.like(asset.creators_inherited![0], {
+    t.is(asset.creators.length, 1);
+    t.like(asset.creators[0], {
       address: publicKey(INHERITED_SFBP_COLLECTION_CREATOR),
       share: 100,
       verified: true,
     });
+    t.deepEqual(asset.creators_raw, []);
 
     t.like(asset.compression, {
       compressed: true,

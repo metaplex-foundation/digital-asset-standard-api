@@ -418,7 +418,7 @@
                 }
               }
             },
-            "creators_inherited": {
+            "creators_raw": {
               "type": [
                 "array",
                 "null"
@@ -651,7 +651,7 @@
                   "format": "uint32",
                   "minimum": 0
                 },
-                "basis_points_inherited": {
+                "basis_points_raw": {
                   "type": [
                     "integer",
                     "null"
@@ -659,12 +659,11 @@
                   "format": "uint32",
                   "minimum": 0
                 },
-                "percent_inherited": {
+                "sfbp_inherited": {
                   "type": [
-                    "number",
+                    "boolean",
                     "null"
-                  ],
-                  "format": "double"
+                  ]
                 },
                 "locked": {
                   "type": "boolean"
@@ -1092,7 +1091,7 @@
                   }
                 }
               },
-              "creators_inherited": {
+              "creators_raw": {
                 "type": [
                   "array",
                   "null"
@@ -1325,7 +1324,7 @@
                     "format": "uint32",
                     "minimum": 0
                   },
-                  "basis_points_inherited": {
+                  "basis_points_raw": {
                     "type": [
                       "integer",
                       "null"
@@ -1333,12 +1332,11 @@
                     "format": "uint32",
                     "minimum": 0
                   },
-                  "percent_inherited": {
+                  "sfbp_inherited": {
                     "type": [
-                      "number",
+                      "boolean",
                       "null"
-                    ],
-                    "format": "double"
+                    ]
                   },
                   "locked": {
                     "type": "boolean"
@@ -2072,7 +2070,7 @@
                         "format": "uint32",
                         "minimum": 0
                       },
-                      "basis_points_inherited": {
+                      "basis_points_raw": {
                         "type": [
                           "integer",
                           "null"
@@ -2080,12 +2078,11 @@
                         "format": "uint32",
                         "minimum": 0
                       },
-                      "percent_inherited": {
+                      "sfbp_inherited": {
                         "type": [
-                          "number",
+                          "boolean",
                           "null"
-                        ],
-                        "format": "double"
+                        ]
                       },
                       "locked": {
                         "type": "boolean"
@@ -2845,7 +2842,7 @@
                         "format": "uint32",
                         "minimum": 0
                       },
-                      "basis_points_inherited": {
+                      "basis_points_raw": {
                         "type": [
                           "integer",
                           "null"
@@ -2853,12 +2850,11 @@
                         "format": "uint32",
                         "minimum": 0
                       },
-                      "percent_inherited": {
+                      "sfbp_inherited": {
                         "type": [
-                          "number",
+                          "boolean",
                           "null"
-                        ],
-                        "format": "double"
+                        ]
                       },
                       "locked": {
                         "type": "boolean"
@@ -3620,7 +3616,7 @@
                         "format": "uint32",
                         "minimum": 0
                       },
-                      "basis_points_inherited": {
+                      "basis_points_raw": {
                         "type": [
                           "integer",
                           "null"
@@ -3628,12 +3624,11 @@
                         "format": "uint32",
                         "minimum": 0
                       },
-                      "percent_inherited": {
+                      "sfbp_inherited": {
                         "type": [
-                          "number",
+                          "boolean",
                           "null"
-                        ],
-                        "format": "double"
+                        ]
                       },
                       "locked": {
                         "type": "boolean"
@@ -4389,7 +4384,7 @@
                         "format": "uint32",
                         "minimum": 0
                       },
-                      "basis_points_inherited": {
+                      "basis_points_raw": {
                         "type": [
                           "integer",
                           "null"
@@ -4397,12 +4392,11 @@
                         "format": "uint32",
                         "minimum": 0
                       },
-                      "percent_inherited": {
+                      "sfbp_inherited": {
                         "type": [
-                          "number",
+                          "boolean",
                           "null"
-                        ],
-                        "format": "double"
+                        ]
                       },
                       "locked": {
                         "type": "boolean"
@@ -5357,7 +5351,7 @@
                         "format": "uint32",
                         "minimum": 0
                       },
-                      "basis_points_inherited": {
+                      "basis_points_raw": {
                         "type": [
                           "integer",
                           "null"
@@ -5365,12 +5359,11 @@
                         "format": "uint32",
                         "minimum": 0
                       },
-                      "percent_inherited": {
+                      "sfbp_inherited": {
                         "type": [
-                          "number",
+                          "boolean",
                           "null"
-                        ],
-                        "format": "double"
+                        ]
                       },
                       "locked": {
                         "type": "boolean"
