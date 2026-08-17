@@ -31,8 +31,19 @@ test('isInheritedSfbpRoyalty returns false for explicit leaf SFBP', (t) => {
   t.false(isInheritedSfbpRoyalty(explicitRoyalty));
 });
 
+const inheritedFlagOnlyRoyalty: DasApiAssetRoyalty = {
+  ...explicitRoyalty,
+  basis_points: 750,
+  percent: 0.075,
+  inherited: true,
+};
+
 test('isInheritedSfbpRoyalty returns true when inherited is set', (t) => {
   t.true(isInheritedSfbpRoyalty(inheritedRoyalty));
+});
+
+test('isInheritedSfbpRoyalty returns true when only inherited is set', (t) => {
+  t.true(isInheritedSfbpRoyalty(inheritedFlagOnlyRoyalty));
 });
 
 test('isInheritedSfbpRoyalty returns true when only basis_points_raw sentinel is set', (t) => {
@@ -50,6 +61,13 @@ test('getRawSellerFeeBasisPoints returns leaf rate for explicit SFBP', (t) => {
 
 test('getRawSellerFeeBasisPoints returns inherit sentinel for inherited SFBP', (t) => {
   t.is(getRawSellerFeeBasisPoints(inheritedRoyalty), 65535);
+});
+
+test('getRawSellerFeeBasisPoints returns inherit sentinel when only inherited is set', (t) => {
+  t.is(
+    getRawSellerFeeBasisPoints(inheritedFlagOnlyRoyalty),
+    SELLER_FEE_BASIS_POINTS_INHERIT
+  );
 });
 
 test('getResolvedSellerFeeBasisPoints returns collection rate for inherited SFBP', (t) => {

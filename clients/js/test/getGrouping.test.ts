@@ -6,13 +6,14 @@ import { DAS_API_ENDPOINTS, createUmi } from './_setup';
 const COLLECTION = publicKey('5PA96eCFHJSFPY9SWFeRJUHrpoNF5XZL6RrE1JADXhxf');
 
 const isUnsupportedGroupingError = (error: unknown) =>
-  error instanceof Error &&
-  /method not found|-32601|-32603|No grouping found/i.test(error.message);
+  error instanceof Error && /method not found|-32601/i.test(error.message);
+
+/** Decorator maps a null RPC result to this error; some providers omit the method that way. */
+const isNullGroupingResult = (error: unknown) =>
+  error instanceof Error && /^No grouping found for:/i.test(error.message);
 
 DAS_API_ENDPOINTS.forEach((endpoint) => {
   test(`it can fetch grouping metadata for a collection (${endpoint.name})`, async (t) => {
-    // Some DAS providers omit getGrouping or return a null result; treat that as
-    // unsupported rather than failing the suite (same pattern as optional methods).
     const umi = createUmi(endpoint.url);
 
     try {
@@ -28,6 +29,10 @@ DAS_API_ENDPOINTS.forEach((endpoint) => {
     } catch (error) {
       if (isUnsupportedGroupingError(error)) {
         t.pass('getGrouping is not supported by this endpoint');
+        return;
+      }
+      if (isNullGroupingResult(error)) {
+        t.pass('getGrouping returned null for this fixture');
         return;
       }
       throw error;
