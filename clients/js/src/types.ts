@@ -369,9 +369,16 @@ export type DasApiAsset = {
   royalty: DasApiAssetRoyalty;
 
   /**
-   * List of creators.
+   * Creators for display / royalty payout. When SFBP is inherited, these are
+   * the collection Royalties plugin creators.
    */
   creators: Array<DasApiAssetCreator>;
+
+  /**
+   * Leaf creators used for hashing. Present when royalties are inherited
+   * (typically empty); display payees remain on `creators`.
+   */
+  creators_raw?: Array<DasApiAssetCreator> | null;
 
   /**
    * Ownership information.
@@ -540,6 +547,7 @@ export type DasApiAssetInterface =
   | 'Identity'
   | 'Executable'
   | 'ProgrammableNFT'
+  | 'MplBubblegumV2'
   | 'MplCoreAsset'
   | 'MplCoreCollection'
   | 'MplCoreGroup';
@@ -595,7 +603,18 @@ export type DasApiAssetRoyalty = {
   royalty_model: 'creators' | 'fanout' | 'single';
   target: PublicKey | null;
   percent: number;
+  /** Resolved royalty rate (e.g. from collection when SFBP is inherited). */
   basis_points: number;
+  /**
+   * Raw seller fee basis points stored on the leaf (65535 when inheriting from
+   * collection). Omitted when the leaf stores an explicit rate.
+   */
+  basis_points_raw?: number | null;
+  /**
+   * True when the leaf uses the inherit sentinel and `basis_points` was resolved
+   * from the collection Royalties plugin.
+   */
+  inherited?: boolean | null;
   primary_sale_happened: boolean;
   locked: boolean;
 };
