@@ -29,6 +29,7 @@ on:
 
 env:
   CACHE: true
+  NODE_VERSION: "20.x"
 
 jobs:
   test_js_client:
@@ -42,6 +43,7 @@ jobs:
     needs: test_js_client
     permissions:
       contents: write
+      id-token: write
     steps:
       - name: Git checkout
         uses: actions/checkout@v3
@@ -53,6 +55,9 @@ jobs:
         with:
           version: ${{ env.NODE_VERSION }}
           cache: ${{ env.CACHE }}
+
+      - name: Install npm with trusted publishing support
+        run: npm install -g "npm@>=11.5.1"
 
       - name: Install dependencies
         uses: metaplex-foundation/actions/install-node-dependencies@v1
@@ -76,14 +81,9 @@ jobs:
           fi
           echo "new_version=$(node -e "console.log(require('./package.json').version)")" >> $GITHUB_OUTPUT
 
-      - name: Set publishing config
-        run: pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: Publish
         working-directory: ./clients/js
-        run: pnpm publish --no-git-checks --tag ${{ inputs.tag }}
+        run: npm publish --access public --tag ${{ inputs.tag }}
 
       - name: Commit and tag new version
         uses: stefanzweifel/git-auto-commit-action@v4
