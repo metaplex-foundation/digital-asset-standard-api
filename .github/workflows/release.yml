@@ -1,0 +1,34 @@
+name: Tag JS Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version to tag, e.g. 2.1.1 (must already be merged into the selected branch)
+        required: true
+        type: string
+
+jobs:
+  tag_js_client:
+    name: JS client / Tag release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v3
+
+      - name: Verify version matches package.json
+        working-directory: ./clients/js
+        run: |
+          pkg_version=$(node -e "console.log(require('./package.json').version)")
+          if [ "$pkg_version" != "${{ inputs.version }}" ]; then
+            echo "::error::clients/js/package.json is $pkg_version on ${{ github.ref_name }}, but you asked to tag ${{ inputs.version }}. Merge the release pull request first."
+            exit 1
+          fi
+
+      - name: Create tag and GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: js@v${{ inputs.version }}
+          commit: ${{ github.sha }}

@@ -21,11 +21,6 @@ on:
         required: true
         type: string
         default: latest
-      create_release:
-        description: Create a GitHub release
-        required: true
-        type: boolean
-        default: true
 
 env:
   CACHE: true
@@ -44,6 +39,7 @@ jobs:
     permissions:
       contents: write
       id-token: write
+      pull-requests: write
     steps:
       - name: Git checkout
         uses: actions/checkout@v3
@@ -85,17 +81,23 @@ jobs:
         working-directory: ./clients/js
         run: npm publish --access public --tag ${{ inputs.tag }}
 
-      - name: Commit and tag new version
-        uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Create release pull request
+        uses: peter-evans/create-pull-request@v8
         with:
-          commit_message: Deploy JS client v${{ steps.bump.outputs.new_version }}
-          tagging_message: js@v${{ steps.bump.outputs.new_version }}
+          token: ${{ secrets.SVC_TOKEN }}
+          add-paths: clients/js/package.json
+          commit-message: Deploy JS client v${{ steps.bump.outputs.new_version }}
+          branch: release/js-client-v${{ steps.bump.outputs.new_version }}
+          title: Deploy JS client v${{ steps.bump.outputs.new_version }}
+          labels: release
+          body: |
+            `@metaplex-foundation/digital-asset-standard-api@${{ steps.bump.outputs.new_version }}`
+            is published to npm. This pull request syncs `clients/js/package.json`
+            with the registry.
 
-      - name: Create GitHub release
-        if: github.event.inputs.create_release == 'true'
-        uses: ncipollo/release-action@v1
-        with:
-          tag: js@v${{ steps.bump.outputs.new_version }}
+            Merge it, then run the **Tag JS Release** workflow against `main` with
+            version `${{ steps.bump.outputs.new_version }}` to create the
+            `js@v${{ steps.bump.outputs.new_version }}` tag and its GitHub release.
 
   deploy_js_docs:
     name: JS client / Deploy docs
